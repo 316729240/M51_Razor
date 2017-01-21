@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新建网页 1</title>
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="../static/js/jquery.validate.min.js"></script>
+<script src="../static/js/messages_zh.js"></script>
+<script src="../static/js/validate-methods.js"></script>
+</head>
+
+<link href="css/bootstrap.min.css" rel="stylesheet" >
+<body>
+
+
+<div  id="myTabs" xtype="Tab">
+	<ul class="nav nav-tabs" role="tablist" >
+		<li  class="active"><a href="#home" >创建新帐号</a></li>
+		<li ><a href="#profile">已有本站帐号</a></li>
+	</ul>
+	<div id="myTabContent" class="tab-content">
+		<div  class="tab-pane" >
+<form class="form-horizontal" id="connect_create" xtype="Form" method="post" action="/manage/app/account/frontEnd.ashx" onSubmit=function(){alert(1);}>
+<input type="hidden" name="_m" value="connect_create"/>
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="username" placeholder="用户名" xtype="TextBox" vtype="{required: true,remote:'/manage/app/account/frontEnd.ashx?_m=checkName',messages:{remote:'用户名已存在'}}" >
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="email" placeholder="邮箱" xtype="TextBox" vtype="{required: true,email:true}">
+		</div>
+	</div>
+	<div class="form-group"><label class="col-sm-2 control-label"></label>
+<div class="col-sm-10"><button class="btn btn-primary" name="enter" type="submit" >完成，继续浏览</button></div>
+</div>
+</form>
+		</div>
+		<div class="tab-pane" >
+<form class="form-horizontal" id="connect_login" xtype="Form" method="post" action="/manage/app/account/frontEnd.ashx" >
+<input type="hidden" name="_m" value="connect_login"/>
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="username" placeholder="用户名" xtype="TextBox" vtype="{required: true}" >
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">密码</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="password" type="password"  placeholder="密码" xtype="TextBox" vtype="{required: true}">
+		</div>
+	</div>
+	<div class="form-group"><label class="col-sm-2 control-label"></label>
+<div class="col-sm-10"><button class="btn btn-primary" name="enter" type="submit" >完成，继续浏览</button></div>
+</div>
+</form>
+		</div>
+
+	</div>
+</div>
+
+</body>
+
+</html>
+
+<script>
+var form=$("#myTabs").render();
+var form=$("#connect_create").render();
+var form=$("#connect_login").render();
+form.attr("onSubmit",function(sender,e){
+if(e.returnData.errNo<0)alert(e.returnData.errMsg);
+else{
+alert("绑定成功！");
+}
+});
+</script>

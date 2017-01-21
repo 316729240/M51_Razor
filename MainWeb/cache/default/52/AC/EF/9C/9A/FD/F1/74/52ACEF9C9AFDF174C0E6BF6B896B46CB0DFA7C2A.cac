@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<title>新建网页 1</title>
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/messages_zh.js"></script>
+<script src="/static/js/validate-methods.js"></script>
+</head>
+
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<body>
+
+<form class="form-horizontal" id="reg" xtype="Form" method="post" action="/manage/app/account/frontEnd.ashx">
+	<input type="hidden" name="_m" value="passwordRecovery">
+<input type="hidden" name="sId" value="98627f43713d34fe835b03957f7d6c91dfc918c3">
+
+	<div class="form-group">
+		<label for="inputPassword2" class="col-sm-2 control-label">密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" id="inputPassword2" name="password" placeholder="密码" xtype="TextBox" vtype="{required: true,isPassword:true}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="确认密码" xtype="TextBox" vtype="{required: true,isPassword:true,equalTo:'#inputPassword2'}">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary btn-lg">修改</button>
+		</div>
+	</div>
+</form>
+
+
+
+</body>
+
+</html>
+<script>
+var form=$("#reg").render();
+form.attr("onSubmit",function(sender,e){
+if(e.returnData.errNo<0)alert(e.returnData.errMsg);
+else{
+alert("设置成功！");
+}
+});
+</script>

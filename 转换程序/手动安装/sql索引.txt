@@ -1,0 +1,157 @@
+CREATE NONCLUSTERED INDEX [IndexTable_dataId] ON [dbo].[IndexTable] 
+(
+	[dataId] ASC
+)WITH (SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+
+/****** 对象:  Index [indexTable_pinyin]    脚本日期: 07/07/2015 15:32:59 ******/
+CREATE NONCLUSTERED INDEX [indexTable_pinyin] ON [dbo].[IndexTable] 
+(
+	[pinyin] ASC
+)WITH (SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+
+
+/****** Object:  Index [mainTable_classId_id]    Script Date: 07/04/2015 15:48:21 ******/
+CREATE NONCLUSTERED INDEX [mainTable_classId_id] ON [dbo].[mainTable] 
+(
+	[classId] ASC,
+	[id] DESC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_classId_orderId_createDate]    Script Date: 07/04/2015 15:48:27 ******/
+CREATE NONCLUSTERED INDEX [mainTable_classId_orderId_createDate] ON [dbo].[mainTable] 
+(
+	[classId] ASC,
+	[orderId] DESC,
+	[createDate] DESC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_clickCount_classId]    Script Date: 07/04/2015 15:48:32 ******/
+CREATE NONCLUSTERED INDEX [mainTable_clickCount_classId] ON [dbo].[mainTable] 
+(
+	[clickCount] DESC,
+	[classId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_clickCount_moduleId]    Script Date: 07/04/2015 15:48:38 ******/
+CREATE NONCLUSTERED INDEX [mainTable_clickCount_moduleId] ON [dbo].[mainTable] 
+(
+	[clickCount] DESC,
+	[moduleId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+GO
+
+/****** Object:  Index [mainTable_createDate_classId]    Script Date: 07/04/2015 15:48:44 ******/
+CREATE NONCLUSTERED INDEX [mainTable_createDate_classId] ON [dbo].[mainTable] 
+(
+	[createDate] DESC,
+	[classId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+
+/****** Object:  Index [mainTable_moduleId_createDate]    Script Date: 07/10/2015 13:00:27 ******/
+CREATE NONCLUSTERED INDEX [mainTable_moduleId_createDate] ON [dbo].[mainTable] 
+(
+	[moduleId] ASC,
+	[createDate] ASC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+
+GO
+
+/****** Object:  Index [mainTable_moduleId_orderId_createdate]    Script Date: 07/04/2015 15:48:54 ******/
+CREATE NONCLUSTERED INDEX [mainTable_moduleId_orderId_createdate] ON [dbo].[mainTable] 
+(
+	[moduleId] ASC,
+	[orderId] DESC,
+	[createDate] DESC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_orderId_createDate]    Script Date: 07/04/2015 15:48:59 ******/
+CREATE NONCLUSTERED INDEX [mainTable_orderId_createDate] ON [dbo].[mainTable] 
+(
+	[orderId] DESC,
+	[createDate] DESC,
+	[classId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_rootId_createDate]    Script Date: 07/04/2015 15:49:05 ******/
+CREATE NONCLUSTERED INDEX [mainTable_rootId_createDate] ON [dbo].[mainTable] 
+(
+	[rootId] ASC,
+	[createDate] DESC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_rootId_orderId_createDate]    Script Date: 07/04/2015 15:49:10 ******/
+CREATE NONCLUSTERED INDEX [mainTable_rootId_orderId_createDate] ON [dbo].[mainTable] 
+(
+	[rootId] ASC,
+	[orderId] DESC,
+	[createDate] DESC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+GO
+
+/****** Object:  Index [maintTable_url]    Script Date: 07/04/2015 15:49:16 ******/
+CREATE NONCLUSTERED INDEX [maintTable_url] ON [dbo].[mainTable] 
+(
+	[url] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO

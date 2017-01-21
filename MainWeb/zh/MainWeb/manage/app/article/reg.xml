@@ -1,0 +1,3 @@
+<app title="文章系统" name="article" dataTypeId="22192428132">
+    <include>edit.js</include>
+</app>

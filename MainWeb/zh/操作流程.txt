@@ -1,0 +1,7 @@
+1、拷贝出旧站 (图片 js css uploadfile)
+2、将 mainweb建为一个站点 然后把旧的(图片 js css uploadfile)拷进去
+3、修改web.config连接信息
+4、进入数据库执行 转换脚本.txt
+5、先后执行 resetClassUrl.aspx resetContentUrl.aspx zhbz.aspx  zhkeyword.aspx
+6、执行 zhmb.aspx (只能执行一次)
+7、执行rpassword.aspx 重置密码

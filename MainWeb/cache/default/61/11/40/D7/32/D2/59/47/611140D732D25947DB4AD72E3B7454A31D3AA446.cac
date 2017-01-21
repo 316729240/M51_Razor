@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新建网页 1</title>
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/messages_zh.js"></script>
+<script src="/static/js/validate-methods.js"></script>
+<link type="text/css" href="../static/skin/css/font-awesome.min.css" rel="stylesheet" />
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/skin/css/other.css" />
+</head>
+
+<body>
+
+<div class="col-md-3">
+<ul class="nav nav-list bs-docs-sidenav affix">
+                <li class="active"><a href="/spacecp/avatar.html"><i class="icon-chevron-right"></i> 修改头像</a></li>
+                <li class="active"><a href="/spacecp/info.html"><i class="icon-chevron-right"></i> 会员信息</a></li>
+                <li class="active"><a href="/spacecp/aptitude.html"><i class="icon-chevron-right"></i> 企业资质</a></li>
+                <li class="active"><a href="/spacecp/notice_list-0.html"><i class="icon-chevron-right"></i> 通知列表</a></li>
+                <li class=""><a href="/spacecp/safe.html"><i class="icon-chevron-right"></i> 修改密码</a></li>
+                <li class=""><a href="/manage/app/account/frontEnd.ashx?_m=exit"><i class="icon-chevron-right"></i> 退出</a></li>
+</ul>
+</div><div class="col-md-9">
+<h1>222222222</h1>
+ffffffffff
+
+
+</div>
+</body>
+
+</html>

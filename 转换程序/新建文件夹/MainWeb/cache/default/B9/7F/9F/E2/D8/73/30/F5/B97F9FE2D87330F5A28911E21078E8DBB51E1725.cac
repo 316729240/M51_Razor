@@ -1,0 +1,7 @@
+fff
+调试：select  top 5 A.title from [mainTable] A WITH(NOLOCK)  where  A.orderid>-1 and A.createdate<getdate()  and A.classId=9698706388 order by A.orderid desc,A.createdate desc
+
+调试：select  top 5 A.title from [mainTable] A WITH(NOLOCK)  where  A.orderid>-1 and A.createdate<getdate()  and A.classId=9698706388 order by A.orderid desc,A.createdate desc
+
+
+11111

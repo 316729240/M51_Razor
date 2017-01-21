@@ -1,0 +1,354 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[m_admin]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[m_admin](
+	[id] [float] NOT NULL,
+	[uname] [varchar](40) NULL,
+	[pword] [varchar](40) NULL,
+	[createDate] [smalldatetime] NULL CONSTRAINT [DF_admin_createDate]  DEFAULT (getdate()),
+	[Permissions] [varchar](5000) NULL,
+	[loginDateTime] [smalldatetime] NULL CONSTRAINT [DF_admin_loginDateTime]  DEFAULT (getdate()),
+	[leaveDateTime] [smalldatetime] NULL,
+	[status] [int] NULL,
+	[userId] [float] NULL,
+	[updateDate] [smalldatetime] NULL,
+	[integral] [int] NULL,
+	[sex] [bit] NULL,
+	[question] [varchar](80) NULL,
+	[answer] [varchar](80) NULL,
+	[email] [varchar](200) NULL,
+	[icon] [varchar](40) NULL,
+	[name] [varchar](20) NULL,
+	[phone] [varchar](20) NULL,
+	[mobile] [varchar](20) NULL,
+	[filteringIP] [varchar](1000) NULL,
+ CONSTRAINT [PK_admin] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[htmlTemplate]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[htmlTemplate](
+	[id] [float] NOT NULL,
+	[u_content] [ntext] NULL,
+	[u_dataTypeId] [float] NULL,
+	[u_type] [int] NULL,
+	[u_editboxStatus] [bit] NULL,
+	[u_defaultFlag] [bit] NULL,
+	[u_parameterValue] [varchar](200) NULL,
+	[u_webFAid] [int] NULL,
+	[u_runtime] [float] NULL,
+	[u_runurl] [varchar](300) NULL,
+	[u_rundate] [datetime] NULL,
+	[title] [varchar](100) NULL,
+	[classId] [float] NULL,
+	[createDate] [datetime] NULL,
+	[updateDate] [datetime] NULL,
+	[url] [varchar](200) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[backupTemplate]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[backupTemplate](
+	[dataId] [float] NULL,
+	[classId] [float] NULL,
+	[u_type] [int] NULL,
+	[u_content] [ntext] NULL,
+	[updateDate] [smalldatetime] NULL,
+	[username] [varchar](20) NULL,
+	[u_webFAid] [int] NULL,
+	[title] [varchar](100) NULL,
+	[u_defaultFlag] [bit] NULL CONSTRAINT [DF_backupTemplate_u_defaultTag]  DEFAULT ((0)),
+	[id] [float] NULL,
+	[u_datatypeId] [float] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[article]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[article](
+	[id] [float] NOT NULL,
+	[u_content] [ntext] NULL,
+	[u_defaultPic] [varchar](255) NULL,
+	[u_fromWeb] [varchar](255) NULL,
+	[u_titleFontColor] [varchar](50) NULL,
+	[u_titleFontType] [varchar](50) NULL,
+	[u_info] [ntext] NULL,
+	[u_keyword] [varchar](255) NULL,
+	[u_custom] [ntext] NULL,
+ CONSTRAINT [PK_article] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[role]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[role](
+	[id] [float] NULL,
+	[name] [varchar](50) NULL,
+	[appertaining] [varchar](500) NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[admin_role]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[admin_role](
+	[id] [float] NULL,
+	[userId] [float] NULL,
+	[roleId] [float] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[class]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[class](
+	[id] [float] NOT NULL,
+	[classname] [varchar](80) NULL,
+	[classid] [float] NULL,
+	[info] [ntext] NULL,
+	[OrderID] [int] NULL,
+	[CreateDate] [smalldatetime] NULL,
+	[showtype] [varchar](2) NULL,
+	[SaveDataType] [float] NULL,
+	[maxico] [varchar](60) NULL,
+	[Updatedate] [smalldatetime] NULL,
+	[RootID] [float] NULL,
+	[userid] [float] NULL,
+	[AppendTable] [varchar](100) NULL,
+	[DirName] [varchar](100) NULL,
+	[SkinID] [float] NULL,
+	[KeyWord] [varchar](510) NULL,
+	[DirPath] [varchar](255) NULL,
+	[childId] [varchar](8000) NULL,
+	[parentId] [varchar](8000) NULL,
+	[Layer] [int] NULL,
+	[Attribute] [varchar](50) NULL,
+	[PDDir] [varchar](200) NULL,
+	[ModuleID] [float] NULL,
+	[Custom] [ntext] NULL,
+	[Inheritance] [bit] NULL,
+	[thumbnailWidth] [int] NULL,
+	[thumbnailHeight] [int] NULL,
+	[thumbnailForce] [int] NULL,
+	[ContentSkinID] [float] NULL,
+	[DomainName] [varchar](50) NULL,
+	[saveRemoteImages] [int] NULL,
+	[inherit] [int] NULL,
+	[_SkinID] [float] NULL,
+	[_ContentSkinID] [float] NULL,
+	[url] [varchar](300) NULL,
+ CONSTRAINT [PK_class_1] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[mainTable]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[mainTable](
+	[id] [float] NOT NULL,
+	[classId] [float] NULL CONSTRAINT [DF_mainTable_classId]  DEFAULT ((0)),
+	[createDate] [datetime] NULL CONSTRAINT [DF_mainTable_createDate]  DEFAULT (getdate()),
+	[updateDate] [datetime] NULL CONSTRAINT [DF_mainTable_updateDate]  DEFAULT (getdate()),
+	[title] [varchar](100) NULL,
+	[orderId] [int] NULL CONSTRAINT [DF_mainTable_orderId]  DEFAULT ((0)),
+	[userId] [float] NULL CONSTRAINT [DF_mainTable_userId]  DEFAULT ((0)),
+	[path] [varchar](200) NULL,
+	[filename] [varchar](255) NULL,
+	[moduleId] [float] NULL CONSTRAINT [DF_mainTable_moduleId]  DEFAULT ((0)),
+	[dataTypeId] [float] NULL CONSTRAINT [DF_mainTable_dataTypeId]  DEFAULT ((0)),
+	[clickCount] [int] NULL CONSTRAINT [DF_mainTable_clickCount]  DEFAULT ((0)),
+	[attr0] [bit] NULL CONSTRAINT [DF_mainTable_attr0]  DEFAULT ((0)),
+	[attr1] [bit] NULL CONSTRAINT [DF_mainTable_attr1]  DEFAULT ((0)),
+	[attr2] [bit] NULL CONSTRAINT [DF_mainTable_attr2]  DEFAULT ((0)),
+	[attr3] [bit] NULL CONSTRAINT [DF_mainTable_attr3]  DEFAULT ((0)),
+	[attr4] [bit] NULL CONSTRAINT [DF_mainTable_arrt4]  DEFAULT ((0)),
+	[url] [varchar](300) NULL,
+	[skinId] [float] NULL CONSTRAINT [DF_mainTable_skinId]  DEFAULT ((0)),
+	[rootId] [float] NULL,
+ CONSTRAINT [PK_mainTable] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[loginInfo]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[loginInfo](
+	[sessionId] [float] NOT NULL,
+	[ip] [bigint] NULL,
+	[logindate] [datetime] NULL,
+	[loginPword] [varchar](300) NULL,
+	[userid] [float] NULL,
+	[username] [varchar](20) NULL,
+ CONSTRAINT [PK_loginInfo] PRIMARY KEY CLUSTERED 
+(
+	[sessionId] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[module]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[module](
+	[id] [float] NOT NULL,
+	[ModuleName] [varchar](20) NULL,
+	[type] [bit] NULL,
+	[saveDataType] [float] NULL,
+	[dirname] [varchar](50) NULL,
+	[createdate] [datetime] NULL,
+	[updatedate] [datetime] NULL,
+	[UserID] [float] NULL,
+	[custom] [ntext] NULL,
+	[thumbnailWidth] [int] NULL,
+	[thumbnailHeight] [int] NULL,
+	[thumbnailForce] [int] NULL,
+	[saveRemoteImages] [int] NULL,
+	[orderid] [int] NULL,
+ CONSTRAINT [PK_module] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[permissions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[permissions](
+	[classId] [float] NULL,
+	[type] [int] NULL,
+	[dataId] [float] NULL,
+	[p0] [int] NULL CONSTRAINT [DF_permissions_q0]  DEFAULT ((0)),
+	[p1] [int] NULL CONSTRAINT [DF_permissions_q1]  DEFAULT ((0)),
+	[p2] [int] NULL CONSTRAINT [DF_permissions_q2]  DEFAULT ((0)),
+	[p3] [int] NULL CONSTRAINT [DF_permissions_q3]  DEFAULT ((0)),
+	[p4] [int] NULL CONSTRAINT [DF_permissions_q4]  DEFAULT ((0))
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[IndexTable]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[IndexTable](
+	[dataId] [float] NULL CONSTRAINT [DF_IndexTable_DataID]  DEFAULT ((0)),
+	[keyword] [varchar](100) NULL,
+	[pinyin] [varchar](50) NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[datatype]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[datatype](
+	[id] [float] NOT NULL,
+	[classid] [float] NULL,
+	[Attribute] [varchar](4) NULL,
+	[DataType] [varchar](80) NULL,
+	[TableName] [varchar](40) NULL,
+	[TableStructure] [ntext] NULL,
+	[createdate] [smalldatetime] NULL,
+	[updatedate] [smalldatetime] NULL,
+	[OrderID] [int] NULL,
+	[userid] [float] NULL,
+	[TableIndexTag] [tinyint] NULL,
+	[FormHTML] [ntext] NULL,
+	[displayField] [varchar](100) NULL,
+ CONSTRAINT [PK_datatype] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dataview]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[dataview](
+	[id] [float] NOT NULL,
+	[u_viewType] [varchar](2) NULL,
+	[u_html] [ntext] NULL,
+	[u_dataTypeID] [float] NULL,
+	[u_parameterValue] [varchar](400) NULL,
+	[u_editboxStatus] [bit] NULL,
+	[u_viewset] [varchar](500) NULL,
+	[u_pinyin] [varchar](100) NULL,
+	[title] [varchar](100) NULL,
+	[classId] [float] NULL,
+	[createDate] [datetime] NULL,
+	[updateDate] [datetime] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[invalidLogin]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[invalidLogin](
+	[ip] [bigint] NULL,
+	[uname] [varchar](100) NULL,
+	[count] [int] NULL,
+	[createdate] [smalldatetime] NULL
+) ON [PRIMARY]
+END

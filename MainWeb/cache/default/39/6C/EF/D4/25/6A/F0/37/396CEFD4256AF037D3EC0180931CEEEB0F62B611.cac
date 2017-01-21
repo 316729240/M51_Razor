@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0065)http://localhost:8001/member/index_do.php?fmdo=user&dopost=regnew -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+
+<title>医疗力量派遣系统 - 会员注册</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/css/reset.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/messages_zh.js"></script>
+<script src="/static/js/validate-methods.js"></script>
+<script src="/static/js/dialog.js"></script>
+
+</head>
+<body style="background: #fff;">
+	<!-- 顶部开始 -->
+	<div id="top">
+
+	</div>
+	<!-- 顶部结束 -->
+	<!-- 头部开始 -->
+	<div id="header">
+		<div class="position">
+			<div class="logo">
+				<a style="line-height:80px;width:650px;" href="/">军委机关服务保障信息平台——医疗力量派遣</a>
+			</div>
+			<div class="search">
+			
+			</div>
+		</div>
+	</div>
+	<!-- 头部结束 -->
+	<!-- 导航开始-->
+	<div id="nav">
+		<div class="position">
+			<!-- 分类相关 -->
+			<div class="category">
+        	</div>
+			<!-- 用户相关 -->
+			<div id="user-relevance" class="user-relevance">
+					<div class="user-nav login-reg">	
+						<a class="title" href="/login.html">登录</a>
+					</div>
+					<div class="user-nav login-reg">	
+						<a class="title" href="/register.html">注册</a>
+					</div>
+			</div>
+		</div>
+	</div> 
+<div id="login" class="bor">
+
+  <div class="tip1"></div>
+  <div class="theme fLeft">
+      <div style="width:600px;padding-top:100px;margin:0 auto;"><form class="form-horizontal" id="reg" xtype="Form"  errorShowType="0"  method="post" action="/manage/app/account/frontEnd.ashx">
+	<input type="hidden" name="_m" value="reg">
+	<div class="form-group">
+		<label for="username" class="col-sm-2 control-label">用户名</label>
+		<div class="col-sm-10">
+			<input class="form-control" name="username" placeholder="用户名" xtype="TextBox" vtype="{required: true,remote:'/manage/app/account/frontEnd.ashx?_m=checkName',messages:{remote:'用户名已存在'}}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword2" class="col-sm-2 control-label">密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" id="inputPassword2" name="password" placeholder="密码" xtype="TextBox" vtype="{required: true,isPassword:true}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="确认密码" xtype="TextBox" vtype="{required: true,isPassword:true,equalTo:'#inputPassword2'}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="u_bzb" class="col-sm-2 control-label">部职别</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="u_bzb" name="u_bzb" placeholder="填写部职别" xtype="TextBox" vtype="{required: true}">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="u_danwei" class="col-sm-2 control-label">隶属单位</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="u_danwei" name="u_danwei" placeholder="隶属单位" xtype="TextBox" vtype="{required: true}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="u_quyuid" class="col-sm-2 control-label">所属保障区域</label>
+		<div class="col-sm-10">
+<select id="u_quyuid" name="u_quyuid" placeholder="所属保障区域" class="form-control" >
+<option value="14061327762">西山区域</option>
+<option value="14061329755">黄寺区域</option>
+<option value="14061368932">旃坛寺区域</option>
+<option value="14061370081">复兴路区域</option>
+</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="u_jxdh" class="col-sm-2 control-label">军线电话</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="u_jxdh" name="u_jxdh" placeholder="军线电话" xtype="TextBox" >
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="mobile" class="col-sm-2 control-label">手机</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="mobile" name="mobile" placeholder="填写手机或者邮箱" xtype="TextBox" vtype="{required: true,isMobile:true}">
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label for="securityCode" class="col-sm-2 control-label" >验证码</label>
+		<div class="col-sm-10">
+
+<div class="input-group col-sm-6">
+  <input type="text" class="form-control" name="verification" placeholder="验证码" xtype="TextBox" vtype="{required: true}">
+<span class="input-group-addon"  id="codeButton"><a href="#" onclick="$('#verification').attr('src','/manage/app/account/verification.ashx?r='+Math.random());return false;">
+			换一个</a></span>
+</div>
+	</div></div>
+	<div class="form-group" id="codePic">
+		<label for="securityCode" class="col-sm-2 control-label"></label>
+		<div class="col-sm-10">
+			<img src="/manage/app/account/verification.ashx" id="verification" onclick="$('#verification').attr('src','/manage/app/account/verification.ashx?r='+Math.random());" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary btn-lg" id=regbutton >注册</button>
+		</div>
+	</div>
+</form>
+<script>
+    var form=$("#reg").render();
+form.attr("onSubmit",function(sender,e){
+if(e.returnData.errNo<0)alert(e.returnData.errMsg);
+else{
+alert("注册成功！");
+location.href="/";
+}
+});
+</script></div>
+      
+  </div>
+  <br class="clear">
+</div>
+
+	<div class="c"></div>
+	<div id="footer" style="position: fixed;">
+	<p>军委机关服务保障信息平台 |系统维管：780055/780052</p>
+		<p> Powered by 军委机关事务管理总局综合局 2016</p>
+		
+	</div>
+</body></html>

@@ -1,0 +1,4 @@
+  <app title="公告" name="announcement" type="1">
+    <include>announcement.js</include>
+    <cards color="2" size="6" >card.html</cards>
+  </app>

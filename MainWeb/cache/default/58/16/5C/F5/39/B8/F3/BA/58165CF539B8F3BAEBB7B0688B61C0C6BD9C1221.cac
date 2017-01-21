@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0065)http://localhost:8001/member/index_do.php?fmdo=user&dopost=regnew -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+
+<title>医疗力量派遣系统 - 会员 </title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/css/reset.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/messages_zh.js"></script>
+<script src="/static/js/validate-methods.js"></script>
+<script src="/static/js/dialog.js"></script>
+	<link href="/css/login2.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="background: #fff;">
+	<!-- 顶部开始 -->
+	<div id="top">
+
+	</div>
+	<!-- 顶部结束 -->
+	<!-- 头部开始 -->
+	<div id="header">
+		<div class="position">
+			<div class="logo">
+				<a style="line-height:80px;width:650px;" href="/">军委机关服务保障信息平台——医疗力量派遣</a>
+			</div>
+			<div class="search">
+			
+			</div>
+		</div>
+	</div>
+	<!-- 头部结束 -->
+	<!-- 导航开始-->
+	<div id="nav">
+		<div class="position">
+			<!-- 分类相关 -->
+			<div class="category">
+        	</div>
+			<!-- 用户相关 -->
+			<div id="user-relevance" class="user-relevance">
+					<div class="user-nav login-reg">	
+						<a class="title" href="/login.html">登录</a>
+					</div>
+					<div class="user-nav login-reg">	
+						<a class="title" href="/register.html">注册</a>
+					</div>
+			</div>
+		</div>
+	</div> 
+<div id="login" class="bor">
+
+<div id="login-box">
+		<h3>用户登录</h3>
+		<div class="left">
+		<form id="loginform" xtype="Form"  errorShowType="0"  method="post" action="/manage/app/account/frontEnd.ashx">
+			<input type="hidden" name="_m" value="login">
+			<div class="form">
+				<dl>
+					<dt>账号:</dt>
+					<dd class="text">
+						<input id="txtUsername" name="username" type="text"  vtype="{required: true,messages:{required:'用户名必须填写'}}">
+					</dd>
+				</dl>
+				<dl>
+					<dt>密码:</dt>
+					<dd class="text">
+						<input id="txtPassword" type="password" name="password" vtype="{required: true,messages:{required:'密码必须填写'}}">
+					</dd>
+				</dl>
+
+				<dl>
+					<dt></dt>
+					
+					<dd class="submit">
+						<input id="btnSignCheck" value="登录" type="submit">
+					</dd>
+					<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</dd>
+					<dd><a style="color:#015da1;" href="/manage/">后台管理登录</a></dd>
+				</dl>
+			</div>
+			</form>
+<script>
+    var form=$("#loginform").render();
+form.attr("onSubmit",function(sender,e){
+if(e.returnData.errNo<0)alert(e.returnData.errMsg);
+else{
+alert("登录成功！");
+location.href="/";
+}
+});
+</script>
+		</div>
+		
+		<div class="right">
+			<p class="right-title">车辆派遣目前作为总局机关</p>
+			<p class="right-title">自用功能试行，其他单位如</p>
+			<p class="right-title">有需要可以与总局联系。</p>
+			<p class="open-title">车辆派遣电话列表</p>
+			<p class="open-title">系统运维：780055/780052</p>
+			<p class="open-title">车队调度室：780419</p>
+			<p class="open-title">系统维护：780055</p>
+		</div> 
+	</div>
+</div>
+
+	<div class="c"></div>
+	<div id="footer" style="position: fixed;">
+	<p>军委机关服务保障信息平台 |系统维管：780055/780052</p>
+		<p> Powered by 军委机关事务管理总局综合局 2016</p>
+		
+	</div>
+</body></html>

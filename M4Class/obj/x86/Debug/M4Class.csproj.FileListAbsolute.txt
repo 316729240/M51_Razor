@@ -1,0 +1,14 @@
+F:\web\my\MWMS4.5\M4Class\M4Class\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\web\my\MWMS4.5\M4Class\M4Class\bin\x86\Debug\MWMS.dll
+F:\web\my\MWMS4.5\M4Class\M4Class\bin\x86\Debug\MWMS.pdb
+F:\web\my\MWMS4.5\M4Class\M4Class\bin\x86\Debug\ICSharpCode.SharpZipLib.dll
+F:\web\my\MWMS4.5\M4Class\M4Class\obj\x86\Debug\MWMS.dll
+F:\web\my\MWMS4.5\M4Class\M4Class\obj\x86\Debug\MWMS.pdb
+F:\web\my\M45\M4Class\obj\x86\Debug\MWMS.dll
+F:\web\my\M45\M4Class\bin\x86\Debug\MWMS.dll
+F:\web\my\M45\M4Class\bin\x86\Debug\MWMS.pdb
+F:\web\my\M45\M4Class\bin\x86\Debug\ICSharpCode.SharpZipLib.dll
+F:\web\my\M45\M4Class\obj\x86\Debug\MWMS.pdb
+F:\web\my\M45\M4Class\obj\x86\Debug\M4Class.csprojResolveAssemblyReference.cache
+F:\web\my\M45\M4Class\bin\x86\Debug\Helper.dll
+F:\web\my\M45\M4Class\bin\x86\Debug\Helper.pdb

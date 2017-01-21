@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新建网页 1</title>
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/messages_zh.js"></script>
+<script src="/static/js/validate-methods.js"></script>
+<link type="text/css" href="../static/skin/css/font-awesome.min.css" rel="stylesheet" />
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/skin/css/other.css" />
+</head>
+
+<body>
+
+<div class="col-md-3">
+<ul class="nav nav-list bs-docs-sidenav affix">
+                <li class="active"><a href="/spacecp/avatar.html"><i class="icon-chevron-right"></i> 修改头像</a></li>
+                <li class="active"><a href="/spacecp/info.html"><i class="icon-chevron-right"></i> 会员信息</a></li>
+                <li class="active"><a href="/spacecp/aptitude.html"><i class="icon-chevron-right"></i> 企业资质</a></li>
+                <li class="active"><a href="/spacecp/notice_list-0.html"><i class="icon-chevron-right"></i> 通知列表</a></li>
+                <li class=""><a href="/spacecp/safe.html"><i class="icon-chevron-right"></i> 修改密码</a></li>
+                <li class=""><a href="/manage/app/account/frontEnd.ashx?_m=exit"><i class="icon-chevron-right"></i> 退出</a></li>
+</ul>
+</div><div class="col-md-9">
+<div class="bs-example bs-example-tabs" >
+    <ul id="myTabs" class="nav nav-tabs">
+
+      <li role="presentation" class="active"><a href="/spacecp/notice_list-0.html" >未读</a></li>
+      <li role="presentation" class=""><a href="/spacecp/notice_list-1.html" >已读</a></li>
+
+    </ul>
+    <div  class="tab-content">
+      
+<table class="table">
+      <thead>
+        <tr>
+          <th>标题</th>
+          <th>时间</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td><a href='/spacecp/notice_read-10278939438.html' >fffffffffff</a></td>
+          <td>2015/11/3 16:36:29</td>
+        </tr>
+ 
+        <tr>
+          <td><a href='/spacecp/notice_read-10278940303.html' >cccccccccc</a></td>
+          <td>2015/11/3 16:36:37</td>
+        </tr>
+ 
+      </tbody>
+    </table>
+<a href="notice_list-0.html" >首页</a>&nbsp; <a href="notice_list-0.html" >上一页</a> &nbsp;<a href="notice_list-0.html" class="">1</a><a href="/spacecp/notice_list-0_2.html" ><font color='#FF0000'><b>2</b></font></a>&nbsp; <span>下一页</span> <span>尾页</span> 共5条记录 2/2
+
+
+    </div>
+  </div>
+
+
+</div>
+</body>
+
+</html>

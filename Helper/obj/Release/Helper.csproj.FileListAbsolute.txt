@@ -1,0 +1,5 @@
+F:\web\my\M45_Razor\Helper\bin\Release\Helper.dll
+F:\web\my\M45_Razor\Helper\bin\Release\Helper.pdb
+F:\web\my\M45_Razor\Helper\obj\Release\Helper.csprojResolveAssemblyReference.cache
+F:\web\my\M45_Razor\Helper\obj\Release\Helper.dll
+F:\web\my\M45_Razor\Helper\obj\Release\Helper.pdb

@@ -1,0 +1,17 @@
+insert into m_admin (id,uname,pword,createDate,updateDate,status)values(8704636116,'admin','CBC8F61023A92C1B3152BEA5AA9E40E3938CCF1E',getDate(),getDate(),1)
+insert into admin_role (id,userId,roleId)values(9313494547,8704636116,1)
+
+insert into module (id,modulename,type,savedatatype,dirname,createdate,updatedate,userid,custom,thumbnailwidth,thumbnailheight,thumbnailforce,saveremoteimages,orderid)values(1,'文章',0,22192428132,'article',getDate(),getDate(),0,'<Variables/>',0,0,0,0,0)
+
+insert into datatype (id,classId,attribute,datatype,tablename,tablestructure,createdate,updatedate,orderid,userid,tableindextag,formhtml,displayfield) values 
+(0,16,'N','栏目','class','id-数据唯一标识-Double------否--|classId-数据所属栏目-Double------否--|createDate-创建时间-Date------否--|updateDate-修改时间-Date------否--|orderId-排序至顶-Long------否--|attribute-属性-String-0-5------|className-名称-String-0-40-TextBox---是--|dirName-目录名称-String-0-15-TextBox---是--|keyword-关键词-String-0-255-TextBox---关键词--|info-备注-Remark-0--HTMLEditBox-0--否--|maxico-缩略图-String-0-30-UploadBox-0,300,300--是--|custom-自定义变量-Remark-0---0--否--|',getdate(),getdate(),0,0,0,'','')
+
+insert into datatype (id,classId,attribute,datatype,tablename,tablestructure,createdate,updatedate,orderid,userid,tableindextag,formhtml,displayfield) values 
+(22192428132,16,'N','文章','article','u_titleFontColor-标题颜色-String-0-50-TextBox---否--|u_info-简介-Remark-0--HTMLEditBox---否--|u_content-内容-Remark-0--HTMLEditBox-0--否--|u_defaultPic-图片-String-1-255-UploadBox-0,,1,-NoValidate-否--|u_keyword-关键字-String-0-255-TextBox--NoValidate-是--|u_fromWeb-来源-String-0-255-TextBox--NoValidate-否--','2006-09-25 16:02:00','2012-09-05 09:38:00',0,0,1,'','id,title,attribute,createDate')
+
+
+insert into role (id,name)values(1,'管理员')
+insert into role (id,name)values(2,'高级编辑')
+insert into role (id,name)values(3,'普通编辑')
+insert into role (id,name)values(4,'审核员')
+insert into role (id,name)values(4,'来宾')

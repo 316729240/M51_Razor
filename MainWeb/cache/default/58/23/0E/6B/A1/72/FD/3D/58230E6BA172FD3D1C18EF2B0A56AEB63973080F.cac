@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新建网页 1</title>
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+</head>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<body>
+<div class="container">
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-8">
+<div  class="m5_view">
+<div class="panel panel-default">
+  <div class="panel-heading">Panel heading without title</div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div  class="m5_view">
+<div class="panel panel-default">
+  <div class="panel-heading">Panel heading without title</div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
+</div>
+<div  class="m5_view">
+<div class="panel panel-default">
+  <div class="panel-heading">Panel heading without title</div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+</div>
+</body>
+<script>
+var findViewDiv=function(dom){
+	var parent=dom.parent();
+	if(parent!=null){
+		if(parent.attr("class").indexOf("view")>-1){
+			return parent;
+		}else{
+			return findViewDiv(parent);
+		}		
+	}
+	return null;
+};
+//$(document.body).on("mousedown",function(e){
+//	var dom=findViewDiv($(e.target));
+//});
+$(".m5_view").moveBox({});
+</script>

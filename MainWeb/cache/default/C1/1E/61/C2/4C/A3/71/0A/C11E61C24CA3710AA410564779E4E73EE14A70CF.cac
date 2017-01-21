@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新建网页 1</title>
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/messages_zh.js"></script>
+<script src="/static/js/validate-methods.js"></script>
+<link type="text/css" href="../static/skin/css/font-awesome.min.css" rel="stylesheet" />
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/skin/css/other.css" />
+</head>
+
+<body>
+
+<div class="col-md-3">
+<ul class="nav nav-list bs-docs-sidenav affix">
+                <li class="active"><a href="/spacecp/avatar.html"><i class="icon-chevron-right"></i> 修改头像</a></li>
+                <li class="active"><a href="/spacecp/info.html"><i class="icon-chevron-right"></i> 会员信息</a></li>
+
+                <li class="active"><a href="/spacecp/notice_list-0.html"><i class="icon-chevron-right"></i> 通知列表</a></li>
+                <li class=""><a href="/spacecp/safe.html"><i class="icon-chevron-right"></i> 修改密码</a></li>
+                <li class=""><a href="/manage/app/account/frontEnd.ashx?_m=exit"><i class="icon-chevron-right"></i> 退出</a></li>
+</ul>
+</div><div class="col-md-9">
+
+<form class="form-horizontal" id="edit" xtype="Form" method="post" action="/manage/app/account/frontEnd.ashx">
+<input type="hidden" name="_m" value="editBase">
+
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+		<div class="col-sm-10">
+			<label class="control-label">wangxu</label>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="name" placeholder="姓名" xtype="TextBox" vtype="{required: true}" value="ddss">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword2" class="col-sm-2 control-label">性别</label>
+		<div class="col-sm-10">
+			<select  xtype="SelectBox" value="0" name="sex" ><option value="0">男</option><option value="1">女</option></select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="email" class="col-sm-2 control-label">邮箱</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="phone" placeholder="邮箱" xtype="TextBox" vtype="{email:true}" value="316729240@qq.com">
+		</div>
+	</div>	
+<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">电话</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="phone" placeholder="电话" xtype="TextBox" vtype="{isTel:true}" value="">
+		</div>
+	</div>
+<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">手机</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="mobile" placeholder="手机" xtype="TextBox" vtype="{isMobile: true}" value="13810992891">
+		</div>
+	</div>
+<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">出生日期</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="birthday" xtype="DatePickerInput" value="1983/9/29 0:00:00">
+		</div>
+	</div>
+<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">城市</label>
+		<div class="col-sm-10">
+			<select  xtype="SelectBox"  name="city" ></select>
+			<select  xtype="SelectBox"  name="area" ></select>
+		</div>
+	</div>
+<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">婚姻状况</label>
+		<div class="col-sm-10">
+			<select  xtype="SelectBox"  name="marriage" items="[{text:'未婚',value:0},{text:'已婚',value:1}]" value="1"></select>
+		</div>
+	</div>
+<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">教育程度</label>
+		<div class="col-sm-10">
+			<select  xtype="SelectBox"  name="education" items="[{text:'小学'},{text:'初中'},{text:'高中'},{text:'大学'},{text:'其它'}]" value="大学"></select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="occupation" class="col-sm-2 control-label">职称</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="occupation" placeholder="职称" xtype="TextBox"  value="eaa">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="character" class="col-sm-2 control-label">性格</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="character" placeholder="性格" xtype="TextBox"  value="ccc">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="habit" class="col-sm-2 control-label">习惯</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="habit" placeholder="习惯" xtype="TextBox"  value="dddd">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="like_domain" class="col-sm-2 control-label">关心领域</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="like_domain" placeholder="关心领域" xtype="TextBox"  value="11">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="like_brand" class="col-sm-2 control-label">关心品牌</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="like_brand" placeholder="关心品牌" xtype="TextBox"  value="cc">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="vin" class="col-sm-2 control-label">vin码</label>
+		<div class="col-sm-10">
+			<input  class="form-control" name="vin" placeholder="vin码" xtype="TextBox"  value="sssd">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary btn-lg">保存</button>
+		</div>
+	</div>
+</form>
+dddd
+<script>
+var where= new Array(35);
+where[0]= ["请选择",""];
+where[1] = ["北京","东城|西城|崇文|宣武|朝阳|丰台|石景山|海淀|门头沟|房山|通州|顺义|昌平|大兴|平谷|怀柔|密云|延庆"];  //欢迎来到站长特效网，我们的网址是www.zzjs.net，很好记，zz站长，js就是js特效，本站收集大量高质量js代码，还有许多广告代码下载。
+where[2] = ["上海","黄浦|卢湾|徐汇|长宁|静安|普陀|闸北|虹口|杨浦|闵行|宝山|嘉定|浦东|金山|松江|青浦|南汇|奉贤|崇明"];//欢迎来到站长特效网，我们的网址是www.zzjs.net，很好记，zz站长，js就是js特效，本站收集大量高质量js代码，还有许多广告代码下载。
+where[3] = ["天津","和平|东丽|河东|西青|河西|津南|南开|北辰|河北|武清|红挢|塘沽|汉沽|大港|宁河|静海|宝坻|蓟县"];
+where[4] = ["重庆","万州|涪陵|渝中|大渡口|江北|沙坪坝|九龙坡|南岸|北碚|万盛|双挢|渝北|巴南|黔江|长寿|綦江|潼南|铜梁|大足|荣昌|壁山|梁平|城口|丰都|垫江|武隆|忠县|开县|云阳|奉节|巫山|巫溪|石柱|秀山|酉阳|彭水|江津|合川|永川|南川"];
+where[5] = ["河北","石家庄|邯郸|邢台|保定|张家口|承德|廊坊|唐山|秦皇岛|沧州|衡水"];
+where[6] = ["山西","太原|大同|阳泉|长治|晋城|朔州|吕梁|忻州|晋中|临汾|运城"];
+where[7] = ["内蒙古","呼和浩特|包头|乌海|赤峰|呼伦贝尔盟|阿拉善盟|哲里木盟|兴安盟|乌兰察布盟|锡林郭勒盟|巴彦淖尔盟|伊克昭盟"];
+where[8] = ["辽宁","沈阳|大连|鞍山|抚顺|本溪|丹东|锦州|营口|阜新|辽阳|盘锦|铁岭|朝阳|葫芦岛"];
+where[9] = ["吉林","长春|吉林|四平|辽源|通化|白山|松原|白城|延边"];
+where[10] = ["黑龙江","哈尔滨|齐齐哈尔|牡丹江|佳木斯|大庆|绥化|鹤岗|鸡西|黑河|双鸭山|伊春|七台河|大兴安岭"];
+where[11] = ["江苏","南京|镇江|苏州|南通|扬州|盐城|徐州|连云港|常州|无锡|宿迁|泰州|淮安"];
+where[12] = ["浙江","杭州|宁波|温州|嘉兴|湖州|绍兴|金华|衢州|舟山|台州|丽水"];
+where[13] = ["安徽","合肥|芜湖|蚌埠|马鞍山|淮北|铜陵|安庆|黄山|滁州|宿州|池州|淮南|巢湖|阜阳|六安|宣城|亳州"];
+where[14] = ["福建","福州|厦门|莆田|三明|泉州|漳州|南平|龙岩|宁德"];
+where[15] = ["江西","南昌市|景德镇|九江|鹰潭|萍乡|新馀|赣州|吉安|宜春|抚州|上饶"];
+where[16] = ["山东","济南|青岛|淄博|枣庄|东营|烟台|潍坊|济宁|泰安|威海|日照|莱芜|临沂|德州|聊城|滨州|菏泽"];
+where[17] = ["河南","郑州|开封|洛阳|平顶山|安阳|鹤壁|新乡|焦作|濮阳|许昌|漯河|三门峡|南阳|商丘|信阳|周口|驻马店|济源"];
+where[18] = ["湖北","武汉|宜昌|荆州|襄樊|黄石|荆门|黄冈|十堰|恩施|潜江|天门|仙桃|随州|咸宁|孝感|鄂州"];
+where[19] = ["湖南","长沙|常德|株洲|湘潭|衡阳|岳阳|邵阳|益阳|娄底|怀化|郴州|永州|湘西|张家界"];
+where[20] = ["广东","广州|深圳|珠海|汕头|东莞|中山|佛山|韶关|江门|湛江|茂名|肇庆|惠州|梅州|汕尾|河源|阳江|清远|潮州|揭阳|云浮"];
+where[21] = ["广西","南宁|柳州|桂林|梧州|北海|防城港|钦州|贵港|玉林|南宁地区|柳州地区|贺州|百色|河池"];
+where[22] = ["海南","海口|三亚"];
+where[23] = ["四川","成都|绵阳|德阳|自贡|攀枝花|广元|内江|乐山|南充|宜宾|广安|达川|雅安|眉山|甘孜|凉山|泸州"];
+where[24] = ["贵州","贵阳|六盘水|遵义|安顺|铜仁|黔西南|毕节|黔东南|黔南"];
+where[25] = ["云南","昆明|大理|曲靖|玉溪|昭通|楚雄|红河|文山|思茅|西双版纳|保山|德宏|丽江|怒江|迪庆|临沧"];
+where[26] = ["西藏","拉萨|日喀则|山南|林芝|昌都|阿里|那曲"];
+where[27] = ["陕西","西安|宝鸡|咸阳|铜川|渭南|延安|榆林|汉中|安康|商洛"];
+where[28] = ["甘肃","兰州|嘉峪关|金昌|白银|天水|酒泉|张掖|武威|定西|陇南|平凉|庆阳|临夏|甘南"];
+where[29] = ["宁夏","银川|石嘴山|吴忠|固原"];
+where[30] = ["青海","西宁|海东|海南|海北|黄南|玉树|果洛|海西"];
+where[31] = ["新疆","乌鲁木齐|石河子|克拉玛依|伊犁|巴音郭勒|昌吉|克孜勒苏柯尔克孜|博尔塔拉|吐鲁番|哈密|喀什|和田|阿克苏"];
+where[32] = ["香港",""];
+where[33] = ["澳门",""];
+where[34] = ["台湾","台北|高雄|台中|台南|屏东|南投|云林|新竹|彰化|苗栗|嘉义|花莲|桃园|宜兰|基隆|台东|金门|马祖|澎湖"];
+where[35] = ["其它","北美洲|南美洲|亚洲|非洲|欧洲|大洋洲"];
+var form=$("#edit").render();
+form.attr("onSubmit",function(sender,e){
+if(e.returnData.errNo<0)alert(e.returnData.errMsg);
+else{
+alert("修改成功！");
+}
+});
+var city=form.find("city"),area=form.find("area");
+area.addItem({text:"请选择",value:""});
+var selChange=function(sender){
+for(var i=0;i<where.length;i++){
+if(where[i][0]==sender.val()){
+var list=where[i][1].split('|');
+area.clear();
+area.addItem({text:"请选择",value:""});
+for(var i1=0;i1<list.length;i1++){
+area.addItem({text:list[i1]});
+}
+}
+}
+}
+city.attr("onChange",selChange);
+for(var i=0;i<where.length;i++)city.addItem({text:where[i][0]});
+city.val("吉林");
+selChange(city);
+area.val("白山");
+</script>
+
+
+</div>
+</body>
+
+</html>

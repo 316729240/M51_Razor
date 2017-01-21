@@ -1,0 +1,10 @@
+<!-- #SqlLabel#
+labelId=201651193644176
+sql=select title from maintable 
+recordCount=5
+pageSize=5
+<htmlTemplate>111</htmlTemplate>--><!-- #PageBar#
+pageBarId=201651193644176
+showCount=12
+<HtmlTemplate>{LabelName=FirstPage Value=首页}&nbsp; {LabelName=Prev Value=上一页} &nbsp;{LabelName=PageNumber}&nbsp; {LabelName=Next Value=下一页} {LabelName=EndPage Value=尾页} 共[RecordCount]条记录 [PageNo]/[PageCount]</HtmlTemplate>
+-->

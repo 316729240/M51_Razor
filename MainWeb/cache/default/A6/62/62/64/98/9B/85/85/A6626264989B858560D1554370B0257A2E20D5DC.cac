@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新建网页 1</title>
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="../static/js/jquery.validate.min.js"></script>
+<script src="../static/js/messages_zh.js"></script>
+<script src="../static/js/validate-methods.js"></script>
+</head>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<body>
+
+<div class="col-md-3">
+<ul class="nav nav-list bs-docs-sidenav affix">
+                <li class="active"><a href="#dropdowns"><i class="icon-chevron-right"></i> 会员信息</a></li>
+                <li class=""><a href="#buttonGroups"><i class="icon-chevron-right"></i> 修改密码</a></li>
+                <li class=""><a href="#buttonDropdowns"><i class="icon-chevron-right"></i> 退出</a></li>
+</ul>
+</div><div class="col-md-9">
+
+ffff
+
+
+333
+
+</div>
+</body>
+
+</html>

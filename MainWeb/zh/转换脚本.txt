@@ -1,0 +1,873 @@
+CREATE function f_GetPying(@str varchar(100))
+returns varchar(8000)
+as
+begin
+ declare @re varchar(8000)
+ --Éú³ÉÁÙÊ±±í
+ declare @t table(chr nchar(1) collate  Chinese_PRC_CS_AS_KS_WS,py nvarchar(20)) 
+ insert into @t select'ß¹','a' 
+ insert into @t select'…','aes' 
+ insert into @t select'°¥','ai' 
+ insert into @t select'°²','an' 
+ insert into @t select'°¹','ang' 
+ insert into @t select'°¼','ao' 
+ insert into @t select'°Ë','ba' 
+ insert into @t select'’“','bai' 
+ insert into @t select'ƒÄ','baike' 
+ insert into @t select'®B','baiwa' 
+ insert into @t select'°â','ban' 
+ insert into @t select'°î','bang' 
+ insert into @t select'Ùè','bao' 
+ insert into @t select'È`','be' 
+ insert into @t select'Úé','bei' 
+ insert into @t select'±¼','ben' 
+ insert into @t select'È','beng' 
+ insert into @t select'°n','bi' 
+ insert into @t select'±ß','bian' 
+ insert into @t select'Þm','uu' 
+ insert into @t select'ìá','biao' 
+ insert into @t select'±ï','bie' 
+ insert into @t select'šñ','bin' 
+ insert into @t select'Ùû','bing' 
+ insert into @t select'°h','bo' 
+ insert into @t select'm','bu' 
+ insert into @t select'àê','ca' 
+ insert into @t select'‚Æ','cai' 
+ insert into @t select'k','cal' 
+ insert into @t select'²Î','can' 
+ insert into @t select'²Ö','cang' 
+ insert into @t select'“Ù','cao' 
+ insert into @t select'ƒÔ','ce' 
+ insert into @t select'Ä~','cen' 
+ insert into @t select'àá','ceng' 
+ insert into @t select'³€','ceok' 
+ insert into @t select'K','ceom' 
+ insert into @t select'ªe','ceon' 
+ insert into @t select'u','ceor' 
+ insert into @t select'²æ','cha' 
+ insert into @t select' å','chai' 
+ insert into @t select'Þ{','chan' 
+ insert into @t select'Øö','chang' 
+ insert into @t select'³­','chao' 
+ insert into @t select'³µ','che' 
+ insert into @t select'ÞÓ','chen' 
+ insert into @t select'êp','cheng' 
+ insert into @t select'³Ô','chi' 
+ insert into @t select'³ä','chong' 
+ insert into @t select'³é','chou' 
+ insert into @t select'³ö','chu' 
+ insert into @t select'Äu','chuai' 
+ insert into @t select'çÝ','chuan' 
+ insert into @t select'„V','chuang' 
+ insert into @t select'´µ','chui' 
+ insert into @t select'•I','chun' 
+ insert into @t select'õÖ','chuo' 
+ insert into @t select'ßÚ','ci' 
+ insert into @t select'†ï','cis' 
+ insert into @t select'´Ó','cong' 
+ insert into @t select'´Õ','cou' 
+ insert into @t select'´Ö','cu' 
+ insert into @t select'Ùà','cuan' 
+ insert into @t select'´Þ','cui' 
+ insert into @t select'ß—','cun' 
+ insert into @t select'¬›','cuo' 
+ insert into @t select'´é','chua' 
+ insert into @t select'…ö','da' 
+ insert into @t select'ß¾','dai' 
+ insert into @t select'µ¤','dan' 
+ insert into @t select'µ±','dang' 
+ insert into @t select'µ¶','dao' 
+ insert into @t select'z','de' 
+ insert into @t select'“g','dem' 
+ insert into @t select'’O','den' 
+ insert into @t select'µÆ','deng' 
+ insert into @t select'ª','di' 
+ insert into @t select'àÇ','dia' 
+ insert into @t select'”“','dian' 
+ insert into @t select'µó','diao' 
+ insert into @t select'µù','die' 
+ insert into @t select'†O','dei' 
+ insert into @t select'‡Ã','dim' 
+ insert into @t select'¶¡','ding' 
+ insert into @t select'G','diu' 
+ insert into @t select'¶«','dong' 
+ insert into @t select'…Ê','dou' 
+ insert into @t select'„†','du' 
+ insert into @t select'ÂZ','duan' 
+ insert into @t select'…¶','dug' 
+ insert into @t select'ˆŒ','dui' 
+ insert into @t select'¶Ö','dun' 
+ insert into @t select'ßÍ','duo' 
+ insert into @t select'ŠŠ','e' 
+ insert into @t select'ŠC','en' 
+ insert into @t select'íE','eng' 
+ insert into @t select'˜','eo' 
+ insert into @t select's','eol' 
+ insert into @t select'”ñ','eos' 
+ insert into @t select'¶ù','er' 
+ insert into @t select'·¢','fa' 
+ insert into @t select'·«','fan' 
+ insert into @t select'ØÎ','fang' 
+ insert into @t select'·É','fei' 
+ insert into @t select'·Ô','fen' 
+ insert into @t select'·á','feng' 
+ insert into @t select'­ž','fenwa' 
+ insert into @t select'Ò…','fiao' 
+ insert into @t select'–','fo' 
+ insert into @t select'ˆ¡','fou' 
+ insert into @t select'·ò','fu' 
+ insert into @t select'ªg','fui' 
+ insert into @t select'ê¸','ga' 
+ insert into @t select'ì','gai' 
+ insert into @t select'¸Ê','gan' 
+ insert into @t select'¸Ô','gang' 
+ insert into @t select'¸Þ','gao' 
+ insert into @t select'¸ê','ge' 
+ insert into @t select'¸ø','gei' 
+ insert into @t select'¸ù','gen' 
+ insert into @t select'¸ü','geng' 
+ insert into @t select'†¯','geu' 
+ insert into @t select'†Ö','gib' 
+ insert into @t select'†ñ','go' 
+ insert into @t select'¹¤','gong' 
+ insert into @t select'ƒÀ','gongfen' 
+ insert into @t select'ƒÅ','gongli' 
+ insert into @t select'¹´','gou' 
+ insert into @t select'¹À','gu' 
+ insert into @t select'¹Ï','gua' 
+ insert into @t select'¹Ô','guai' 
+ insert into @t select'¹Ø','guan' 
+ insert into @t select'¹â','guang' 
+ insert into @t select'¹é','gui' 
+ insert into @t select'Ø­','gun' 
+ insert into @t select'ßÃ','guo' 
+ insert into @t select'Šo','ha' 
+ insert into @t select'…õ','hai' 
+ insert into @t select'a','hal' 
+ insert into @t select'ƒË','han' 
+ insert into @t select'ôŒ','hang' 
+ insert into @t select'Æ’','hao' 
+ insert into @t select'ƒÁ','haoke' 
+ insert into @t select'Ú­','he' 
+ insert into @t select'ü\','hei' 
+ insert into @t select'’‹','hen' 
+ insert into @t select'ºà','heng' 
+ insert into @t select'‡Ö','heui' 
+ insert into @t select'Y','ho' 
+ insert into @t select'b','hol' 
+ insert into @t select'…·','hong' 
+ insert into @t select'ýJ','hou' 
+ insert into @t select'ºõ','hu' 
+ insert into @t select'»¨','hua' 
+ insert into @t select'»²','huai' 
+ insert into @t select'»¶','huan' 
+ insert into @t select'Žx','huang' 
+ insert into @t select'»Ò','hui' 
+ insert into @t select'»è','hun' 
+ insert into @t select'…¿','huo' 
+ insert into @t select'‡É','geo' 
+ insert into @t select'‰þ','hwa' 
+ insert into @t select'Ø¢','ji' 
+ insert into @t select'¼Ó','jia' 
+ insert into @t select'†í','jialun' 
+ insert into @t select'ê§','jian' 
+ insert into @t select'½­','jiang' 
+ insert into @t select'Ü´','jiao' 
+ insert into @t select'½×','jie' 
+ insert into @t select'½í','jin' 
+ insert into @t select'ˆi','jing' 
+ insert into @t select'Øç','jiong' 
+ insert into @t select'L','jiu' 
+ insert into @t select'™ã','jou' 
+ insert into @t select'„H','ju' 
+ insert into @t select'Š¤','juan' 
+ insert into @t select'àÙ','jue' 
+ insert into @t select'¾ü','jun' 
+ insert into @t select'ßÇ','ka' 
+ insert into @t select'¿ª','kai' 
+ insert into @t select'f','kal' 
+ insert into @t select'¿¯','kan' 
+ insert into @t select'ƒÝ','hem' 
+ insert into @t select'³T','kang' 
+ insert into @t select'åê','kao' 
+ insert into @t select'¿À','ke' 
+ insert into @t select'ÃG','ken' 
+ insert into @t select'„´','keng' 
+ insert into @t select'Ž|','keo' 
+ insert into @t select'g','keol' 
+ insert into @t select'†{','keos' 
+ insert into @t select'…ž','keum' 
+ insert into @t select']','ki' 
+ insert into @t select'¿Õ','kong' 
+ insert into @t select'W','kos' 
+ insert into @t select'¿Ù','kou' 
+ insert into @t select'’H','ku' 
+ insert into @t select'¿ä','kua' 
+ insert into @t select'Øá','kuai' 
+ insert into @t select'¿í','kuan' 
+ insert into @t select'¿ï','kuang' 
+ insert into @t select'¿÷','kui' 
+ insert into @t select'À¤','kun' 
+ insert into @t select'’ˆ','kuo' 
+ insert into @t select'·i','kweok' 
+ insert into @t select'À¬','la' 
+ insert into @t select'À´','lai' 
+ insert into @t select'À¼','lan' 
+ insert into @t select'à¥','lang' 
+ insert into @t select'ÀÌ','lao' 
+ insert into @t select'Øì','le' 
+ insert into @t select'À×','lei' 
+ insert into @t select'Ü¨','leng' 
+ insert into @t select'†o','li' 
+ insert into @t select'Á©','lia' 
+ insert into @t select'‹¼','lian' 
+ insert into @t select'º|','liang' 
+ insert into @t select'ÜG','liao' 
+ insert into @t select'š¸','lie' 
+ insert into @t select'…›','lin' 
+ insert into @t select'Áæ','ling' 
+ insert into @t select'Áï','liu' 
+ insert into @t select'®F','liwa' 
+ insert into @t select'‡Þ','lo' 
+ insert into @t select'Áú','long' 
+ insert into @t select'Â¦','lou' 
+ insert into @t select'àà','lu' 
+ insert into @t select'Â¿','lv' 
+ insert into @t select'Œœ','lue' 
+ insert into @t select'ÂÏ','luan' 
+ insert into @t select'’à','lun' 
+ insert into @t select'îb','luo' 
+ insert into @t select'…Þ','m' 
+ insert into @t select'Âè','ma' 
+ insert into @t select'ßj','hweong' 
+ insert into @t select'Âñ','mai' 
+ insert into @t select'ò©','man' 
+ insert into @t select' ¯','mang' 
+ insert into @t select'„õ','mangmi' 
+ insert into @t select'Ã¨','mao' 
+ insert into @t select'†x','mas' 
+ insert into @t select'ŽÛ','me' 
+ insert into @t select'…Ð','mei' 
+ insert into @t select'—È','men' 
+ insert into @t select'’ú','meng' 
+ insert into @t select'Û_','meo' 
+ insert into @t select'²[','mi' 
+ insert into @t select'å²','mian' 
+ insert into @t select'ß÷','miao' 
+ insert into @t select'Ø¿','mie' 
+ insert into @t select'­Ÿ','miliklanm' 
+ insert into @t select'Ãñ','min' 
+ insert into @t select'ƒä','lem' 
+ insert into @t select'Ãû','ming' 
+ insert into @t select'Ãý','miu' 
+ insert into @t select'Ãþ','mo' 
+ insert into @t select'i','mol' 
+ insert into @t select'ßè','mou' 
+ insert into @t select'Ä¸','mu' 
+ insert into @t select'”æ','myeo' 
+ insert into @t select'C','myeon' 
+ insert into @t select'—Ò','myeong' 
+ insert into @t select'’‚','na' 
+ insert into @t select'ÄG','nai' 
+ insert into @t select'àï','nan' 
+ insert into @t select'àì','nang' 
+ insert into @t select'e','keg' 
+ insert into @t select'Ø«','nao' 
+ insert into @t select'ðÚ','ne' 
+ insert into @t select'ŠÌ','nei' 
+ insert into @t select'Ÿˆ','nem' 
+ insert into @t select'ÄÛ','nen' 
+ insert into @t select'Ç‚','neus' 
+ insert into @t select'â…','ngag' 
+ insert into @t select'äG','ngai' 
+ insert into @t select'†«','ngam' 
+ insert into @t select'ÄÝ','ni' 
+ insert into @t select'Äê','nian' 
+ insert into @t select'Äï','niang' 
+ insert into @t select'Üà','niao' 
+ insert into @t select'Äó','nie' 
+ insert into @t select'Ã€','nin' 
+ insert into @t select'Äþ','ning' 
+ insert into @t select'Å£','niu' 
+ insert into @t select'Å©','nong' 
+ insert into @t select'Á…','nou' 
+ insert into @t select'Å«','nu' 
+ insert into @t select'Å®','nv' 
+ insert into @t select'Å±','nue' 
+ insert into @t select'¯‘','nve' 
+ insert into @t select'Šf','nuan' 
+ insert into @t select'üQ','nun' 
+ insert into @t select' \','nung' 
+ insert into @t select'Å²','nuo' 
+ insert into @t select'¹p','o' 
+ insert into @t select'‰ñ','oes' 
+ insert into @t select'j','ol' 
+ insert into @t select'íM','on' 
+ insert into @t select'Ú©','ou' 
+ insert into @t select'Šr','pa' 
+ insert into @t select'Ù½','pai' 
+ insert into @t select'´s','pak' 
+ insert into @t select'±e','pan' 
+ insert into @t select'ÅÒ','pang' 
+ insert into @t select'Å×','pao' 
+ insert into @t select'ÅÞ','pei' 
+ insert into @t select'­›','pen' 
+ insert into @t select'„ú','peng' 
+ insert into @t select'›¹','peol' 
+ insert into @t select'Ž‡','phas' 
+ insert into @t select'êC','phdeng' 
+ insert into @t select'n','phoi' 
+ insert into @t select'†Ô','phos' 
+ insert into @t select'Ø§','pi' 
+ insert into @t select'‡æ','pian' 
+ insert into @t select'çÎ','piao' 
+ insert into @t select'ë­','pie' 
+ insert into @t select'Ø¯','pianpang' 
+ insert into @t select'æ°','pin' 
+ insert into @t select'Æ¹','ping' 
+ insert into @t select'îÇ','po' 
+ insert into @t select'ÆÊ','pou' 
+ insert into @t select'†V','deo' 
+ insert into @t select'ƒÍ','ppun' 
+ insert into @t select'ÆÍ','pu' 
+ insert into @t select'Æß','qi' 
+ insert into @t select'Æþ','qia' 
+ insert into @t select'Ç§','qian' 
+ insert into @t select'Ç¼','qiang' 
+ insert into @t select'ƒ¿','qianke' 
+ insert into @t select'­™','qianwa' 
+ insert into @t select'ÇÄ','qiao' 
+ insert into @t select'Æj','qie' 
+ insert into @t select'Ç×','qin' 
+ insert into @t select'Ïˆ','kem' 
+ insert into @t select'Çâ','qing' 
+ insert into @t select'öÆ','qiong' 
+ insert into @t select'Çð','qiu' 
+ insert into @t select'Çú','qu' 
+ insert into @t select'Þ‘','keop' 
+ insert into @t select'Z','quan' 
+ insert into @t select'ÉU','que' 
+ insert into @t select'‰æ','qun' 
+ insert into @t select'’','ra' 
+ insert into @t select'‡Ý','ram' 
+ insert into @t select'…ß','ran' 
+ insert into @t select'·y','rang' 
+ insert into @t select'Üé','rao' 
+ insert into @t select'ÈÇ','re' 
+ insert into @t select'ÈË','ren' 
+ insert into @t select'ÈÓ','reng' 
+ insert into @t select'ÈÕ','ri' 
+ insert into @t select'–Ñ','rong' 
+ insert into @t select'¶b','rou' 
+ insert into @t select'Ž]','ru' 
+ insert into @t select'“É','ruan' 
+ insert into @t select'—M','rui' 
+ insert into @t select'Èò','run' 
+ insert into @t select'…ª','ruo' 
+ insert into @t select'Øí','sa' 
+ insert into @t select'–Ó','saeng' 
+ insert into @t select'šº','sai' 
+ insert into @t select'Ìƒ','sal' 
+ insert into @t select'Èý','san' 
+ insert into @t select'–ø','sang' 
+ insert into @t select'’û','sao' 
+ insert into @t select'É«','se' 
+ insert into @t select'ÑS','sed' 
+ insert into @t select'Â{','sei' 
+ insert into @t select'É­','sen' 
+ insert into @t select'ôO','seng' 
+ insert into @t select'é~','seo' 
+ insert into @t select'¿L','seon' 
+ insert into @t select'É±','sha' 
+ insert into @t select'É¸','shai' 
+ insert into @t select'É½','shan' 
+ insert into @t select'ÉË','shang' 
+ insert into @t select'„','shao' 
+ insert into @t select'ÉÝ','she' 
+ insert into @t select'Éê','shen' 
+ insert into @t select'Éý','sheng' 
+ insert into @t select'Ê¬','shi' 
+ insert into @t select'ƒ¾','shike' 
+ insert into @t select'­—','shiwa' 
+ insert into @t select'…§','shou' 
+ insert into @t select'Êé','shu' 
+ insert into @t select'Ë¢','shua' 
+ insert into @t select'Ë¤','shuai' 
+ insert into @t select'ãÅ','shuan' 
+ insert into @t select'Ë«','shuang' 
+ insert into @t select'Ë­','shei' 
+ insert into @t select'ÃŸ','shui' 
+ insert into @t select'Ë±','shun' 
+ insert into @t select'†d','shuo' 
+ insert into @t select'Ë¿','si' 
+ insert into @t select'ÏA','so' 
+ insert into @t select'r','sol' 
+ insert into @t select'âì','song' 
+ insert into @t select'ƒð','sou' 
+ insert into @t select'ËÕ','su' 
+ insert into @t select'¯i','suan' 
+ insert into @t select'‰å','sui' 
+ insert into @t select'Ëï','sun' 
+ insert into @t select'æ¶','suo' 
+ insert into @t select'Ëû','ta' 
+ insert into @t select'Òk','tae' 
+ insert into @t select'‡ò','tai' 
+ insert into @t select'Ì®','tan' 
+ insert into @t select'ï¦','tang' 
+ insert into @t select'—','tao' 
+ insert into @t select'®z','tap' 
+ insert into @t select'ß¯','te' 
+ insert into @t select'Ä†','teng' 
+ insert into @t select'†z','teo' 
+ insert into @t select'–Y','teul' 
+ insert into @t select'ÌÞ','ti' 
+ insert into @t select'Ìì','tian' 
+ insert into @t select'”þ','tiao' 
+ insert into @t select'G','tie' 
+ insert into @t select'Ìü','ting' 
+ insert into @t select'h','tol' 
+ insert into @t select'‡ì','tong' 
+ insert into @t select'Íµ','tou' 
+ insert into @t select'Í¹','tu' 
+ insert into @t select'ÍÄ','tuan' 
+ insert into @t select'ÍÆ','tui' 
+ insert into @t select'•H','tun' 
+ insert into @t select'Ø±','tuo' 
+ insert into @t select'ŒÜ','wa' 
+ insert into @t select'Íá','wai' 
+ insert into @t select'^','wan' 
+ insert into @t select'Œ²','wang' 
+ insert into @t select'Î£','wei' 
+ insert into @t select'‰e','wen' 
+ insert into @t select'ÎÌ','weng' 
+ insert into @t select'ÎÎ','wo' 
+ insert into @t select'ÎÚ','wu' 
+ insert into @t select'Ï¦','xi' 
+ insert into @t select'ÚÀ','ei' 
+ insert into @t select'¯P','xia' 
+ insert into @t select'ÏÉ','xian' 
+ insert into @t select'Ïç','xiang' 
+ insert into @t select'ž¼','xiao' 
+ insert into @t select'Ð¨','xie' 
+ insert into @t select'ÐÄ','xin' 
+ insert into @t select'ÐÇ','xing' 
+ insert into @t select'Ð×','xiong' 
+ insert into @t select'ÐÝ','xiu' 
+ insert into @t select'•B','xu' 
+ insert into @t select'•R','xuan' 
+ insert into @t select'¯T','xue' 
+ insert into @t select'ˆ_','xun' 
+ insert into @t select'Ñ¾','ya' 
+ insert into @t select'ÑÊ','yan' 
+ insert into @t select'™ë','eom' 
+ insert into @t select'Ñë','yang' 
+ insert into @t select'ßº','yao' 
+ insert into @t select'Ò¬','ye' 
+ insert into @t select'ÄŒ','yen' 
+ insert into @t select'Ò»','yi' 
+ insert into @t select'U','i' 
+ insert into @t select']','yin' 
+ insert into @t select'Ó¦','ying' 
+ insert into @t select'Ó´','yo' 
+ insert into @t select'Ó¶','yong' 
+ insert into @t select'ÓÅ','you' 
+ insert into @t select'ÓØ','yu' 
+ insert into @t select'‡ä','yuan' 
+ insert into @t select'Ô»','yue' 
+ insert into @t select'ÉC','yun' 
+ insert into @t select'Ž‰','za' 
+ insert into @t select'žÄ','zai' 
+ insert into @t select'ƒ³','zan' 
+ insert into @t select' ™','zang' 
+ insert into @t select'Ôâ','zao' 
+ insert into @t select'†¨','ze' 
+ insert into @t select'Ôô','zei' 
+ insert into @t select'Ôõ','zen' 
+ insert into @t select'•û','zeng' 
+ insert into @t select'ß¸','zha' 
+ insert into @t select'®h','gad' 
+ insert into @t select'‰ã','zhai' 
+ insert into @t select'Õ±','zhan' 
+ insert into @t select'ÕÅ','zhang' 
+ insert into @t select'îÈ','zhao' 
+ insert into @t select'òØ','zhe' 
+ insert into @t select'Õê','zhen' 
+ insert into @t select'„J','zheng' 
+ insert into @t select'Ö®','zhi' 
+ insert into @t select'ÖÐ','zhong' 
+ insert into @t select'ÖÝ','zhou' 
+ insert into @t select'„¸','zhu' 
+ insert into @t select'×¥','zhua' 
+ insert into @t select'×¨','zhuan' 
+ insert into @t select'×ª','zhuai' 
+ insert into @t select'×±','zhuang' 
+ insert into @t select'æí','zhui' 
+ insert into @t select'Œd','zhun' 
+ insert into @t select'×¿','zhuo' 
+ insert into @t select'×Î','zi' 
+ insert into @t select'†€','zo' 
+ insert into @t select'×Ú','zong' 
+ insert into @t select'—°','zou' 
+ insert into @t select'†X','zu' 
+ insert into @t select'„®','zuan' 
+ insert into @t select'…‰','zui' 
+ insert into @t select'×ð','zun' 
+ insert into @t select'×ò','zuo' 
+ 
+ declare @strlen int 
+ select @strlen=len(@str),@re=''
+ while @strlen>0
+ begin     
+      select top 1 @re=UPPER(substring(py,1,1) )+substring(py,2,len(py))+@re,@strlen=@strlen-1 
+      from @t a where chr<=substring(@str,@strlen,1) 
+      order by chr collate Chinese_PRC_CS_AS_KS_WS  desc 
+      if @@rowcount=0
+        select @re=substring(@str,@strlen,1)+@re,@strlen=@strlen-1
+   end
+ return(@re)
+end
+
+
+CREATE TABLE [dbo].[admin_role](
+	[id] [float] NULL,
+	[userId] [float] NULL,
+	[roleId] [float] NULL
+) ON [PRIMARY]
+
+drop table backupTemplate
+CREATE TABLE [dbo].[backupTemplate](
+	[dataId] [float] NULL,
+	[classId] [float] NULL,
+	[u_type] [int] NULL,
+	[u_content] [ntext] COLLATE Chinese_PRC_CI_AS NULL,
+	[updateDate] [smalldatetime] NULL,
+	[username] [varchar](20) COLLATE Chinese_PRC_CI_AS NULL,
+	[u_webFAid] [int] NULL,
+	[title] [varchar](100) COLLATE Chinese_PRC_CI_AS NULL,
+	[u_defaultFlag] [bit] NULL CONSTRAINT [DF_backupTemplate_u_defaultTag]  DEFAULT ((0)),
+	[id] [float] NULL,
+	[u_datatypeId] [float] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+CREATE TABLE [dbo].[article](
+	[id] [float] NOT NULL,
+	[u_content] [ntext] COLLATE Chinese_PRC_CI_AS NULL,
+	[u_defaultPic] [varchar](255) COLLATE Chinese_PRC_CI_AS NULL,
+	[u_fromWeb] [varchar](255) COLLATE Chinese_PRC_CI_AS NULL,
+	[u_titleFontColor] [varchar](50) COLLATE Chinese_PRC_CI_AS NULL,
+	[u_titleFontType] [varchar](50) COLLATE Chinese_PRC_CI_AS NULL,
+	[u_info] [ntext] COLLATE Chinese_PRC_CI_AS NULL,
+	[u_keyword] [varchar](255) COLLATE Chinese_PRC_CI_AS NULL,
+	[u_custom] [ntext] COLLATE Chinese_PRC_CI_AS NULL,
+ CONSTRAINT [PK_article] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+EXEC sp_rename 'dataview.[viewType]', 'u_viewType', 'column' 
+EXEC sp_rename 'dataview.[html]', 'u_html', 'column' 
+EXEC sp_rename 'dataview.[dataTypeId]', 'u_dataTypeId', 'column' 
+EXEC sp_rename 'dataview.[parameterValue]', 'u_parameterValue', 'column' 
+EXEC sp_rename 'dataview.[EditBoxTag]', 'u_editboxStatus', 'column' 
+EXEC sp_rename 'dataview.[viewSet]', 'u_viewSet', 'column' 
+EXEC sp_rename 'dataview.[viewname]', 'title', 'column' 
+
+
+alter table dataview add 	u_pinyin [varchar](100) COLLATE Chinese_PRC_CI_AS NULL
+
+update dataview set u_pinyin= dbo.f_GetPying(title)
+update dataview set u_pinyin=LOWER(u_pinyin)
+
+EXEC sp_rename 'htmlTemplate.[content]', 'u_content', 'column' 
+EXEC sp_rename 'htmlTemplate.[dataTypeId]', 'u_dataTypeId', 'column' 
+
+
+alter table HtmlTemplate add 	u_type [int]  NULL
+
+update htmlTemplate set u_type=CONVERT(int,type)
+
+
+EXEC sp_rename 'htmlTemplate.[parameterValue]', 'u_parameterValue', 'column' 
+EXEC sp_rename 'htmlTemplate.[EditBoxTag]', 'u_editboxStatus', 'column' 
+EXEC sp_rename 'htmlTemplate.[DefaultTag]', 'u_defaultFlag', 'column' 
+EXEC sp_rename 'htmlTemplate.[webFAid]', 'u_webFAid', 'column' 
+EXEC sp_rename 'htmlTemplate.[runtime]', 'u_runtime', 'column' 
+EXEC sp_rename 'htmlTemplate.[runurl]', 'u_runurl', 'column' 
+EXEC sp_rename 'htmlTemplate.[rundate]', 'u_rundate', 'column' 
+alter table htmlTemplate add 	url [varchar](200) COLLATE Chinese_PRC_CI_AS NULL
+
+
+drop table [IndexTable]
+CREATE TABLE [dbo].[IndexTable](
+	[dataId] [float] NULL CONSTRAINT [DF_IndexTable_DataID]  DEFAULT ((0)),
+	[keyword] [varchar](100) COLLATE Chinese_PRC_CI_AS NULL,
+	[pinyin] [varchar](50) COLLATE Chinese_PRC_CI_AS NULL
+) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [IndexTable_dataId] ON [dbo].[IndexTable] 
+(
+	[dataId] ASC
+)WITH (SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+
+/****** ¶ÔÏó:  Index [indexTable_pinyin]    ½Å±¾ÈÕÆÚ: 07/07/2015 15:32:59 ******/
+CREATE NONCLUSTERED INDEX [indexTable_pinyin] ON [dbo].[IndexTable] 
+(
+	[pinyin] ASC
+)WITH (SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+exec sp_rename 'admin','m_admin'
+alter table m_admin add 	status [int]  NULL
+alter table m_admin add 	icon [varchar](100) COLLATE Chinese_PRC_CI_AS NULL
+alter table m_admin add 	phone [varchar](100) COLLATE Chinese_PRC_CI_AS NULL
+alter table m_admin add 	filteringIP [varchar](1000) COLLATE Chinese_PRC_CI_AS NULL
+
+update m_admin set status=1,phone='',icon=''
+update m_admin set status=0 where orderid<0
+update datatype set tablestructure='id-Êý¾ÝÎ¨Ò»±êÊ¶-Double------·ñ--|classId-Êý¾ÝËùÊôÀ¸Ä¿-Double------·ñ--|createDate-´´½¨Ê±¼ä-Date------·ñ--|updateDate-ÐÞ¸ÄÊ±¼ä-Date------·ñ--|orderId-ÅÅÐòÖÁ¶¥-Long------·ñ--|attribute-ÊôÐÔ-String-0-5------|className-Ãû³Æ-String-0-40-TextBox---ÊÇ--|dirName-Ä¿Â¼Ãû³Æ-String-0-15-TextBox---ÊÇ--|keyword-¹Ø¼ü´Ê-String-0-255-TextBox---¹Ø¼ü´Ê--|info-±¸×¢-Remark-0--HTMLEditBox-0--·ñ--|maxico-ËõÂÔÍ¼-String-0-30-UploadBox-0,300,300--ÊÇ--|custom-×Ô¶¨Òå±äÁ¿-Remark-0---0--·ñ--|' where id=0
+CREATE TABLE [dbo].[mainTable](
+	[id] [float] NOT NULL,
+	[classId] [float] NULL CONSTRAINT [DF_mainTable_classId]  DEFAULT ((0)),
+	[createDate] [datetime] NULL CONSTRAINT [DF_mainTable_createDate]  DEFAULT (getdate()),
+	[updateDate] [datetime] NULL CONSTRAINT [DF_mainTable_updateDate]  DEFAULT (getdate()),
+	[title] [varchar](100) COLLATE Chinese_PRC_CI_AS NULL,
+	[orderId] [int] NULL CONSTRAINT [DF_mainTable_orderId]  DEFAULT ((0)),
+	[userId] [float] NULL CONSTRAINT [DF_mainTable_userId]  DEFAULT ((0)),
+	[path] [varchar](200) COLLATE Chinese_PRC_CI_AS NULL,
+	[filename] [varchar](255) COLLATE Chinese_PRC_CI_AS NULL,
+	[moduleId] [float] NULL CONSTRAINT [DF_mainTable_moduleId]  DEFAULT ((0)),
+	[dataTypeId] [float] NULL CONSTRAINT [DF_mainTable_dataTypeId]  DEFAULT ((0)),
+	[clickCount] [int] NULL CONSTRAINT [DF_mainTable_clickCount]  DEFAULT ((0)),
+	[attr0] [bit] NULL CONSTRAINT [DF_mainTable_attr0]  DEFAULT ((0)),
+	[attr1] [bit] NULL CONSTRAINT [DF_mainTable_attr1]  DEFAULT ((0)),
+	[attr2] [bit] NULL CONSTRAINT [DF_mainTable_attr2]  DEFAULT ((0)),
+	[attr3] [bit] NULL CONSTRAINT [DF_mainTable_attr3]  DEFAULT ((0)),
+	[attr4] [bit] NULL CONSTRAINT [DF_mainTable_arrt4]  DEFAULT ((0)),
+	[url] [varchar](300) COLLATE Chinese_PRC_CI_AS NULL,
+	[skinId] [float] NULL CONSTRAINT [DF_mainTable_skinId]  DEFAULT ((0)),
+	[rootId] [float] NULL,
+ CONSTRAINT [PK_mainTable] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+drop table Permissions
+CREATE TABLE [dbo].[permissions](
+	[classId] [float] NULL,
+	[type] [int] NULL,
+	[dataId] [float] NULL,
+	[p0] [int] NULL CONSTRAINT [DF_permissions_q0]  DEFAULT ((0)),
+	[p1] [int] NULL CONSTRAINT [DF_permissions_q1]  DEFAULT ((0)),
+	[p2] [int] NULL CONSTRAINT [DF_permissions_q2]  DEFAULT ((0)),
+	[p3] [int] NULL CONSTRAINT [DF_permissions_q3]  DEFAULT ((0)),
+	[p4] [int] NULL CONSTRAINT [DF_permissions_q4]  DEFAULT ((0))
+) ON [PRIMARY]
+
+alter table class add 	url [varchar](300) COLLATE Chinese_PRC_CI_AS NULL
+
+
+
+
+insert into article (id,u_content,u_defaultPic,u_fromWeb,u_titleFontColor,u_titleFontType,u_info,u_keyword,u_custom)
+select id,content,defaultpic,fromweb,titlefontcolor,titlefonttype,info,keyword,custom from word
+
+insert into mainTable (id,classId,createDate,updateDate,title,orderId,userId,moduleId,clickCount,attr0,attr1,attr2,attr3,attr4,rootid,datatypeid)
+select  A.id,A.classId,A.createDate,A.updateDate,A.title,A.orderid,A.userid,B.moduleId,0,0,0,0,0,0,B.rootid,B.SaveDataType from word A,class B where A.classid=B.id 
+
+insert into mainTable (id,classId,createDate,updateDate,title,orderId,userId,moduleId,clickCount,attr0,attr1,attr2,attr3,attr4)
+select  A.id,A.classId,A.createDate,A.updateDate,A.title,A.orderid,A.userid,0,0,0,0,0,0,0 from dataview A
+
+
+update datatype  set tablename='article',tablestructure='u_titleFontColor-±êÌâÑÕÉ«-String-0-50-TextBox---·ñ--|u_info-¼ò½é-Remark-0--HTMLEditBox---·ñ--|u_content-ÄÚÈÝ-Remark-0--HTMLEditBox-0--·ñ--|u_defaultPic-Í¼Æ¬-String-1-255-UploadBox-0,,1,-NoValidate-·ñ--|u_keyword-¹Ø¼ü×Ö-String-0-255-TextBox--NoValidate-ÊÇ--|u_fromWeb-À´Ô´-String-0-255-TextBox--NoValidate-·ñ--' where id=22192428132
+
+
+
+
+
+drop table [loginInfo]
+
+CREATE TABLE [dbo].[loginInfo](
+	[sessionId] [float] NOT NULL,
+	[ip] [bigint] NULL,
+	[logindate] [datetime] NULL,
+	[loginPword] [varchar](300) COLLATE Chinese_PRC_CI_AS NULL,
+	[userid] [float] NULL,
+	[username] [varchar](20) COLLATE Chinese_PRC_CI_AS NULL,
+ CONSTRAINT [PK_loginInfo] PRIMARY KEY CLUSTERED 
+(
+	[sessionId] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+EXEC sp_rename 'dataview.[viewType]', 'u_viewType', 'column' 
+
+
+EXEC sp_rename 'class.[ParentPath]', 'parentId', 'column' 
+EXEC sp_rename 'module.[datatypeid]', 'saveDataType', 'column' 
+update HtmlTemplate set url='/'+title
+
+update HtmlTemplate set url='/'+B.dirname+'/'+title from HtmlTemplate A,class B
+where A.classId=B.id 
+
+
+
+GO
+
+/****** Object:  Index [mainTable_classId_id]    Script Date: 07/04/2015 15:48:21 ******/
+CREATE NONCLUSTERED INDEX [mainTable_classId_id] ON [dbo].[mainTable] 
+(
+	[classId] ASC,
+	[id] DESC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_classId_orderId_createDate]    Script Date: 07/04/2015 15:48:27 ******/
+CREATE NONCLUSTERED INDEX [mainTable_classId_orderId_createDate] ON [dbo].[mainTable] 
+(
+	[classId] ASC,
+	[orderId] DESC,
+	[createDate] DESC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_clickCount_classId]    Script Date: 07/04/2015 15:48:32 ******/
+CREATE NONCLUSTERED INDEX [mainTable_clickCount_classId] ON [dbo].[mainTable] 
+(
+	[clickCount] DESC,
+	[classId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_clickCount_moduleId]    Script Date: 07/04/2015 15:48:38 ******/
+CREATE NONCLUSTERED INDEX [mainTable_clickCount_moduleId] ON [dbo].[mainTable] 
+(
+	[clickCount] DESC,
+	[moduleId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+GO
+
+/****** Object:  Index [mainTable_createDate_classId]    Script Date: 07/04/2015 15:48:44 ******/
+CREATE NONCLUSTERED INDEX [mainTable_createDate_classId] ON [dbo].[mainTable] 
+(
+	[createDate] DESC,
+	[classId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+
+/****** Object:  Index [mainTable_moduleId_createDate]    Script Date: 07/10/2015 13:00:27 ******/
+CREATE NONCLUSTERED INDEX [mainTable_moduleId_createDate] ON [dbo].[mainTable] 
+(
+	[moduleId] ASC,
+	[createDate] ASC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+
+GO
+
+/****** Object:  Index [mainTable_moduleId_orderId_createdate]    Script Date: 07/04/2015 15:48:54 ******/
+CREATE NONCLUSTERED INDEX [mainTable_moduleId_orderId_createdate] ON [dbo].[mainTable] 
+(
+	[moduleId] ASC,
+	[orderId] DESC,
+	[createDate] DESC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_orderId_createDate]    Script Date: 07/04/2015 15:48:59 ******/
+CREATE NONCLUSTERED INDEX [mainTable_orderId_createDate] ON [dbo].[mainTable] 
+(
+	[orderId] DESC,
+	[createDate] DESC,
+	[classId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_rootId_createDate]    Script Date: 07/04/2015 15:49:05 ******/
+CREATE NONCLUSTERED INDEX [mainTable_rootId_createDate] ON [dbo].[mainTable] 
+(
+	[rootId] ASC,
+	[createDate] DESC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+
+GO
+
+/****** Object:  Index [mainTable_rootId_orderId_createDate]    Script Date: 07/04/2015 15:49:10 ******/
+CREATE NONCLUSTERED INDEX [mainTable_rootId_orderId_createDate] ON [dbo].[mainTable] 
+(
+	[rootId] ASC,
+	[orderId] DESC,
+	[createDate] DESC,
+	[attr0] ASC,
+	[attr1] ASC,
+	[attr2] ASC,
+	[attr3] ASC,
+	[attr4] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+GO
+
+/****** Object:  Index [maintTable_url]    Script Date: 07/04/2015 15:49:16 ******/
+CREATE NONCLUSTERED INDEX [maintTable_url] ON [dbo].[mainTable] 
+(
+	[url] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+ALTER TABLE module DROP COLUMN orderid
+alter table module add 	 [orderid] [int] NULL
+update module set orderid=0
+
+
+update maintable set attr0=1 where id in (select id from Word where Attribute='1')
+update maintable set attr1=1 where id in (select id from Word where Attribute='2')
+update maintable set attr2=1 where id in (select id from Word where Attribute='3')
+update maintable set attr3=1 where id in (select id from Word where Attribute='4')
+update maintable set attr4=1 where id in (select id from Word where Attribute='5')
+

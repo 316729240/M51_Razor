@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<title>新建网页 1</title>
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/baseControl.js"></script>
+<script type="text/javascript" src="/static/js/frame.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/messages_zh.js"></script>
+<script src="/static/js/validate-methods.js"></script>
+</head>
+
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<body>
+
+<form class="form-horizontal" id="reg" xtype="Form" method="post" action="/manage/app/account/frontEnd.ashx">
+	<input type="hidden" name="_m" value="reg">
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">会员类型</label>
+		<div class="col-sm-10">
+			<input type="radio" value="0" checked name="type">个人会员
+			<input type="radio" value="1" checked name="type">企业会员
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+		<div class="col-sm-10">
+			<input class="form-control" name="username" placeholder="用户名" xtype="TextBox" vtype="{required: true}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword2" class="col-sm-2 control-label">密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" id="inputPassword2" name="password" placeholder="密码" xtype="TextBox" vtype="{required: true,isPassword:true}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="确认密码" xtype="TextBox" vtype="{required: true,isPassword:true,equalTo:'#inputPassword2'}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="mobile" class="col-sm-2 control-label">手机/邮箱</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="mobile" name="mobile" placeholder="填写手机或者邮箱" xtype="TextBox" vtype="{required: true,isME:true}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="securityCode" class="col-sm-2 control-label" >验证码</label>
+		<div class="col-sm-10">
+
+<div class="input-group col-sm-3">
+  <input type="text" class="form-control" name="verification" placeholder="验证码" xtype="TextBox" vtype="{required: true}">
+<span class="input-group-addon"  id="codeButton"><a href="#" onclick="$('#verification').attr('src','/manage/app/account/verification.ashx?r='+Math.random());return false;">
+			换一个</a></span>
+<span class="input-group-addon" id="sortMsgButton"><a href="#" >获取短信验证码</a></span>
+</div>
+	</div></div>
+	<div class="form-group" id="codePic">
+		<label for="securityCode" class="col-sm-2 control-label"></label>
+		<div class="col-sm-10">
+			<img src="/manage/app/account/verification.ashx" id="verification" onclick="$('#verification').attr('src','/manage/app/account/verification.ashx?r='+Math.random());" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary btn-lg">注册</button>
+		</div>
+	</div>
+</form>
+
+
+
+</body>
+
+</html>
+<script>
+var form=$("#reg").render();
+form.attr("onSubmit",function(sender,e){
+if(e.returnData.errNo<0)alert(e.returnData.errMsg);
+else{
+alert("注册成功！");
+}
+});
+var mobile=form.find("mobile");
+mobile.attr("onChange",function(sender,e){
+var value=sender.val();
+        var length = value.length;
+var flag=(length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
+if(flag){
+$("#codeButton").hide();
+$("#sortMsgButton").show();
+$("#codePic").hide();
+}else{
+$("#codeButton").show();
+$("#sortMsgButton").hide();
+$("#codePic").show();
+}
+});
+$("#sortMsgButton").hide();
+$("#sortMsgButton").click(function(){
+$M.ajax("/manage/app/account/frontEnd.ashx",{_m:"getMobileCode"});
+});
+</script>
