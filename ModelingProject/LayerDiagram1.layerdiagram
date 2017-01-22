@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="71a89c6b-dfd1-4387-9dd4-536ede2ac600" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="18f71ecb-0a75-4629-9595-798a4af8077c" name="RazorEngine" />
+    <layer Id="122e5c38-c915-44d4-a53d-e1997382e537" name="MWMS.DAL" />
+    <layer Id="fc531320-a21c-421b-a577-6a3132721d31" name="MWMS.Template">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="4d5c54b9-49be-422b-9445-c839d0b54a37" direction="Forward">
+          <layerMoniker Id="18f71ecb-0a75-4629-9595-798a4af8077c" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="068bd4fc-a945-49e2-843a-4e4f052e9a49" direction="Forward">
+          <layerMoniker Id="122e5c38-c915-44d4-a53d-e1997382e537" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="1dc711dc-5865-4387-868e-2fbe14ea4ad5" name="MWMS.UserFramework">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="859d6df2-e899-4307-8b12-fc5bccc41694" direction="Forward">
+          <layerMoniker Id="122e5c38-c915-44d4-a53d-e1997382e537" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="6fabdace-0759-4367-86d7-2563aee8ed61" name="MWMS.Web">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="7c2ccc76-cd39-441d-8775-0dc7785a9c7d" direction="Forward">
+          <layerMoniker Id="1dc711dc-5865-4387-868e-2fbe14ea4ad5" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="37330d1f-1f7e-4e7b-b08b-7f9fbe13e9e2" direction="Forward">
+          <layerMoniker Id="3b6f8b5d-c2ac-4bff-a345-4778ac036ee4" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="3b6f8b5d-c2ac-4bff-a345-4778ac036ee4" name="MWMS.Catch">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="34eadd35-6c4d-4fa3-a10e-01783b1a1c7a" direction="Forward">
+          <layerMoniker Id="fc531320-a21c-421b-a577-6a3132721d31" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+  </layers>
+</layerModel>

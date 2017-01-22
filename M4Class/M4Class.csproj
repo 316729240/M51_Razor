@@ -150,10 +150,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\RazorEngineNET4.0-master2\RazorEngine\Core\RazorEngine.Core\RazorEngine.Core.csproj">
-      <Project>{d268f86d-2dab-4329-a75f-3bcf6d5bcdc4}</Project>
-      <Name>RazorEngine.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Helper\Helper.csproj">
       <Project>{65277B33-7EF2-4606-A136-14CB3F5E9240}</Project>
       <Name>Helper</Name>

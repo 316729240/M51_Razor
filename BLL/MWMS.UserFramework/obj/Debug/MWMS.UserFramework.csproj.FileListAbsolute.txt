@@ -1,0 +1,4 @@
+D:\myproject\M51_Razor\BLL\MWMS.UserFramework\bin\Debug\MWMS.UserFramework.dll
+D:\myproject\M51_Razor\BLL\MWMS.UserFramework\bin\Debug\MWMS.UserFramework.pdb
+D:\myproject\M51_Razor\BLL\MWMS.UserFramework\obj\Debug\MWMS.UserFramework.dll
+D:\myproject\M51_Razor\BLL\MWMS.UserFramework\obj\Debug\MWMS.UserFramework.pdb

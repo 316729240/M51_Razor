@@ -7,3 +7,8 @@ F:\web\my\M45_Razor\Helper\bin\Debug\Helper.pdb
 F:\web\my\M45_Razor\Helper\obj\Debug\Helper.dll
 F:\web\my\M45_Razor\Helper\obj\Debug\Helper.pdb
 F:\web\my\M45_Razor\Helper\obj\Debug\Helper.csprojResolveAssemblyReference.cache
+D:\myproject\M51_Razor\Helper\bin\Debug\Helper.dll
+D:\myproject\M51_Razor\Helper\bin\Debug\Helper.pdb
+D:\myproject\M51_Razor\Helper\obj\Debug\Helper.csprojResolveAssemblyReference.cache
+D:\myproject\M51_Razor\Helper\obj\Debug\Helper.dll
+D:\myproject\M51_Razor\Helper\obj\Debug\Helper.pdb

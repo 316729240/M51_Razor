@@ -1,0 +1,4 @@
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.Template.dll
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.Template.pdb
+D:\myproject\M51_Razor\BLL\MWMS.Template\obj\Debug\MWMS.Template.dll
+D:\myproject\M51_Razor\BLL\MWMS.Template\obj\Debug\MWMS.Template.pdb
