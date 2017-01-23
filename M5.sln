@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M4Class", "M4Class\M4Class.csproj", "{13FAF33A-4791-4196-973C-EF40AABA478F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MWMS.DAL", "MWMS.DAL\MWMS.D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{3EEFFA37-A043-4137-B950-746377322451}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MWMS.UserFramework", "BLL\MWMS.UserFramework\MWMS.UserFramework.csproj", "{08383B02-2489-4B95-A843-83343E229B66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserFramework", "BLL\MWMS.UserFramework\UserFramework.csproj", "{08383B02-2489-4B95-A843-83343E229B66}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MWMS.Template", "BLL\MWMS.Template\MWMS.Template.csproj", "{1992D0D5-B513-476E-B16B-B06B709006DA}"
 EndProject
