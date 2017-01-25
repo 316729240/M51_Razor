@@ -13,20 +13,20 @@
         </dependencyFromLayerToLayer>
       </dependencyToLayers>
     </layer>
-    <layer Id="1dc711dc-5865-4387-868e-2fbe14ea4ad5" name="MWMS.UserFramework">
+    <layer Id="1dc711dc-5865-4387-868e-2fbe14ea4ad5" name="UserFramework">
       <dependencyToLayers>
         <dependencyFromLayerToLayer Id="859d6df2-e899-4307-8b12-fc5bccc41694" direction="Forward">
           <layerMoniker Id="122e5c38-c915-44d4-a53d-e1997382e537" />
         </dependencyFromLayerToLayer>
       </dependencyToLayers>
     </layer>
-    <layer Id="6fabdace-0759-4367-86d7-2563aee8ed61" name="MWMS.Web">
+    <layer Id="6fabdace-0759-4367-86d7-2563aee8ed61" name="MWMS.UI">
       <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="7c2ccc76-cd39-441d-8775-0dc7785a9c7d" direction="Forward">
-          <layerMoniker Id="1dc711dc-5865-4387-868e-2fbe14ea4ad5" />
-        </dependencyFromLayerToLayer>
         <dependencyFromLayerToLayer Id="37330d1f-1f7e-4e7b-b08b-7f9fbe13e9e2" direction="Forward">
           <layerMoniker Id="3b6f8b5d-c2ac-4bff-a345-4778ac036ee4" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="96a46ca0-3628-4a15-a76e-db3f21d690f4" direction="Forward">
+          <layerMoniker Id="1c2f4b78-9d1c-4d1e-86bc-bf984cf2c685" />
         </dependencyFromLayerToLayer>
       </dependencyToLayers>
     </layer>
@@ -34,6 +34,13 @@
       <dependencyToLayers>
         <dependencyFromLayerToLayer Id="34eadd35-6c4d-4fa3-a10e-01783b1a1c7a" direction="Forward">
           <layerMoniker Id="fc531320-a21c-421b-a577-6a3132721d31" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="1c2f4b78-9d1c-4d1e-86bc-bf984cf2c685" name="ManagerFramework">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="1b8a3177-2cba-43a8-bffd-87f3d9644059" direction="Forward">
+          <layerMoniker Id="1dc711dc-5865-4387-868e-2fbe14ea4ad5" />
         </dependencyFromLayerToLayer>
       </dependencyToLayers>
     </layer>

@@ -73,13 +73,6 @@ F:\web\my\M45_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Reso
 F:\web\my\M45_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.csproj.GenerateResource.Cache
 F:\web\my\M45_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.dll
 F:\web\my\M45_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.pdb
-D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\bin\Debug\System.Web.Razor.Net4.0.dll
-D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\bin\Debug\System.Web.Razor.Net4.0.pdb
-D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\Microsoft.Internal.Web.Utils.CommonResources.resources
-D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Resources.RazorResources.resources
-D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.csproj.GenerateResource.Cache
-D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.dll
-D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.pdb
 F:\web\my\M51_Razor\RazorEngine\System.Web.Razor\bin\Debug\System.Web.Razor.Net4.0.dll
 F:\web\my\M51_Razor\RazorEngine\System.Web.Razor\bin\Debug\System.Web.Razor.Net4.0.pdb
 F:\web\my\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\Microsoft.Internal.Web.Utils.CommonResources.resources
@@ -87,3 +80,10 @@ F:\web\my\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Reso
 F:\web\my\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.csproj.GenerateResource.Cache
 F:\web\my\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.dll
 F:\web\my\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.pdb
+D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\bin\Debug\System.Web.Razor.Net4.0.dll
+D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\bin\Debug\System.Web.Razor.Net4.0.pdb
+D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\Microsoft.Internal.Web.Utils.CommonResources.resources
+D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Resources.RazorResources.resources
+D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.csproj.GenerateResource.Cache
+D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.dll
+D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.pdb

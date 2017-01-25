@@ -1,0 +1,7 @@
+D:\myproject\M51_Razor\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+D:\myproject\M51_Razor\test\bin\Debug\test.exe
+D:\myproject\M51_Razor\test\bin\Debug\test.pdb
+D:\myproject\M51_Razor\test\bin\Debug\UserFramework.dll
+D:\myproject\M51_Razor\test\bin\Debug\UserFramework.pdb
+D:\myproject\M51_Razor\test\obj\Debug\test.exe
+D:\myproject\M51_Razor\test\obj\Debug\test.pdb
