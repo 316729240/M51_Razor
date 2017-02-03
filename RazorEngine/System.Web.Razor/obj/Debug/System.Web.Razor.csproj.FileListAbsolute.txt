@@ -87,3 +87,4 @@ D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.R
 D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.csproj.GenerateResource.Cache
 D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.dll
 D:\myproject\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.Net4.0.pdb
+F:\web\my\M51_Razor\RazorEngine\System.Web.Razor\obj\Debug\System.Web.Razor.csprojResolveAssemblyReference.cache

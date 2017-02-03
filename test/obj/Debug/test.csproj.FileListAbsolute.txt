@@ -5,3 +5,16 @@ D:\myproject\M51_Razor\test\bin\Debug\UserFramework.dll
 D:\myproject\M51_Razor\test\bin\Debug\UserFramework.pdb
 D:\myproject\M51_Razor\test\obj\Debug\test.exe
 D:\myproject\M51_Razor\test\obj\Debug\test.pdb
+F:\web\my\M51_Razor\test\obj\Debug\test.exe
+F:\web\my\M51_Razor\test\obj\Debug\test.pdb
+F:\web\my\M51_Razor\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+F:\web\my\M51_Razor\test\bin\Debug\test.exe
+F:\web\my\M51_Razor\test\bin\Debug\test.pdb
+F:\web\my\M51_Razor\test\bin\Debug\ManagerFramework.dll
+F:\web\my\M51_Razor\test\bin\Debug\UserFramework.dll
+F:\web\my\M51_Razor\test\bin\Debug\Helper.dll
+F:\web\my\M51_Razor\test\bin\Debug\MWMS.DAL.dll
+F:\web\my\M51_Razor\test\bin\Debug\ManagerFramework.pdb
+F:\web\my\M51_Razor\test\bin\Debug\UserFramework.pdb
+F:\web\my\M51_Razor\test\bin\Debug\Helper.pdb
+F:\web\my\M51_Razor\test\bin\Debug\MWMS.DAL.pdb

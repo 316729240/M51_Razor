@@ -4,36 +4,46 @@
 //     如果重新生成代码，将丢失对此文件所做的更改。
 // </auto-generated>
 //------------------------------------------------------------------------------
-namespace UserFramework
+namespace AuthtokenFramework
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Linq;
+    using System.Text;
+    using Helper;
 
-	/// <summary>
-	/// 公用类
-	/// </summary>
-	public abstract class Common
+    /// <summary>
+    /// 公用类
+    /// </summary>
+    public abstract class Common
 	{
 		/// <summary>
 		/// 加密
 		/// </summary>
 		/// <param name="str">字符串</param>
-		public static string Encryption(object str)
+		public static string Encryption(string str)
 		{
-			throw new System.NotImplementedException();
+            return str.Encryption(ConfigurationManager.AppSettings["WebID"]).MD5();
 		}
+        public static string GetId()
+        {
+            string id;
+            Random rnd = new Random(System.DateTime.Now.Millisecond);
+            //id = ((long)((System.DateTime.Now.ToOADate() - 39781) * 1000000) - 432552).ToString() + rnd.Next(99).ToString("D2");
+            //long webid = long.Parse(Config.webId.Substring(0, Config.webId.Length-2));
+            id = ((System.DateTime.Now.Ticks - System.DateTime.Parse("2012-8-1").Ticks) / 10000000 ).ToString() + rnd.Next(99).ToString("D2");
+            return (id);
+        }
+        /// <summary>
+        /// 解密
+        /// </summary>
+        /// <param name="str">字符串</param>
+        public static string Decrypt(string str)
+        {
+            return str.Decryption(ConfigurationManager.AppSettings["WebID"]).MD5();
+        }
 
-		/// <summary>
-		/// 解密
-		/// </summary>
-		/// <param name="str">字符串</param>
-		public static string Decrypt(object str)
-		{
-			throw new System.NotImplementedException();
-		}
-
-	}
+    }
 }
 

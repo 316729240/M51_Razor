@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M4Class", "M4Class\M4Class.csproj", "{13FAF33A-4791-4196-973C-EF40AABA478F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -34,13 +34,35 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Common\Helper\Hel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelingProjectLib", "ModelingProjectLib\ModelingProjectLib.csproj", "{A70393A9-38B9-4F6A-A94A-CC57B9AEB1DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserFramework", "BLL\UserFramework\UserFramework.csproj", "{9F27B8A3-1951-4272-8C28-236EF9B07BD6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthtokenFramework", "BLL\UserFramework\AuthtokenFramework.csproj", "{9F27B8A3-1951-4272-8C28-236EF9B07BD6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{48DA36ED-953F-430C-8903-720B5DA74133}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagerFramework", "BLL\ManagerFramework\ManagerFramework.csproj", "{44C5CD02-971F-4C95-9CDB-93542C6B3404}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{8EAD4033-5875-4D16-9807-4BCF7EEDD512}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MainWeb(3)", "MainWeb\", "{54B3FC73-096F-4EC0-87ED-6E53D28810E4}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{44c5cd02-971f-4c95-9cdb-93542c6b3404}|ManagerFramework.dll;{FCCFB5A1-A771-49CC-AC13-3500C4CDE9F1}|Helper.dll;{dae1f43a-7699-4d94-a787-afb9d28b9fdd}|Catch.dll;{9F27B8A3-1951-4272-8C28-236EF9B07BD6}|UserFramework.dll;{CAC3687F-17FA-4082-B216-449C3335361B}|MWMS.DAL.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_1504"
+		Debug.AspNetCompiler.PhysicalPath = "MainWeb\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1504\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_1504"
+		Release.AspNetCompiler.PhysicalPath = "MainWeb\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1504\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1504"
+		SlnRelativePath = "MainWeb\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -206,6 +228,18 @@ Global
 		{44C5CD02-971F-4C95-9CDB-93542C6B3404}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{44C5CD02-971F-4C95-9CDB-93542C6B3404}.Release|x86.ActiveCfg = Release|Any CPU
 		{44C5CD02-971F-4C95-9CDB-93542C6B3404}.Release|x86.Build.0 = Release|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Debug|x86.Build.0 = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Release|x86.ActiveCfg = Debug|Any CPU
+		{54B3FC73-096F-4EC0-87ED-6E53D28810E4}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

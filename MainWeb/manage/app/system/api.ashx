@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 
 using System.Collections.Generic;
 using MWMS;
+using ManagerFramework;
+using Helper;
 public class api : IHttpHandler {
 
     public void ProcessRequest(HttpContext context)
@@ -20,7 +22,8 @@ public class api : IHttpHandler {
             ErrInfo err =new ErrInfo();
             try
             {
-                err = UserClass.manageLogin(context.Request.Form["uname"].ToString(), context.Request.Form["pword"].ToString(),1);
+                User.Login(context.Request.Form["uname"].ToString(), context.Request.Form["pword"].ToString());
+                //err = UserClass.manageLogin(context.Request.Form["uname"].ToString(), context.Request.Form["pword"].ToString(),1);
             }
             catch (Exception ex)
             {
@@ -33,9 +36,13 @@ public class api : IHttpHandler {
         {
             ErrInfo err = new ErrInfo();
             try {
-                LoginInfo info = new LoginInfo();
-                err.userData = info.value;
-                err.errNo = (info.value != null && info.isManagerLogin()) ? 0 : -1;
+                LoginUser login = LoginUser.GetLoginUser();
+                if (login == null) { 
+                    err.errNo = -1;
+                }
+                //LoginInfo info = new LoginInfo();
+                //err.userData = info.value;
+                //err.errNo = (info.value != null && info.isManagerLogin()) ? 0 : -1;
             }
             catch (Exception ex)
             {
@@ -46,7 +53,7 @@ public class api : IHttpHandler {
         }
         else if (m == "getDirName")
         {
-            
+
             string name = s_request.getString("name");
             ErrInfo info = new ErrInfo();
             string pinyin = name.GetPinYin();

@@ -34,7 +34,7 @@ namespace DBHelper
 	/// </summary>
 	public sealed class SqlServer
 	{
-       public static string connectionString = "";
+       public static string connectionString =  @"Data Source=" + ConfigurationManager.AppSettings["ServerIP"] + ";Initial Catalog=" + ConfigurationManager.AppSettings["DataBaseName"] + ";Integrated Security=false;UID=" + ConfigurationManager.AppSettings["Username"] + ";PWD=" + ConfigurationManager.AppSettings["Password"] + ";Pooling=true;MAX Pool Size=512;Min Pool Size=8;Connection Lifetime=5";
        //public static string connectionString = @"Data Source=211.100.55.125;Initial Catalog=jichumei;Integrated Security=false;UID=cp001;PWD=ZAQXSWCDE;Pooling=true;MAX Pool Size=512;Min Pool Size=8;Connection Lifetime=30";
 		#region private utility methods & constructors
 

@@ -1,0 +1,9 @@
+F:\web\my\M51_Razor\BLL\UserFramework\obj\Debug\AuthtokenFramework.csprojResolveAssemblyReference.cache
+F:\web\my\M51_Razor\BLL\UserFramework\obj\Debug\UserFramework.dll
+F:\web\my\M51_Razor\BLL\UserFramework\obj\Debug\UserFramework.pdb
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\UserFramework.dll
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\UserFramework.pdb
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\Helper.dll
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\MWMS.DAL.dll
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\Helper.pdb
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\MWMS.DAL.pdb

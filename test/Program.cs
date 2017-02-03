@@ -10,7 +10,7 @@ namespace test
     {
         static void Main(string[] args)
         {
-            Login login=User.Login("", "");
+            //Login login=User.Login("", "");
         }
     }
 }
