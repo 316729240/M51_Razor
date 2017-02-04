@@ -7,3 +7,4 @@ F:\web\my\M51_Razor\MWMS.DAL\bin\Debug\MWMS.DAL.pdb
 F:\web\my\M51_Razor\MWMS.DAL\obj\Debug\MWMS.DAL.dll
 F:\web\my\M51_Razor\MWMS.DAL\obj\Debug\MWMS.DAL.pdb
 F:\web\my\M51_Razor\MWMS.DAL\obj\Debug\MWMS.DAL.csprojResolveAssemblyReference.cache
+D:\myproject\M51_Razor\MWMS.DAL\obj\Debug\MWMS.DAL.csprojResolveAssemblyReference.cache

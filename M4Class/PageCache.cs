@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 using RazorEngine.Configuration;
 using RazorEngine;
 using RazorEngine.Templating;
-
+using Helper;
 namespace MWMS
 {
     public class PageCache

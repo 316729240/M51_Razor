@@ -3,7 +3,7 @@
 using System;
 using System.Web;
 using System.Text.RegularExpressions;
-
+using Helper;
 using System.Collections.Generic;
 using MWMS;
 public class api : IHttpHandler {
@@ -16,7 +16,7 @@ public class api : IHttpHandler {
         string m = context.Request.Form["_m"].ToString();
         if (m == "login")
         {
-            
+
             ErrInfo err = UserClass.login(context.Request.Form["uname"].ToString(), context.Request.Form["pword"].ToString());
             context.Response.Write(err.ToJson());
         }
@@ -37,7 +37,7 @@ public class api : IHttpHandler {
             pinyin = Regex.Replace(pinyin, "[ "+@"\-_"+"`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", "");
             info.userData = pinyin;//.Replace(" ","").Trim();
             context.Response.Write(info.ToJson());
-            
+
         }
         else if (m == "readIcon")
         {
@@ -73,7 +73,7 @@ public class api : IHttpHandler {
         }
         context.Response.End();
     }
- 
+
     public bool IsReusable {
         get {
             return false;

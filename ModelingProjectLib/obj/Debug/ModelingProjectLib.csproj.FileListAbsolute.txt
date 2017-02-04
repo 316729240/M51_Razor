@@ -1,4 +1,3 @@
-D:\myproject\M51_Razor\ModelingProjectLib\obj\Debug\ModelingProjectLib.csprojResolveAssemblyReference.cache
 D:\myproject\M51_Razor\ModelingProjectLib\bin\Debug\ModelingProjectLib.dll
 D:\myproject\M51_Razor\ModelingProjectLib\bin\Debug\ModelingProjectLib.pdb
 D:\myproject\M51_Razor\ModelingProjectLib\obj\Debug\ModelingProjectLib.dll
@@ -8,3 +7,4 @@ F:\web\my\M51_Razor\ModelingProjectLib\bin\Debug\ModelingProjectLib.pdb
 F:\web\my\M51_Razor\ModelingProjectLib\obj\Debug\ModelingProjectLib.csprojResolveAssemblyReference.cache
 F:\web\my\M51_Razor\ModelingProjectLib\obj\Debug\ModelingProjectLib.dll
 F:\web\my\M51_Razor\ModelingProjectLib\obj\Debug\ModelingProjectLib.pdb
+D:\myproject\M51_Razor\ModelingProjectLib\obj\Debug\ModelingProjectLib.csprojResolveAssemblyReference.cache

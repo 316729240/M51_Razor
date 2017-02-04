@@ -201,7 +201,7 @@ namespace MWMS
             {
                 if (parentId ==7)
                 {
-                    rs = Helper.Sql.ExecuteReader("select thumbnailWidth,thumbnailHeight,thumbnailForce,saveRemoteImages from module where id=" + moduleId.ToString());
+                    rs = Sql.ExecuteReader("select thumbnailWidth,thumbnailHeight,thumbnailForce,saveRemoteImages from module where id=" + moduleId.ToString());
                     if (rs.Read())
                     {
                         if (rs[0].ToString() != "") size.width = int.Parse(rs[0].ToString());

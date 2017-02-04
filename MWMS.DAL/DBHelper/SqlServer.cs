@@ -258,7 +258,25 @@ namespace DBHelper
             foreach (var item in parameterValues)
             {
                 SqlParameter p = (SqlParameter)((DictionaryEntry)item).Value;
-                op[i] =p;
+                op[i] = p;
+                i++;
+            }
+            using (SqlConnection cn = new SqlConnection(connectionString))
+            {
+                cn.Open();
+
+                //call the overload that takes a connection in place of the connection string
+                return ExecuteNonQuery(cn, CommandType.Text, commandText, op);
+            }
+        }
+        public static int ExecuteNonQuery(string commandText, Dictionary<string,object> parameterValues)
+        {
+            SqlParameter[] op = new SqlParameter[parameterValues.Count];
+            int i = 0;
+            foreach (var item in parameterValues)
+            {
+                SqlParameter p = new SqlParameter(item.Key, item.Value);
+                op[i] = p;
                 i++;
             }
             using (SqlConnection cn = new SqlConnection(connectionString))

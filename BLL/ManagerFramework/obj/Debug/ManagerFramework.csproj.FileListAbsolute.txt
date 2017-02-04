@@ -9,3 +9,14 @@ F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.DAL.dll
 F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.DAL.pdb
 F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\Helper.dll
 F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\Helper.pdb
+D:\myproject\M51_Razor\BLL\ManagerFramework\obj\Debug\ManagerFramework.csprojResolveAssemblyReference.cache
+D:\myproject\M51_Razor\BLL\ManagerFramework\obj\Debug\ManagerFramework.dll
+D:\myproject\M51_Razor\BLL\ManagerFramework\obj\Debug\ManagerFramework.pdb
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\ManagerFramework.dll
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\ManagerFramework.pdb
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\UserFramework.dll
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\Helper.dll
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.DAL.dll
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\UserFramework.pdb
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\Helper.pdb
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.DAL.pdb

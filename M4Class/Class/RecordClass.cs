@@ -563,8 +563,8 @@ namespace MWMS
                 k[i] = k[i].Trim();
                 if (k[i] != "" && k[i].Length < 50)
                 {
-                    string pinyin = chs2py.convert(k[i], '0');
-                    if (pinyin.Length > 10) { pinyin = chs2py.convert(k[i], '2'); }
+                    string pinyin = k[i].GetPinYin('0');
+                    if (pinyin.Length > 10) { pinyin = k[i].GetPinYin('2'); }
                     if (pinyin.Length < 50)
                     {
                         pinyin = Regex.Replace(pinyin, @"[ .~!@#$%\^\+\*&\\\/\?\|:\.{}()';=\[\]" + "\"]", "");

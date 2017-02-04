@@ -455,13 +455,14 @@ public class ajax : IHttpHandler
             context.Response.Write(info.ToJson());
             return;
         }
+        
         //-------------------保存模板----------------------------
         SqlParameter[] p = new SqlParameter[]{
                     new SqlParameter("id",id),
                     new SqlParameter("classId",classId),
                     new SqlParameter("u_viewType",u_viewType),
                     new SqlParameter("title",title),
-                    new SqlParameter("u_pinyin",chs2py.convert(title,'0')),
+                    new SqlParameter("u_pinyin",title.GetPinYin('0')),
                     new SqlParameter("u_html",u_html),
                     new SqlParameter("u_editboxStatus",u_editboxStatus),
                     new SqlParameter("u_datatypeId",u_datatypeId),

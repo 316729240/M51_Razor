@@ -25,12 +25,13 @@ namespace AuthtokenFramework
 		{
 			get;
 			set;
-		}
-
-		/// <summary>
-		/// 登录钥匙
-		/// </summary>
-		public string Token
+        }
+        public string Username { get; set; }
+        public double UserId { get; set; }
+        /// <summary>
+        /// 登录钥匙
+        /// </summary>
+        public string Token
 		{
 			get;
 			set;
@@ -64,7 +65,17 @@ namespace AuthtokenFramework
         }
         public static AuthToken Create(string token)
         {
-
+            AuthToken authToken = new AuthToken();
+            SqlDataReader rs = SqlServer.ExecuteReader("select userid,username from [logininfo] where sessionId=@token", new SqlParameter[] { new SqlParameter("token", token) });
+            if (rs.Read())
+            {
+                authToken.Token = token;
+                authToken.Username = rs[1]+"";
+                authToken.UserId = rs.GetDouble(0);
+            }
+            rs.Close();
+            if (authToken.Token == "") return null;
+            return authToken;
         }
         public static AuthToken Login(string username, string password,int expirationTime)
         {
@@ -119,11 +130,12 @@ namespace AuthtokenFramework
             SqlServer.ExecuteNonQuery("delete from logininfo where logindate<DATEADD(hh, - 1, GETDATE()) or sessionId=@sessionId", new SqlParameter[]{
                         new SqlParameter("sessionId",authToken.Token),
                     });//删除超时用户及重登陆用户
-            SqlServer.ExecuteNonQuery("insert logininfo (sessionId,ip,logindate,userid)values(@sessionId,@ip,GETDATE(),@userId)",
+            SqlServer.ExecuteNonQuery("insert logininfo (sessionId,ip,logindate,userid,username)values(@sessionId,@ip,GETDATE(),@userId,@username)",
             new SqlParameter[]{
                         new SqlParameter("sessionId",authToken.Token),
                         new SqlParameter("ip",ip),
-                        new SqlParameter("userId",userId)
+                        new SqlParameter("userId",userId),
+                        new SqlParameter("username",username)
                 });
             return authToken;
         }

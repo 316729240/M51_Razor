@@ -52,6 +52,10 @@
             TemplateService.Compile(razorTemplate, modelType, name);
         }
 
+        public static void Compile(string razorTemplate, Type modelType, string name,bool flag)
+        {
+            TemplateService.Compile(razorTemplate, modelType, name);
+        }
         /// <summary>
         /// Compiles the specified template.
         /// </summary>

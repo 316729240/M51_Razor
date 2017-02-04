@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MWMS.Template
 {
-    public class Class1
+    public class ViewTemplate: Template
     {
     }
 }
