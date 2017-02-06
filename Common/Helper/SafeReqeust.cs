@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace MWMS
+namespace Helper
 {
 
     public class SafeReqeust
@@ -100,11 +100,7 @@ namespace MWMS
             {
                 if (requestType == 1)
                 {
-                    ErrInfo err = new ErrInfo();
-                    err.errNo = -1;
-                    err.errMsg = "参数[" + name + "]获取失败";
-                    HttpContext.Current.Response.Write(err.ToJson());
-                    HttpContext.Current.Response.End();
+                    throw new NullReferenceException("参数[" + name + "]获取失败");
                 }
                 else if (requestType == 2)
                 {

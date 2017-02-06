@@ -44,7 +44,12 @@
     <Compile Include="DBHelper\SqlServer.cs" />
     <Compile Include="TableHandle.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Helper\Helper.csproj">
+      <Project>{FCCFB5A1-A771-49CC-AC13-3500C4CDE9F1}</Project>
+      <Name>Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

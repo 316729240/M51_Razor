@@ -28,6 +28,7 @@ namespace MWMS
         Queue<string> task = new Queue<string>();
         public PageCache()
         {
+            loadConfig();
             //System.Timers.Timer myTimer = new System.Timers.Timer(200);
             //myTimer.Elapsed += new System.Timers.ElapsedEventHandler(runTask);
             //myTimer.Enabled = true;

@@ -1,0 +1,7 @@
+D:\myproject\M51_Razor\MWMS.Configuration\obj\Debug\MWMS.Configuration.csprojResolveAssemblyReference.cache
+D:\myproject\M51_Razor\MWMS.Configuration\bin\Debug\MWMS.Configuration.dll
+D:\myproject\M51_Razor\MWMS.Configuration\bin\Debug\MWMS.Configuration.pdb
+D:\myproject\M51_Razor\MWMS.Configuration\bin\Debug\Helper.dll
+D:\myproject\M51_Razor\MWMS.Configuration\bin\Debug\Helper.pdb
+D:\myproject\M51_Razor\MWMS.Configuration\obj\Debug\MWMS.Configuration.dll
+D:\myproject\M51_Razor\MWMS.Configuration\obj\Debug\MWMS.Configuration.pdb

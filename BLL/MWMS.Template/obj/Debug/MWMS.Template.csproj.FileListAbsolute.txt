@@ -7,3 +7,15 @@ F:\web\my\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.Template.pdb
 F:\web\my\M51_Razor\BLL\MWMS.Template\obj\Debug\MWMS.Template.dll
 F:\web\my\M51_Razor\BLL\MWMS.Template\obj\Debug\MWMS.Template.pdb
 D:\myproject\M51_Razor\BLL\MWMS.Template\obj\Debug\MWMS.Template.csprojResolveAssemblyReference.cache
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\Helper.dll
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.Configuration.dll
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.DAL.dll
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.dll
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\RazorEngine.Core.dll
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\System.Web.Razor.Net4.0.dll
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\Helper.pdb
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.pdb
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.Configuration.pdb
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\MWMS.DAL.pdb
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\RazorEngine.Core.pdb
+D:\myproject\M51_Razor\BLL\MWMS.Template\bin\Debug\System.Web.Razor.Net4.0.pdb

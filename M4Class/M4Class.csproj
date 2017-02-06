@@ -119,7 +119,6 @@
     <Compile Include="Config.cs" />
     <Compile Include="LabelEngine.cs" />
     <Compile Include="PageCache.cs" />
-    <Compile Include="SafeReqeust.cs" />
     <Compile Include="TemplateCode.cs" />
     <Compile Include="TemplateEngine.cs" />
     <Compile Include="Class\UserClass.cs" />

@@ -13,6 +13,20 @@ namespace Helper
 
     public static class ObjectExtensions
     {
+        #region 取得HTML中字段项的值
+        public static string GetHTMLValue(this string HTML, string FieldName)
+        {
+            string YH = @"\b";
+            string YH2 = "\"";
+            string headstr = FieldName + "=(\0| |\"|" + YH + ")";
+            MatchCollection mc;
+            Regex r = new Regex(@"(?<=" + headstr + @")(.*?)(?=( |}|" + YH2 + "))", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+            mc = r.Matches(HTML);
+            if (mc.Count > 0) return (mc[0].Value.Replace("\"", ""));
+            return ("");
+        }
+        #endregion
         public static string Item(this XmlNodeList list, string name)
         {
             for (int i = 0; i < list.Count; i++)
