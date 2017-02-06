@@ -1,10 +1,3 @@
-F:\web\my\M51_Razor\Common\Catch\bin\Debug\Catch.dll
-F:\web\my\M51_Razor\Common\Catch\bin\Debug\Catch.pdb
-F:\web\my\M51_Razor\Common\Catch\bin\Debug\Helper.dll
-F:\web\my\M51_Razor\Common\Catch\bin\Debug\Helper.pdb
-F:\web\my\M51_Razor\Common\Catch\obj\Debug\Catch.csprojResolveAssemblyReference.cache
-F:\web\my\M51_Razor\Common\Catch\obj\Debug\Catch.dll
-F:\web\my\M51_Razor\Common\Catch\obj\Debug\Catch.pdb
 D:\myproject\M51_Razor\Common\Catch\bin\Debug\Catch.dll
 D:\myproject\M51_Razor\Common\Catch\bin\Debug\Catch.pdb
 D:\myproject\M51_Razor\Common\Catch\bin\Debug\Helper.dll
@@ -12,3 +5,10 @@ D:\myproject\M51_Razor\Common\Catch\bin\Debug\Helper.pdb
 D:\myproject\M51_Razor\Common\Catch\obj\Debug\Catch.csprojResolveAssemblyReference.cache
 D:\myproject\M51_Razor\Common\Catch\obj\Debug\Catch.dll
 D:\myproject\M51_Razor\Common\Catch\obj\Debug\Catch.pdb
+F:\web\my\M51_Razor\Common\Catch\bin\Debug\Catch.dll
+F:\web\my\M51_Razor\Common\Catch\bin\Debug\Catch.pdb
+F:\web\my\M51_Razor\Common\Catch\bin\Debug\Helper.dll
+F:\web\my\M51_Razor\Common\Catch\bin\Debug\Helper.pdb
+F:\web\my\M51_Razor\Common\Catch\obj\Debug\Catch.csprojResolveAssemblyReference.cache
+F:\web\my\M51_Razor\Common\Catch\obj\Debug\Catch.dll
+F:\web\my\M51_Razor\Common\Catch\obj\Debug\Catch.pdb

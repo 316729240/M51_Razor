@@ -318,6 +318,7 @@
             var key = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(name, "MD5");
             string className = "C" + key;
             var assemblyPath =_config.CatchPath + className + ".dll";
+            //if (File.Exists(assemblyPath) && !flag)
             if (File.Exists(assemblyPath) && !flag)
             {
                 try

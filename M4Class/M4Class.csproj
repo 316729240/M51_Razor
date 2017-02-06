@@ -110,7 +110,6 @@
     <Compile Include="API.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Class\ColumnClass.cs" />
-    <Compile Include="Class\ErrInfo.cs" />
     <Compile Include="Class\LoginInfo.cs" />
     <Compile Include="Class\ObjectExtensions.cs" />
     <Compile Include="Class\Permissions.cs" />

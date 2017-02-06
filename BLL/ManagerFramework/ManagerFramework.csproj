@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MWMS.DAL\MWMS.DAL.csproj">
+      <Project>{CAC3687F-17FA-4082-B216-449C3335361B}</Project>
+      <Name>MWMS.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserFramework\AuthtokenFramework.csproj">
       <Project>{9f27b8a3-1951-4272-8c28-236ef9b07bd6}</Project>
       <Name>AuthtokenFramework</Name>

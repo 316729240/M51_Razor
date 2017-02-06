@@ -27,7 +27,8 @@
 
             Namespaces = new HashSet<string>
                              {
-                                 "System", 
+                                 "System",
+                                 "MWMS",
                                  "System.Collections.Generic", 
                                  "System.Linq"
                              };

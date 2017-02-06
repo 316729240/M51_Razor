@@ -47,7 +47,7 @@ namespace MWMS.DAL
             bool flag = false;
             if (rs.Read())
             {
-                for (int i = 0; i < fields.Length; i++)
+                for (int i = 0; i < _fields.Length; i++)
                 {
                     model[_fields[i]] = rs[_fields[i]];
                 }

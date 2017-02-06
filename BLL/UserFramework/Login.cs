@@ -18,16 +18,23 @@ namespace AuthtokenFramework
     /// </summary>
     public class AuthToken
     {
-		/// <summary>
-		/// 登录用户
-		/// </summary>
-		public object User
-		{
-			get;
-			set;
+        /// <summary>
+        /// 登录用户id
+        /// </summary>
+        public double UserId
+        {
+            get;
+            set;
         }
-        public string Username { get; set; }
-        public double UserId { get; set; }
+        /// <summary>
+        /// 登录用户名
+        /// </summary>
+        public string Username
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// 登录钥匙
         /// </summary>
@@ -65,20 +72,21 @@ namespace AuthtokenFramework
         }
         public static AuthToken Create(string token)
         {
-            AuthToken authToken = new AuthToken();
-            SqlDataReader rs = SqlServer.ExecuteReader("select userid,username from [logininfo] where sessionId=@token", new SqlParameter[] { new SqlParameter("token", token) });
+            AuthToken authToken = null;
+            SqlDataReader rs = SqlServer.ExecuteReader("select userid,username from [loginInfo] where expirationTime>getdate() and sessionId=@sessionId", new SqlParameter[] { new SqlParameter("sessionId", token) });
             if (rs.Read())
             {
-                authToken.Token = token;
-                authToken.Username = rs[1]+"";
+                authToken=new AuthToken();
                 authToken.UserId = rs.GetDouble(0);
+                authToken.Username = rs[1] + "";
             }
             rs.Close();
-            if (authToken.Token == "") return null;
             return authToken;
         }
         public static AuthToken Login(string username, string password,int expirationTime)
         {
+            expirationTime = expirationTime == 0 ? 1 : expirationTime;
+            password = Common.Encryption(password);
             AuthToken authToken = new AuthToken();
             //string ip = API.IPToNumber(HttpContext.Current.Request.UserHostAddress).ToString();
             //ErrInfo err = new ErrInfo();
@@ -108,7 +116,7 @@ namespace AuthtokenFramework
             rs.Close();
             #endregion
             #region 密码错误
-            if (pword2 != Common.Encryption(password))
+            if (pword2 != password)
             {
                 SqlParameter[] p = new SqlParameter[] {
                             new SqlParameter ( "ip", ip ),
@@ -126,17 +134,44 @@ namespace AuthtokenFramework
                 throw new Exception("用户名或密码不正确");
             }
             #endregion
-            authToken.Token =Common.GetId();// ; Guid.NewGuid().ToString();
-            SqlServer.ExecuteNonQuery("delete from logininfo where logindate<DATEADD(hh, - 1, GETDATE()) or sessionId=@sessionId", new SqlParameter[]{
-                        new SqlParameter("sessionId",authToken.Token),
-                    });//删除超时用户及重登陆用户
-            SqlServer.ExecuteNonQuery("insert logininfo (sessionId,ip,logindate,userid,username)values(@sessionId,@ip,GETDATE(),@userId,@username)",
-            new SqlParameter[]{
-                        new SqlParameter("sessionId",authToken.Token),
+            authToken.Token = "";
+            authToken.UserId = userId;
+            authToken.Username = username;
+            rs = SqlServer.ExecuteReader("select sessionId from logininfo where userId=@userId and ip=@ip and loginPword=@pword", new SqlParameter[] {
                         new SqlParameter("ip",ip),
                         new SqlParameter("userId",userId),
-                        new SqlParameter("username",username)
+                        new SqlParameter("pword",password)
+            });
+            if (rs.Read())
+            {
+
+                authToken.Token = rs[0].ToString();
+                /*
+                SqlServer.ExecuteNonQuery("delete from logininfo where logindate<DATEADD(hh, - 1, GETDATE()) or sessionId=@sessionId", new SqlParameter[]{
+                        new SqlParameter("sessionId",authToken.Token),
+                    });//删除超时用户及重登陆用户*/
+                SqlServer.ExecuteNonQuery("update logininfo set username=@username,loginPword=@pword,expirationTime=@expirationTime", new SqlParameter[] {
+                        new SqlParameter("username",username),
+                        new SqlParameter("expirationTime",DateTime.Now.AddHours(expirationTime)),
+                        new SqlParameter("pword",password)
                 });
+            }
+            else
+            {
+                authToken.Token = Common.GetId();// ; Guid.NewGuid().ToString();
+                SqlServer.ExecuteNonQuery("insert logininfo (sessionId,ip,logindate,userid,expirationTime,username,loginPword)values(@sessionId,@ip,@logindate,@userId,@expirationTime,@username,@pword)",
+                new SqlParameter[]{
+                        new SqlParameter("sessionId",authToken.Token),
+                        new SqlParameter("ip",ip),
+                        new SqlParameter("logindate",DateTime.Now),
+                        new SqlParameter("expirationTime",DateTime.Now.AddHours(expirationTime)),
+                        new SqlParameter("userId",userId),
+                        new SqlParameter("username",username),
+                        new SqlParameter("pword",password)
+                    });
+            }
+            rs.Close();
+            
             return authToken;
         }
 

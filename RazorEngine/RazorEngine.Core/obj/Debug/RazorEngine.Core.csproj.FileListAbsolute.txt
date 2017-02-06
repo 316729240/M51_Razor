@@ -1,10 +1,3 @@
-F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\RazorEngine.Core.dll
-F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\RazorEngine.Core.pdb
-F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\System.Web.Razor.Net4.0.dll
-F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\System.Web.Razor.Net4.0.pdb
-F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.csprojResolveAssemblyReference.cache
-F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.dll
-F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.pdb
 D:\myproject\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\RazorEngine.Core.dll
 D:\myproject\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\RazorEngine.Core.pdb
 D:\myproject\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\System.Web.Razor.Net4.0.dll
@@ -12,3 +5,10 @@ D:\myproject\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\System.Web.Razor.N
 D:\myproject\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.csprojResolveAssemblyReference.cache
 D:\myproject\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.dll
 D:\myproject\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.pdb
+F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\RazorEngine.Core.dll
+F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\RazorEngine.Core.pdb
+F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\System.Web.Razor.Net4.0.dll
+F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\bin\Debug\System.Web.Razor.Net4.0.pdb
+F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.csprojResolveAssemblyReference.cache
+F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.dll
+F:\web\my\M51_Razor\RazorEngine\RazorEngine.Core\obj\Debug\RazorEngine.Core.pdb

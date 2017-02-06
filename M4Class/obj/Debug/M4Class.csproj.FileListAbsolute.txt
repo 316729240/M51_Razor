@@ -22,9 +22,6 @@ F:\web\my\M45_Razor\M4Class\bin\Debug\System.Web.Razor.Net4.0.dll
 F:\web\my\M45_Razor\M4Class\bin\Debug\RazorEngine.NET4.0.pdb
 F:\web\my\M45_Razor\M4Class\bin\Debug\RazorEngine.NET4.0.xml
 F:\web\my\M45_Razor\M4Class\bin\Debug\System.Web.Razor.Net4.0.pdb
-F:\web\my\M51_Razor\M4Class\obj\Debug\M4Class.csprojResolveAssemblyReference.cache
-F:\web\my\M51_Razor\M4Class\obj\Debug\MWMS.dll
-F:\web\my\M51_Razor\M4Class\obj\Debug\MWMS.pdb
 D:\myproject\M51_Razor\M4Class\obj\Debug\M4Class.csprojResolveAssemblyReference.cache
 D:\myproject\M51_Razor\M4Class\bin\Debug\MWMS.dll
 D:\myproject\M51_Razor\M4Class\bin\Debug\MWMS.pdb
@@ -36,3 +33,14 @@ D:\myproject\M51_Razor\M4Class\bin\Debug\RazorEngine.Core.pdb
 D:\myproject\M51_Razor\M4Class\bin\Debug\System.Web.Razor.Net4.0.pdb
 D:\myproject\M51_Razor\M4Class\obj\Debug\MWMS.dll
 D:\myproject\M51_Razor\M4Class\obj\Debug\MWMS.pdb
+F:\web\my\M51_Razor\M4Class\bin\Debug\MWMS.dll
+F:\web\my\M51_Razor\M4Class\bin\Debug\MWMS.pdb
+F:\web\my\M51_Razor\M4Class\bin\Debug\Helper.dll
+F:\web\my\M51_Razor\M4Class\bin\Debug\RazorEngine.Core.dll
+F:\web\my\M51_Razor\M4Class\bin\Debug\System.Web.Razor.Net4.0.dll
+F:\web\my\M51_Razor\M4Class\bin\Debug\Helper.pdb
+F:\web\my\M51_Razor\M4Class\bin\Debug\RazorEngine.Core.pdb
+F:\web\my\M51_Razor\M4Class\bin\Debug\System.Web.Razor.Net4.0.pdb
+F:\web\my\M51_Razor\M4Class\obj\Debug\M4Class.csprojResolveAssemblyReference.cache
+F:\web\my\M51_Razor\M4Class\obj\Debug\MWMS.dll
+F:\web\my\M51_Razor\M4Class\obj\Debug\MWMS.pdb

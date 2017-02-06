@@ -18,12 +18,11 @@ public class api : IHttpHandler {
         string m = context.Request.Form["_m"].ToString();
         if (m == "login")
         {
-
             ErrInfo err =new ErrInfo();
             try
             {
-                User.Login(context.Request.Form["uname"].ToString(), context.Request.Form["pword"].ToString());
-                //err = UserClass.manageLogin(context.Request.Form["uname"].ToString(), context.Request.Form["pword"].ToString(),1);
+                LoginUser loginUser=new LoginUser(s_request.getString("uname"), s_request.getString("pword"));
+                err.userData= loginUser.GetModel("id,icon,uname,classId");
             }
             catch (Exception ex)
             {
@@ -36,9 +35,12 @@ public class api : IHttpHandler {
         {
             ErrInfo err = new ErrInfo();
             try {
-                LoginUser login = LoginUser.GetLoginUser();
-                if (login == null) { 
+                LoginUser loginUser = LoginUser.GetLoginUser();
+                if (loginUser == null) {
                     err.errNo = -1;
+                }else
+                {
+                    err.userData= loginUser.GetModel("id,icon,uname,classId");;
                 }
                 //LoginInfo info = new LoginInfo();
                 //err.userData = info.value;

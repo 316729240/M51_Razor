@@ -5,14 +5,21 @@ using System.Collections.Generic;
 using MWMS;
 using System.Xml;
 using System.IO;
+using ManagerFramework;
 public class api : IHttpHandler {
     XmlElement root = null, interfaceRoot = null;
     XmlDocument doc = null, interfaceDoc = null;
     Uri u = null;
-    LoginInfo login = new LoginInfo();
+    LoginUser login = LoginUser.GetLoginUser();
     public void ProcessRequest(HttpContext context)
     {
-        login.checkLogin();
+        if (login == null)
+        {
+            ErrInfo err = new ErrInfo();
+            err.errNo = -1000;
+            context.Response.Write(err.ToJson());
+            context.Response.End();
+        }
         context.Response.Write("$M.config.webPath=\"" + Config.webPath + "\";\r\n");
         context.Response.Write("$M.config.appPath=\"" + Config.webPath + Config.appPath + "\";\r\n");
         context.Response.Write("$M.config.sysAppPath=\"" + Config.webPath + Config.appPath + "system/\""+";\r\n");
@@ -27,7 +34,7 @@ public class api : IHttpHandler {
         interfaceDoc.AppendChild(interfaceRoot);
         u = new Uri(context.Request.Url, Config.webPath + Config.appPath);
 
-        string path = context.Server.MapPath("~" + Config.tempPath + @"user\" + login.value.id.ToString() + @"\cardLayout.config");
+        string path = context.Server.MapPath("~" + Config.tempPath + @"user\" + login.UserId.ToString() + @"\cardLayout.config");
         if (System.IO.File.Exists(path))
         {
             string  [] cardLayout = System.IO.File.ReadAllLines(path);

@@ -67,7 +67,7 @@
 
             var @params = new CompilerParameters
             {
-                GenerateInMemory = false,
+                GenerateInMemory = true,
                 OutputAssembly = @assemblyPath,
                 GenerateExecutable = false,
                 IncludeDebugInformation = false,
