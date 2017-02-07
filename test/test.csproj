@@ -49,6 +49,14 @@
       <Project>{44c5cd02-971f-4c95-9cdb-93542c6b3404}</Project>
       <Name>ManagerFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RazorEngine\RazorEngine.Core\RazorEngine.Core.csproj">
+      <Project>{4b6dde24-50a4-4545-babc-32f0a5fe9baf}</Project>
+      <Name>RazorEngine.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RazorEngine\System.Web.Razor\System.Web.Razor.csproj">
+      <Project>{881f3fd2-0341-415c-8312-991513d20d3b}</Project>
+      <Name>System.Web.Razor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

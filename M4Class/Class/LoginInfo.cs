@@ -4,7 +4,7 @@ using System.Text;
 using Helper;
 using System.Web;
 using System.Data.SqlClient;
-
+using MWMS;
 
 namespace MWMS
 {
@@ -23,7 +23,7 @@ namespace MWMS
                 sessionId = API.GetId();
                 HttpContext.Current.Response.Cookies["M5_SessionId"].Value = sessionId;
             }
-            SqlDataReader rs2 = Sql.ExecuteReader("select A.userid,A.logindate from logininfo A where   A.sessionId=@sessionId and logindate>DATEADD(hh, - 1, GETDATE())", new SqlParameter[] { new SqlParameter("sessionId", sessionId) });
+            SqlDataReader rs2 = Sql.ExecuteReader("select A.userid,A.logindate from logininfo A where    expirationTime>getdate() and sessionId=@sessionId", new SqlParameter[] { new SqlParameter("sessionId", sessionId) });
             if (rs2.Read())
             {
                 value = UserClass.get(rs2.GetDouble(0));

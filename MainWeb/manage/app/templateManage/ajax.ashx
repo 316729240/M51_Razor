@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Xml;
 using System.Text.RegularExpressions;
+using MWMS.Template;
 public class ajax : IHttpHandler
 {
     LoginInfo login = new LoginInfo();
@@ -455,7 +456,7 @@ public class ajax : IHttpHandler
             context.Response.Write(info.ToJson());
             return;
         }
-        
+
         //-------------------保存模板----------------------------
         SqlParameter[] p = new SqlParameter[]{
                     new SqlParameter("id",id),
@@ -585,38 +586,43 @@ public class ajax : IHttpHandler
     /// <param name="context"></param>
     void saveTemplate(HttpContext context)
     {
+            /*
+        PageTemplate pageTemplate = new PageTemplate();
+        pageTemplate.TemplateId=s_request.getDouble("id");
+        pageTemplate.TemplateName=s_request.getString("title");
+        pageTemplate.TemplateContent=s_request.getString("u_content");
+        pageTemplate.TemplateType=(TemplateType)s_request.getInt("u_typeId");
+        pageTemplate.IsDefault=s_request.getInt("u_defaultFlag")==1;
+        pageTemplate.ColumnId=s_request.getDouble("classId");
+        pageTemplate.DatatypeId=s_request.getDouble("u_datatypeId");
+        pageTemplate.EditMode=(EditMode)s_request.getInt("u_editboxStatus");
+        pageTemplate.ParameterValue=s_request.getString("u_parameterValue");
+        pageTemplate.IsMobile=s_request.getInt("u_webFAid")==1;
+        pageTemplate.Save(login.value.username);
         ErrInfo info = new ErrInfo();
-        TemplateInfo value = new TemplateInfo();
-        value.id = s_request.getDouble("id");
-        value.title = s_request.getString("title");
-        value.u_content = s_request.getString("u_content");
-        value.u_type= s_request.getInt("u_typeId");
-        value.u_defaultFlag = s_request.getInt("u_defaultFlag");
-        value.classId = s_request.getDouble("classId");
-        value.u_datatypeId = s_request.getDouble("u_datatypeId");
-        value.u_editboxStatus = s_request.getInt("u_editboxStatus");
-        value.u_parameterValue = s_request.getString("u_parameterValue");
-        value.u_webFAid = s_request.getInt("u_webFAid");
-        info = TemplateClass.edit(value, login.value);
-        if (info.errNo < 0)
-        {
-            context.Response.Write(info.ToJson());
-            return;
-        }
-        int count = 0;
-        IDataReader rs = Sql.ExecuteReader("select count(1) from backupTemplate where classid=@classid and u_type=@u_type and u_webFAid=@u_webFAid and u_defaultFlag=@u_defaultFlag and u_datatypeId=@u_datatypeId and title=@title and  getdate()<DATEADD(minute,200,updatedate)", new SqlParameter[]{
-            new SqlParameter("classid",value.classId ),
-            new SqlParameter("u_type",value.u_type),
-            new SqlParameter("u_webFAid",value.u_webFAid),
-            new SqlParameter("u_defaultFlag",value.u_defaultFlag),
-            new SqlParameter("u_datatypeId",value.u_datatypeId),
-            new SqlParameter("title",value.title)
-        });
-        if (rs.Read()) count = rs.GetInt32(0);
-        rs.Close();
-        if (count == 0) TemplateClass.backupTemplate((double)info.userData, login.value.username);
         context.Response.Write(info.ToJson());
-        context.Response.End();
+        return;*/
+  
+    ErrInfo info = new ErrInfo();
+    TemplateInfo value = new TemplateInfo();
+    value.id = s_request.getDouble("id");
+    value.title = s_request.getString("title");
+    value.u_content = s_request.getString("u_content");
+    value.u_type= s_request.getInt("u_typeId");
+    value.u_defaultFlag = s_request.getInt("u_defaultFlag");
+    value.classId = s_request.getDouble("classId");
+    value.u_datatypeId = s_request.getDouble("u_datatypeId");
+    value.u_editboxStatus = s_request.getInt("u_editboxStatus");
+    value.u_parameterValue = s_request.getString("u_parameterValue");
+    value.u_webFAid = s_request.getInt("u_webFAid");
+    info = TemplateClass.edit(value, login.value);
+    if (info.errNo < 0)
+    {
+        context.Response.Write(info.ToJson());
+        return;
+    }
+    context.Response.Write(info.ToJson());
+    context.Response.End();
     }
     void readTemplateView(HttpContext context)
     {

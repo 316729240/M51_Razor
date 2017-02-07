@@ -31,18 +31,23 @@ namespace MWMS.DAL
         {
             return GetModel(fields, where, p, "");
         }
+        SqlParameter [] GetParameter(Dictionary<string, object> p)
+        {
+            SqlParameter[] _p = new SqlParameter[p.Count];
+            int i1 = 0;
+            foreach (var value in p)
+            {
+                _p[i1] = new SqlParameter(value.Key, value.Value);
+                i1++;
+            }
+            return _p;
+        }
         public Dictionary<string, object> GetModel(string fields, string where, Dictionary<string, object> p, string desc)
         {
             if (TableName == "") throw new Exception("表名不能为空");
             Dictionary<string, object> model = new Dictionary<string, object>();
             string[] _fields = fields.Split(',');
-            SqlParameter[] _p = new SqlParameter[p.Count];
-            int i1 = 0;
-            foreach (var value in p)
-            {
-                _p[i1] = new SqlParameter(value.Key,value.Value);
-                    i1++;
-            }
+            SqlParameter[] _p = GetParameter(p);
             SqlDataReader rs = SqlServer.ExecuteReader("select " + fields + " from [" + TableName + "] where "+ where+" "+desc, _p);
             bool flag = false;
             if (rs.Read())
@@ -56,6 +61,11 @@ namespace MWMS.DAL
             rs.Close();
             if (!flag) return null;
             return model;
+        }
+        public int GetCount(string where, Dictionary<string, object> p)
+        {
+            SqlParameter[] _p = GetParameter(p);
+            return (int)SqlServer.ExecuteScalar("select count(1) from [" + TableName + "] where " + where, _p);
         }
         /// <summary>
         /// 保存模型到表中
@@ -93,7 +103,7 @@ namespace MWMS.DAL
             StringBuilder fieldstr = new StringBuilder();
             foreach (var field in model)
             {
-                    if (fieldstr.Length == 0) fieldstr.Append(",");
+                    if (fieldstr.Length > 0) fieldstr.Append(",");
                     fieldstr.Append(field.Key + "=@" + field.Key);
             }
             SqlServer.ExecuteNonQuery("update [" + TableName + "] set " + fieldstr.ToString() + " where id=@id", model);

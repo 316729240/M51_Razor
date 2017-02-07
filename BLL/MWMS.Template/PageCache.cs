@@ -12,8 +12,6 @@ using RazorEngine.Configuration;
 using RazorEngine;
 using RazorEngine.Templating;
 using Helper;
-using MWMS.Configuration;
-
 namespace MWMS
 {
     public class PageCache
@@ -177,12 +175,19 @@ namespace MWMS
 
             Regex r = new Regex(@"(?<=/)((.[^/]*)_((\d){1,5}))(." + BaseConfig.extension + ")", RegexOptions.IgnoreCase);
            string newUrl = r.Replace(url, new MatchEvaluator(_replaceUrl));
+
+            Template.PageTemplate pageTemplate = null;
+            pageTemplate=new Template.PageTemplate(newUrl,isMobile);
+            pageTemplate.Build(true);
+
+
             TemplateInfo info = TemplateClass.get(newUrl, isMobile);
             if (info == null)
             {
-                Helper.Page.ERR404("模板不存在");
+                API.ERR404("模板不存在");
             }
             else{
+                /*
                 if (info.u_type == 2)
                 {
                     Helper.Sql.ExecuteNonQuery("update mainTable set clickCount=clickCount+1 where id=@id", new SqlParameter[]{
@@ -204,9 +209,9 @@ namespace MWMS
                 };
                 Razor.SetTemplateService(new TemplateService(templateConfig));
                 RazorEngine.Razor.Compile(info.u_content, typeof(object[]), info.id.ToString(),false);
-                
+                */
 
-                string html = RazorEngine.Razor.Run(info.id.ToString(),new object[] { Config.systemVariables,info.variable });
+                string html = RazorEngine.Razor.Run(pageTemplate.TemplateId.ToString(),new object[] { Config.systemVariables,info.variable });
                 
                 return html;
             }

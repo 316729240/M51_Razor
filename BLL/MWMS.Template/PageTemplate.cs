@@ -31,35 +31,39 @@ namespace MWMS.Template
         public Dictionary<string, object> Variable { get; set; }
         public PageTemplate()
         {
-
+            this.TableName = "htmlTemplate";
         }
         public PageTemplate(string url,bool isMobile)
         {
+            this.TableName = "htmlTemplate";
             Get(url,isMobile);
         }
         public PageTemplate(double id)
         {
+            this.TableName = "htmlTemplate";
             Get(id);
         }
         public PageTemplate(double classId, int typeId, double datatypeId, bool isDefault, string title, bool isMobile)
         {
+            this.TableName = "htmlTemplate";
             Get(classId, typeId, datatypeId, IsDefault, title, isMobile);
         }
         public PageTemplate(double classId, int typeId, double datatypeId, bool isDefault,  bool isMobile)
         {
+            this.TableName = "htmlTemplate";
             Get(classId, typeId, datatypeId, IsDefault, "", isMobile);
         }
         void Get(double id)
         {
             this.TemplateId = id;
-            Dictionary<string, object> model = this.Get("title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue");
+            Dictionary<string, object> model = this.Get("id,title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue");
             if (model == null) throw new Exception("指定模板不存在");
             SetAttr(model);
         }
         void Get(string url,bool isMobile)
         {
             if (url == "/")  Get(0, 0, -1,true,"", isMobile);//获取首页模板
-            if (url.Substring(url.Length - 1) == "/")
+            else if (url.Substring(url.Length - 1) == "/")
             {
                 GetColumnTemplate(url, isMobile);
             }
@@ -205,7 +209,7 @@ namespace MWMS.Template
             string where = "";
             if (url2 != "") where = " or url=@url2";
             Dictionary<string, object> model = null;
-            model = this.GetModel("title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue",
+            model = this.GetModel("id,title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue",
                 " u_webFAid = @u_webFAid and u_type = 3 and(url = @url" + where + ")", p);
             if (model == null) throw new Exception("指定模板不存在");
             SetAttr(model);
@@ -221,10 +225,10 @@ namespace MWMS.Template
             p.Add("isMobile", isMobile?1:0);
             Dictionary<string, object> model = null;
             if (isDefault) { 
-                model =this.GetModel("title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue", "classId=@classId and u_type=@typeId and u_datatypeId=@datatypeId and u_defaultFlag=@isDefault  and u_webFAid=@isMobile", p);
+                model =this.GetModel("id,title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue", "classId=@classId and u_type=@typeId and u_datatypeId=@datatypeId and u_defaultFlag=@isDefault  and u_webFAid=@isMobile", p);
             }else
             {
-                model = this.GetModel("title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue", "classId=@classId and u_type=@typeId and u_datatypeId=@datatypeId and u_defaultFlag=@isDefault and title=@title and u_webFAid=@isMobile", p);
+                model = this.GetModel("id,title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue", "classId=@classId and u_type=@typeId and u_datatypeId=@datatypeId and u_defaultFlag=@isDefault and title=@title and u_webFAid=@isMobile", p);
             }
             if (model == null) throw new Exception("指定模板不存在");
             SetAttr(model);
@@ -238,7 +242,7 @@ namespace MWMS.Template
             p.Add("datatypeId", datatypeId);
             p.Add("isMobile", isMobile ? 1 : 0);
             Dictionary<string, object> model = null;
-            model = this.GetModel("title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue", 
+            model = this.GetModel("id,title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue", 
                 "classId in (0,@moduleId,@rootId) and B.u_defaultFlag=1 and B.u_datatypeid=@datatypeId and B.u_type=@typeId and B.u_webFAid=@isMobile", p, "u_layer desc");
             
             if (model == null) throw new Exception("指定模板不存在");
@@ -246,15 +250,114 @@ namespace MWMS.Template
         }
         void SetAttr(Dictionary<string, object> model)
         {
+            this.TemplateId = (double)model["id"];
             this.TemplateContent = (string)model["u_content"];
             this.TemplateName = (string)model["title"];
             this.DatatypeId = (double)model["u_datatypeId"];
             this.TemplateType = (TemplateType)model["u_type"];
-            this.EditMode = (EditMode)model["u_editboxStatus"];
-            this.IsDefault = (int)model["u_defaultFlag"] == 1 ? true : false;
+            this.EditMode = (EditMode)((bool)model["u_editboxStatus"]?1:0);
+            this.IsDefault = (bool)model["u_defaultFlag"];
             this.IsMobile = (int)model["u_webFAid"] == 1 ? true : false;
             this.ColumnId = (double)model["classId"];
             this.ParameterValue = model["u_parameterValue"] + "";
+        }
+
+        /// <summary>
+        /// 自定义模板是否重名
+        /// </summary>
+        /// <returns></returns>
+        public bool CustomPageExist()
+        {
+            Dictionary<string, object> fields = new Dictionary<string, object>();
+            fields["classId"] = this.ColumnId;
+            fields["id"] = this.TemplateId;
+            fields["title"] = this.TemplateName;
+            int count = this.GetCount("u_datatypeid=-3 and classId=@classId and id<>@id and title=@title",fields);
+            return count > 0;
+        }
+        /// <summary>
+        /// 保存模板
+        /// </summary>
+        public void Save()
+        {
+            if (TemplateType == TemplateType.自定义页 && this.CustomPageExist())
+            {
+                throw new Exception("页面“" + this.TemplateName + "”已存在请不要重复创建");
+            }
+            Dictionary<string, object> fields = new Dictionary<string, object>();
+            fields["id"] = this.TemplateId;
+            fields["title"] = this.TemplateName;
+            fields["u_content"] = SetContent(this.TemplateContent);
+            fields["u_type"] = (int)this.TemplateType;
+            fields["u_defaultFlag"] = this.IsDefault?1:0;
+            fields["classId"] = this.ColumnId;
+            fields["u_datatypeId"] = this.DatatypeId;
+            fields["u_editboxStatus"] = (int)this.EditMode;
+            fields["u_parameterValue"] = this.ParameterValue;
+            fields["u_webFAid"] = this.IsMobile?1:0;
+            Save(fields);
+            Build();
+        }
+        /// <summary>
+        /// 保存并备份
+        /// </summary>
+        /// <param name="username">备份人</param>
+        public void Save(string username)
+        {
+            Save();
+            Dictionary<string, object> fields = new Dictionary<string, object>();
+            fields["id"] = this.TemplateId;
+            fields["title"] = this.TemplateName;
+            fields["u_type"] = (int)this.TemplateType;
+            fields["u_defaultFlag"] = this.IsDefault ? 1 : 0;
+            fields["classId"] = this.ColumnId;
+            fields["u_datatypeId"] = this.DatatypeId;
+            fields["u_editboxStatus"] = (int)this.EditMode;
+            fields["u_parameterValue"] = this.ParameterValue;
+            fields["u_webFAid"] = this.IsMobile ? 1 : 0;
+            TableHandle table = new TableHandle("backupTemplate");
+            int count = table.GetCount("classid=@classid and u_type=@u_type and u_webFAid=@u_webFAid and u_defaultFlag=@u_defaultFlag and u_datatypeId=@u_datatypeId and title=@title and  getdate()<DATEADD(minute,200,updatedate)", fields);
+            if (count == 0) this.Backup(username);
+        }
+        /// <summary>
+        /// 设置页面内容
+        /// </summary>
+        /// <param name="u_content">内容</param>
+        /// <returns></returns>
+        string SetContent(string u_content)
+        {
+            MatchCollection mc, mc2;
+            Regex r = new Regex(@"(</title>).*?(</head>)", RegexOptions.Singleline | RegexOptions.IgnoreCase); //定义一个Regex对象实例
+            mc = r.Matches(u_content);
+            if (mc.Count > 0)//如果找到头部信息时
+            {
+                string H = mc[0].Value;
+                Regex r2 = new Regex(@"<script(.*)</script>", RegexOptions.Singleline | RegexOptions.IgnoreCase);
+                mc2 = r2.Matches(H);
+                if (mc2.Count == 0)//如果没有js时
+                {
+                    string H2 = H.Replace("</head>", "<script type=\"text/javascript\" src=\"" + Config.webPath + "/static/m5_public.js\"></script>\n</head>");
+                    u_content = u_content.Replace(H, H2);
+                }
+                else
+                {
+                    bool tag = false;
+                    for (int i = 0; i < mc2.Count; i++)
+                    {
+                        if (mc2[i].Value.ToLower().IndexOf("m5_public.js") > -1)//如果包含系统js时
+                        {
+                            i = mc2.Count;
+                            tag = true;
+                        }
+                    }
+                    if (!tag)//如果所有的js都不是系统js时
+                    {
+                        string H2 = H.Replace(mc2[0].Value, "<script type=\"text/javascript\" src=\"" + Config.webPath + "/static/m5_public.js\"></script>\n" + mc2[0].Value);
+                        u_content = u_content.Replace(H, H2);
+                    }
+                }
+            }
+            return u_content;
         }
     }
 

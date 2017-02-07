@@ -56,7 +56,7 @@ namespace MWMS
             };
             Razor.SetTemplateService(new TemplateService(templateConfig));
             _html = "@using System.Collections\r\n@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];Dictionary<string, object> page=( Dictionary<string, object>)Model[1];var loginUser=(new LoginInfo()).value;}" + _html;
-
+            
             r = new Regex(@"(<|&lt;)!-- #(.*?)#[\s\S]*?--(>|&gt;)", RegexOptions.IgnoreCase);
             _html = r.Replace(_html, new MatchEvaluator(_variable4));
             RazorEngine.Razor.Compile(_html, typeof(object[]), _fileName , true);

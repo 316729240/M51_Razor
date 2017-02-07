@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Helper\Helper.csproj">
+      <Project>{FCCFB5A1-A771-49CC-AC13-3500C4CDE9F1}</Project>
+      <Name>Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MWMS.DAL\MWMS.DAL.csproj">
       <Project>{CAC3687F-17FA-4082-B216-449C3335361B}</Project>
       <Name>MWMS.DAL</Name>

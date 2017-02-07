@@ -138,7 +138,7 @@ namespace MWMS
                 }
                 else if (file == "cache.config")
                 {
-                    PageCache.loadConfig();
+                    //PageCache.loadConfig();
                     //Rewrite.pageCache.loadConfig();
                 }
                 else if (file == "keywordFiltering.config")

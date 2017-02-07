@@ -40,7 +40,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MainWeb(3)", "MainWeb\", "{54B3FC73-096F-4EC0-87ED-6E53D28810E4}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{44c5cd02-971f-4c95-9cdb-93542c6b3404}|ManagerFramework.dll;{FCCFB5A1-A771-49CC-AC13-3500C4CDE9F1}|Helper.dll;{dae1f43a-7699-4d94-a787-afb9d28b9fdd}|Catch.dll;{9F27B8A3-1951-4272-8C28-236EF9B07BD6}|UserFramework.dll;{CAC3687F-17FA-4082-B216-449C3335361B}|MWMS.DAL.dll;{13faf33a-4791-4196-973c-ef40aaba478f}|MWMS.dll;{4B6DDE24-50A4-4545-BABC-32F0A5FE9BAF}|RazorEngine.Core.dll;{881F3FD2-0341-415C-8312-991513D20D3B}|System.Web.Razor.Net4.0.dll;"
+		ProjectReferences = "{44c5cd02-971f-4c95-9cdb-93542c6b3404}|ManagerFramework.dll;{FCCFB5A1-A771-49CC-AC13-3500C4CDE9F1}|Helper.dll;{dae1f43a-7699-4d94-a787-afb9d28b9fdd}|Catch.dll;{9F27B8A3-1951-4272-8C28-236EF9B07BD6}|UserFramework.dll;{CAC3687F-17FA-4082-B216-449C3335361B}|MWMS.DAL.dll;{13faf33a-4791-4196-973c-ef40aaba478f}|MWMS.dll;{4B6DDE24-50A4-4545-BABC-32F0A5FE9BAF}|RazorEngine.Core.dll;{881F3FD2-0341-415C-8312-991513D20D3B}|System.Web.Razor.Net4.0.dll;{1992d0d5-b513-476e-b16b-b06b709006da}|MWMS.Template.dll;{BF4607D8-E195-4C8D-8837-18D80011FE45}|MWMS.Configuration.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_1504"
 		Debug.AspNetCompiler.PhysicalPath = "MainWeb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1504\"

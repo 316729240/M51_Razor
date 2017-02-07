@@ -106,13 +106,16 @@ namespace MWMS.Template
             return GetModel(this.TemplateId, fields);
         }
         /// <summary>
-        /// 保存模板数据
+        /// 编译模板
         /// </summary>
-        /// <param name="data"></param>
-        public void SaveData(Dictionary<string, object> data)
+        public void Build(bool flag)
         {
-            Save(data);
+            BuildCode build = new BuildCode(this.TemplateId.ToString(), this.TemplateContent);
+            build.compile(flag);
         }
-
+        public void Build()
+        {
+            Build(false);
+        }
     }
 }
