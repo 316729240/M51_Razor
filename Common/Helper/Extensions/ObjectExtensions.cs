@@ -20,7 +20,7 @@ namespace Helper
             string YH2 = "\"";
             string headstr = FieldName + "=(\0| |\"|" + YH + ")";
             MatchCollection mc;
-            Regex r = new Regex(@"(?<=" + headstr + @")(.*?)(?=( |}|" + YH2 + "))", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            Regex r = new Regex(@"(?<=" + headstr + @")(.*?)(?=( |}|" + YH2 + "|\r|\n))", RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
             mc = r.Matches(HTML);
             if (mc.Count > 0) return (mc[0].Value.Replace("\"", ""));

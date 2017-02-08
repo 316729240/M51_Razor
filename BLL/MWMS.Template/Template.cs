@@ -24,6 +24,10 @@ namespace MWMS.Template
     public class Template:TableHandle
     {
         /// <summary>
+        /// 参数表
+        /// </summary>
+        public string ParameterValue { get; set; }
+        /// <summary>
         /// 编辑模型
         /// </summary>
         public EditMode EditMode { get; set; }
@@ -95,6 +99,17 @@ namespace MWMS.Template
                  new SqlParameter("username",username),
             });
             }
+        }
+        public static void Backup(double templateId, string html, string username)
+        {
+            Sql.ExecuteNonQuery("insert into backupTemplate (id,dataId,classId,u_type,title,u_content,updateDate,userName,u_webFAid,u_defaultflag,u_datatypeId)" +
+"select @id,B.id,B.classid,B.u_type,B.title,@u_content,getdate(),@username,B.u_webFAid,B.u_defaultflag,u_datatypeId from htmlTemplate B  " +
+" where B.id=@dataId", new SqlParameter[]{
+                 new SqlParameter("id",double.Parse(API.GetId())),
+                 new SqlParameter("dataId",templateId),
+                 new SqlParameter("u_content",html),
+                 new SqlParameter("username",username),
+            });
         }
         /// <summary>
         /// 获取数据

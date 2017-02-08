@@ -19,10 +19,6 @@ namespace MWMS.Template
         /// 是否默认模板
         /// </summary>
         public bool IsDefault { get; set; }
-        /// <summary>
-        /// 参数表
-        /// </summary>
-        public string ParameterValue { get; set; }
         
         /// <summary>
         /// 模板所属数据类型
@@ -46,12 +42,12 @@ namespace MWMS.Template
         public PageTemplate(double classId, int typeId, double datatypeId, bool isDefault, string title, bool isMobile)
         {
             this.TableName = "htmlTemplate";
-            Get(classId, typeId, datatypeId, IsDefault, title, isMobile);
+            Get(classId, typeId, datatypeId, isDefault, title, isMobile);
         }
         public PageTemplate(double classId, int typeId, double datatypeId, bool isDefault,  bool isMobile)
         {
             this.TableName = "htmlTemplate";
-            Get(classId, typeId, datatypeId, IsDefault, "", isMobile);
+            Get(classId, typeId, datatypeId, isDefault, "", isMobile);
         }
         void Get(double id)
         {
@@ -69,6 +65,7 @@ namespace MWMS.Template
             }
             else
             {
+                url=Regex.Replace(url, @"\.(.*)$","", RegexOptions.IgnoreCase);
                 try { 
                     GetCustomTemplate(url, IsMobile);
                 }catch { 
@@ -284,6 +281,8 @@ namespace MWMS.Template
             {
                 throw new Exception("页面“" + this.TemplateName + "”已存在请不要重复创建");
             }
+
+
             Dictionary<string, object> fields = new Dictionary<string, object>();
             fields["id"] = this.TemplateId;
             fields["title"] = this.TemplateName;
@@ -295,8 +294,27 @@ namespace MWMS.Template
             fields["u_editboxStatus"] = (int)this.EditMode;
             fields["u_parameterValue"] = this.ParameterValue;
             fields["u_webFAid"] = this.IsMobile?1:0;
-            Save(fields);
-            Build();
+            fields["createDate"] = System.DateTime.Now;
+            fields["updateDate"] = System.DateTime.Now;
+            if (TemplateType == TemplateType.自定义页) { 
+                ModuleInfo moduleInfo = ModuleClass.get(ColumnId);
+                if (moduleInfo == null)
+                {
+                    ColumnInfo columnInfo = ColumnClass.get(ColumnId);
+                    if (columnInfo != null) { 
+                    fields["url"] = @"/" + columnInfo.dirName + "/" + TemplateName;
+                    }else
+                    {
+                        fields["url"] = @"/" + TemplateName;
+                    }
+                }
+                else
+                {
+                    if (moduleInfo.type) fields["url"] = @"/" + moduleInfo.dirName + "/" + TemplateName;
+                }
+            }
+            this.TemplateId = Save(fields);
+            Build(true);
         }
         /// <summary>
         /// 保存并备份

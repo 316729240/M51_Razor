@@ -178,7 +178,7 @@ namespace MWMS
 
             Template.PageTemplate pageTemplate = null;
             pageTemplate=new Template.PageTemplate(newUrl,isMobile);
-            pageTemplate.Build(true);
+            pageTemplate.Build();
 
 
             TemplateInfo info = TemplateClass.get(newUrl, isMobile);

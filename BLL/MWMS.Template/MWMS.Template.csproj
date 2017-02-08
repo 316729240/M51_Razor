@@ -41,12 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildCode.cs" />
     <Compile Include="PageCache.cs" />
     <Compile Include="PageTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rewrite.cs" />
     <Compile Include="Template.cs" />
-    <Compile Include="BuildCode.cs" />
     <Compile Include="ViewTemplate.cs" />
   </ItemGroup>
   <ItemGroup>

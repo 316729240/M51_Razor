@@ -334,6 +334,9 @@
                     File.Delete(assemblyPath);
                     //Assembly.LoadFile()
                 }
+            }else
+            {
+                if (!System.IO.Directory.Exists(_config.CatchPath)) System.IO.Directory.CreateDirectory(_config.CatchPath);
             }
 
             var context = new TypeContext

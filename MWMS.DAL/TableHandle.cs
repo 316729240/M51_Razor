@@ -71,24 +71,25 @@ namespace MWMS.DAL
         /// 保存模型到表中
         /// </summary>
         /// <param name="model">模型</param>
-        public void Save(Dictionary<string, object> model)
+        public double Save(Dictionary<string, object> model)
         {
             if (TableName == "") throw new Exception("表名不能为空");
             bool updateFlag = model.ContainsKey("id");
-            if (updateFlag) { 
-                Update(model);
+            if (updateFlag && (double)(model["id"])>0) {
+                return Update(model);
             }else
             {
-                Append(model);
+                return Append(model);
             }
         }
-        void Append(Dictionary<string, object> model)
+        double Append(Dictionary<string, object> model)
         {
             StringBuilder fieldstr = new StringBuilder();
             StringBuilder fieldstr2 = new StringBuilder();
+            model["id"] =double.Parse( Helper.Tools.GetId());
             foreach (var field in model)
             {
-                if (fieldstr.Length == 0)
+                if (fieldstr.Length > 0)
                 {
                     fieldstr.Append(",");
                     fieldstr2.Append(",");
@@ -96,9 +97,10 @@ namespace MWMS.DAL
                 fieldstr.Append(field.Key);
                 fieldstr2.Append("@" + field.Key);
             }
-            SqlServer.ExecuteNonQuery("update [" + TableName + "] set " + fieldstr.ToString() + " where id=@id", model);
+            SqlServer.ExecuteNonQuery("insert into  [" + TableName + "] (" + fieldstr.ToString() + ")values(" + fieldstr2.ToString()+ ")", model);
+            return (double)model["id"];
         }
-        void Update(Dictionary<string, object> model)
+        double Update(Dictionary<string, object> model)
         {
             StringBuilder fieldstr = new StringBuilder();
             foreach (var field in model)
@@ -107,6 +109,7 @@ namespace MWMS.DAL
                     fieldstr.Append(field.Key + "=@" + field.Key);
             }
             SqlServer.ExecuteNonQuery("update [" + TableName + "] set " + fieldstr.ToString() + " where id=@id", model);
+            return (double)model["id"];
         }
     }
 }
