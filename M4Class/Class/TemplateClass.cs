@@ -199,7 +199,7 @@ namespace MWMS
                 value.id = rs.GetDouble(4);
                 value.title = rs[0].ToString();
                 value.u_content = rs[1].ToString();
-                value.u_editboxStatus = rs.GetBoolean(2) ? 1 : 0;
+                value.u_editboxStatus =rs.GetInt32(2);
                 value.u_parameterValue = rs[3].ToString();
                 value.u_datatypeId = datatypeId;
                 value.classId = classId;

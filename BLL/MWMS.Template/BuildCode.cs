@@ -47,12 +47,16 @@ namespace MWMS.Template
         }
         public void compile(bool flag)
         {
+            _html = compile(_html,flag);
+        }
+         string compile(string code,bool flag)
+        {
 
             Regex r = new Regex(@"(\b(page|sys|config))\.((\w|\.|\[|\]){1,30})(\(|)", RegexOptions.IgnoreCase);
-            _html = r.Replace(_html, new MatchEvaluator(_variable2));
+            code = r.Replace(code, new MatchEvaluator(_variable2));
 
-            r = new Regex(@"view\.(.*?)\(", RegexOptions.IgnoreCase);
-            _html = r.Replace(_html, new MatchEvaluator(_variable3));
+            r = new Regex(@"view\.(.*?)\)", RegexOptions.IgnoreCase);
+            code = r.Replace(code, new MatchEvaluator(_variable3));
 
 
             TemplateServiceConfiguration templateConfig = new TemplateServiceConfiguration
@@ -60,16 +64,33 @@ namespace MWMS.Template
                 CatchPath = HttpContext.Current.Server.MapPath("~" + Config.cachePath + "assembly/")
             };
             Razor.SetTemplateService(new TemplateService(templateConfig));
-            _html = "@using System.Collections\r\n"+
-                "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n"+
-                "Dictionary<string, object> page=( Dictionary<string, object>)Model[1];\r\n"+
-                "object [] parameter=(object []) Model[2];\r\n"+
-                "var loginUser=(new LoginInfo()).value;}" + _html;
+
+            string headCode = "@using System.Collections\r\n" +
+                    "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n" +
+                    "Dictionary<string, object> page=( Dictionary<string, object>)Model[1];\r\n" +
+                    "object [] parameter= Model[2]==null?null:(object [])Model[2];\r\n" +
+                    "var loginUser=(new LoginInfo()).value;}";
+            code = headCode + code;
 
             r = new Regex(@"(<|&lt;)!-- #(.*?)#[\s\S]*?--(>|&gt;)", RegexOptions.IgnoreCase);
-            _html = r.Replace(_html, new MatchEvaluator(_variable4));
-            RazorEngine.Razor.Compile(_html, typeof(object[]), _fileName, flag);
+            code = r.Replace(code, new MatchEvaluator(_variable4));
+            RazorEngine.Razor.Compile(code, typeof(object[]), _fileName, flag);
+            return code;
 
+        }
+        public static string readView(string viewPath, object sys, object page, object[] p)
+        {
+            string[] item = viewPath.Split('.');
+            Dictionary<string, object> list = (Dictionary<string, object>)Config.viewVariables[item[0]];
+            object[] obj = (object[])list[item[1]];
+            TemplateServiceConfiguration templateConfig = new TemplateServiceConfiguration
+            {
+                CatchPath = HttpContext.Current.Server.MapPath("~" + Config.cachePath + "assembly/")
+            };
+            Razor.SetTemplateService(new TemplateService(templateConfig));
+            RazorEngine.Razor.Compile((string)obj[1], typeof(object[]), obj[0].ToString(), false);
+            return RazorEngine.Razor.Run(obj[0].ToString(), new object[] { sys, page, p });
+            //return RazorEngine.Razor.Run(obj[0].ToString(), new object[] { Config.systemVariables, null });
         }
         string _variable2(Match m)
         {
@@ -339,23 +360,17 @@ namespace MWMS.Template
         string _variable3(Match m)
         {
             string item = m.Value.SubString(@"view\.", @"\(");
+            string p = m.Value.SubString(@"\(",@"\)");
             //Dictionary<string, object> list =  (Dictionary<string, object>)Config.viewVariables[item[0]];
             //string viewId = list[item[1]].ToString();
-            return "MWMS.Template.BuildCode.readView(\"" + item + "\"";
-        }
-        public static string readView(string viewPath, object[] p)
-        {
-            string[] item = viewPath.Split('.');
-            Dictionary<string, object> list = (Dictionary<string, object>)Config.viewVariables[item[0]];
-            object[] obj = (object[])list[item[1]];
-            TemplateServiceConfiguration templateConfig = new TemplateServiceConfiguration
+            //return "MWMS.Template.BuildCode.readView(\"" + item + "\"";
+            if (p == "")
             {
-                CatchPath = HttpContext.Current.Server.MapPath("~" + Config.cachePath + "assembly/")
-            };
-            Razor.SetTemplateService(new TemplateService(templateConfig));
-            RazorEngine.Razor.Compile((string)obj[1], typeof(object[]), obj[0].ToString(), false);
-            return RazorEngine.Razor.Run(obj[0].ToString(), p);
-            //return RazorEngine.Razor.Run(obj[0].ToString(), new object[] { Config.systemVariables, null });
+                return "MWMS.Template.BuildCode.readView(\"" + item + "\",Model[0],Model[1],null)";
+            }
+            else { 
+                return "MWMS.Template.BuildCode.readView(\"" + item + "\",Model[0],Model[1],new object []{" + p + "})";
+            }
         }
         public static ArrayList getLabel(string labelId, string html, double moduleId, double classId, int pageSize, int recordCount, double datatypeId, int orderBy, string _fields, string attribute, string addWhere, bool debug, Hashtable p1)
         {

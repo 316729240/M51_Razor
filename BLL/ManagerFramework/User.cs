@@ -27,9 +27,8 @@ namespace ManagerFramework
         {
             AuthToken authToken = AuthToken.Login(username, password, expirationTime);
             HttpContext.Current.Response.Cookies["M5_SessionId"].Value = authToken.Token;
-            /*HttpCookie cook = new HttpCookie("m5_token");
-            if (expirationTime > 0) cook.Expires = System.DateTime.Now.AddMinutes(expirationTime);
-            cook.Value = login.Token;*/
+            if (authToken.UserType == 0) HttpContext.Current.Response.Cookies["M5_Login"].Value = "true";
+            else { HttpContext.Current.Response.Cookies["M5_Login"].Value = ""; }
             return authToken;
         }
         public static void Edit(string token, Dictionary<string, object> extendedField)

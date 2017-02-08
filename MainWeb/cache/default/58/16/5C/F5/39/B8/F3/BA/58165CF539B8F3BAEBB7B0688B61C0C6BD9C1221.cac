@@ -40,6 +40,7 @@
 		<div class="position">
 			<!-- 分类相关 -->
 			<div class="category">
+			    <a class="shouye" href="http://localhost:8001/">首页</a>
         	</div>
 			<!-- 用户相关 -->
 			<div id="user-relevance" class="user-relevance">
@@ -107,6 +108,7 @@ location.href="/";
 		</div> 
 	</div>
 </div>
+
 
 	<div class="c"></div>
 	<div id="footer" style="position: fixed;">

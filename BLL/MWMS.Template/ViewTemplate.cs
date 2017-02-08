@@ -51,6 +51,7 @@ namespace MWMS.Template
                 Config.viewVariables[className] = list;
             }
             Build(true);
+            list[TemplateName] = new object[] { TemplateId, TemplateContent };
         }
    }
 }

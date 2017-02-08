@@ -19,6 +19,14 @@ namespace AuthtokenFramework
     public class AuthToken
     {
         /// <summary>
+        /// 会员类型
+        /// </summary>
+        public double UserType
+        {
+            get;
+            set;
+        }
+        /// <summary>
         /// 登录用户id
         /// </summary>
         public double UserId
@@ -73,12 +81,13 @@ namespace AuthtokenFramework
         public static AuthToken Create(string token)
         {
             AuthToken authToken = null;
-            SqlDataReader rs = SqlServer.ExecuteReader("select userid,username from [loginInfo] where expirationTime>getdate() and sessionId=@sessionId", new SqlParameter[] { new SqlParameter("sessionId", token) });
+            SqlDataReader rs = SqlServer.ExecuteReader("select A.userid,A.username,B.classId from [loginInfo] A inner join [m_admin] B on A.userId=B.id where expirationTime>getdate() and sessionId=@sessionId", new SqlParameter[] { new SqlParameter("sessionId", token) });
             if (rs.Read())
             {
                 authToken=new AuthToken();
                 authToken.UserId = rs.GetDouble(0);
                 authToken.Username = rs[1] + "";
+                authToken.UserType = rs.GetDouble(2);
             }
             rs.Close();
             return authToken;

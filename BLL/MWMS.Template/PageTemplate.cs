@@ -252,8 +252,8 @@ namespace MWMS.Template
             this.TemplateName = (string)model["title"];
             this.DatatypeId = (double)model["u_datatypeId"];
             this.TemplateType = (TemplateType)model["u_type"];
-            this.EditMode = (EditMode)((bool)model["u_editboxStatus"]?1:0);
-            this.IsDefault = (bool)model["u_defaultFlag"];
+            this.EditMode = (EditMode)model["u_editboxStatus"];
+            this.IsDefault = (int)model["u_defaultFlag"]==1;
             this.IsMobile = (int)model["u_webFAid"] == 1 ? true : false;
             this.ColumnId = (double)model["classId"];
             this.ParameterValue = model["u_parameterValue"] + "";
@@ -296,13 +296,16 @@ namespace MWMS.Template
             fields["u_webFAid"] = this.IsMobile?1:0;
             fields["createDate"] = System.DateTime.Now;
             fields["updateDate"] = System.DateTime.Now;
+
+            int u_layer = 0;
             if (TemplateType == TemplateType.自定义页) { 
                 ModuleInfo moduleInfo = ModuleClass.get(ColumnId);
                 if (moduleInfo == null)
                 {
                     ColumnInfo columnInfo = ColumnClass.get(ColumnId);
-                    if (columnInfo != null) { 
-                    fields["url"] = @"/" + columnInfo.dirName + "/" + TemplateName;
+                    if (columnInfo != null) {
+                        u_layer = 2;
+                        fields["url"] = @"/" + columnInfo.dirName + "/" + TemplateName;
                     }else
                     {
                         fields["url"] = @"/" + TemplateName;
@@ -310,9 +313,11 @@ namespace MWMS.Template
                 }
                 else
                 {
+                    u_layer = 1;
                     if (moduleInfo.type) fields["url"] = @"/" + moduleInfo.dirName + "/" + TemplateName;
                 }
             }
+            fields["u_layer"] = u_layer;
             this.TemplateId = Save(fields);
             Build(true);
         }

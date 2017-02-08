@@ -211,7 +211,7 @@ namespace MWMS
                 RazorEngine.Razor.Compile(info.u_content, typeof(object[]), info.id.ToString(),false);
                 */
 
-                string html = RazorEngine.Razor.Run(pageTemplate.TemplateId.ToString(),new object[] { Config.systemVariables,info.variable });
+                string html = RazorEngine.Razor.Run(pageTemplate.TemplateId.ToString(),new object[] { Config.systemVariables,info.variable ,null });
                 
                 return html;
             }
