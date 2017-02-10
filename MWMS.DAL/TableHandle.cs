@@ -12,6 +12,13 @@ namespace MWMS.DAL
     /// </summary>
     public class TableHandle
     {
+        /// <summary>
+        /// 主键
+        /// </summary>
+        public string PrimaryKey = "id";
+        /// <summary>
+        /// 表名
+        /// </summary>
         public string TableName { get; set; }
         public TableHandle()
         {
@@ -24,8 +31,8 @@ namespace MWMS.DAL
         public Dictionary<string,object> GetModel(double id,string fields)
         {
             Dictionary<string, object> p = new Dictionary<string, object>();
-            p.Add("id", id);
-            return GetModel(fields, "id=@id", p, "");
+            p.Add(PrimaryKey, id);
+            return GetModel(fields, PrimaryKey+"=@"+ PrimaryKey, p, "");
         }
         public Dictionary<string, object> GetModel(string fields, string where, Dictionary<string, object> p)
         {
@@ -74,8 +81,8 @@ namespace MWMS.DAL
         public double Save(Dictionary<string, object> model)
         {
             if (TableName == "") throw new Exception("表名不能为空");
-            bool updateFlag = model.ContainsKey("id");
-            if (updateFlag && (double)(model["id"])>0) {
+            bool updateFlag = model.ContainsKey(PrimaryKey);
+            if (updateFlag && (double)(model[PrimaryKey])>0) {
                 return Update(model);
             }else
             {
@@ -86,7 +93,7 @@ namespace MWMS.DAL
         {
             StringBuilder fieldstr = new StringBuilder();
             StringBuilder fieldstr2 = new StringBuilder();
-            model["id"] =double.Parse( Helper.Tools.GetId());
+            model[PrimaryKey] =double.Parse( Helper.Tools.GetId());
             foreach (var field in model)
             {
                 if (fieldstr.Length > 0)
@@ -98,7 +105,7 @@ namespace MWMS.DAL
                 fieldstr2.Append("@" + field.Key);
             }
             SqlServer.ExecuteNonQuery("insert into  [" + TableName + "] (" + fieldstr.ToString() + ")values(" + fieldstr2.ToString()+ ")", model);
-            return (double)model["id"];
+            return (double)model[PrimaryKey];
         }
         double Update(Dictionary<string, object> model)
         {
@@ -108,8 +115,8 @@ namespace MWMS.DAL
                     if (fieldstr.Length > 0) fieldstr.Append(",");
                     fieldstr.Append(field.Key + "=@" + field.Key);
             }
-            SqlServer.ExecuteNonQuery("update [" + TableName + "] set " + fieldstr.ToString() + " where id=@id", model);
-            return (double)model["id"];
+            SqlServer.ExecuteNonQuery("update [" + TableName + "] set " + fieldstr.ToString() + " where "+ PrimaryKey + "=@"+ PrimaryKey, model);
+            return (double)model[PrimaryKey];
         }
     }
 }
