@@ -354,30 +354,30 @@ $M.Method.Array.apply(Array.prototype);
 $M.Method.Date.apply(Date.prototype);
 $M.Method.String.apply(String.prototype);
 $.fn.extend({
-render: function() {
-    var xtype = this.attr("xtype");
-    var attrs = this.get(0).attributes;
-    var S = [];
-    var C = attrs.length;
-    for (var i = 0; i < C; i++) {
-        S[attrs[i].name] = attrs[i].value;
-    }
-    var F = {};
-    if (xtype) F = new $M.Control[xtype](null, S, this);
-    var item = this.find("input,select,form,div");
-    F.controls = [];
-    for (var i = 0; i < item.length; i++) {
-        var jqobj = $(item[i]);
-        xtype = jqobj.attr("xtype");
-        if (xtype) {
-            attrs = item[i].attributes;
-            S = []; C = attrs.length;
-            for (var i1 = 0; i1 < C; i1++) S[attrs[i1].name] = attrs[i1].value;
-            var obj = new $M.Control[xtype](null, S, jqobj);
-            F.controls[F.controls.length] = obj;
+    render: function () {
+        var xtype = this.attr("xtype");
+        var attrs = this.get(0).attributes;
+        var S = [];
+        var C = attrs.length;
+        for (var i = 0; i < C; i++) {
+            S[attrs[i].name] = attrs[i].value;
         }
-    }
-    return F;
+        var F = {};
+        if (xtype) F = new $M.Control[xtype](null, S, this);
+        var item = this.find("input,select,form,div");
+        F.controls = [];
+        for (var i = 0; i < item.length; i++) {
+            var jqobj = $(item[i]);
+            xtype = jqobj.attr("xtype");
+            if (xtype) {
+                attrs = item[i].attributes;
+                S = []; C = attrs.length;
+                for (var i1 = 0; i1 < C; i1++) S[attrs[i1].name] = attrs[i1].value;
+                var obj = new $M.Control[xtype](null, S, jqobj);
+                F.controls[F.controls.length] = obj;
+            }
+        }
+        return F;
     },
     addControl: function (S2) {
         var box = this;
@@ -727,30 +727,35 @@ $M.Control["UploadFileBox"] = function (BoxID, S, CID) {
     if (S.ico == null) S.ico = "fa-ellipsis-h";
     var A = null;
     if (CID) {
-        A = $("<div class=\"input-group\"></div>");
+        A = $("<div class=\"input-group\"><a class=\"inputbox form-control openfile\" target=_blank ></a></div>");
         A.insertBefore(CID);
         CID.attr("disabled", "true");
         CID.attr("class", "inputbox form-control");
         CID.disable = false;
         A.append(CID);
         A.append('<div class="input-group-btn"><button type="button" class="btn btn-default">选择文件</button></div>');
-    }else{
+    } else {
         var html = '<div class="input-group">' +
-                    '<input class="inputbox form-control" ' + (S.inputReadOnly ? 'readonly' : '') + ' type="text" name="' + S.name + '">' +
-				    '<div class="input-group-btn"><button type="button" class="btn btn-default">选择文件</button></div>' +
-			    '</div>';
-        A=$(html).appendTo(BoxID);
+                    '<a class=\"inputbox form-control openfile\" target=_blank ></a>' +
+                        '<input class="inputbox form-control" ' + (S.inputReadOnly ? 'readonly' : '') + ' type="text" name="' + S.name + '">' +
+                        '<div class="input-group-btn"><button type="button" class="btn btn-default">选择文件</button></div>' +
+                    '</div>';
+        A = $(html).appendTo(BoxID);
     }
     A.addClass("input-group-" + $M.Control.Constant.sizeCss[S.size == null ? 1 : S.size]);
     var button = A.find("button");
-    var inputbox = A.find(".inputbox");
+    var inputbox = A.find("input");
+    inputbox.hide();
     //var img = $("<input type=file name='" + S.name + "' style='display:none'/>").appendTo(A);
     button.click(function () {
         $M.app.call("$M.system.insertPic", {
+            accept: S.accept,
             isMultiple: false,
             back: function (json) {
+                A.find(".openfile").html("预览文件");
+                A.find(".openfile").attr("href", json[0])
                 T.val(json[0]);
-                if (S.onChange) S.onChange(T,null);
+                if (S.onChange) S.onChange(T, null);
             }
         });
         //        img.click();
@@ -1614,12 +1619,12 @@ $M.Control["ButtonCheckGroup"] = function (BoxID, S) {
     T.container = A;
     $M.BaseClass.apply(T, [S]);
 };
-$M.Control["Button"] = function(BoxID, S, CID) {
+$M.Control["Button"] = function (BoxID, S, CID) {
     var T = this;
     var A = null;
     var group = null, menuButton = null;
-    T.val = function(text) {
-        
+    T.val = function (text) {
+
         //if (text == null) {
         //} else {
         S.text = text;
@@ -1664,28 +1669,28 @@ $M.Control["Button"] = function(BoxID, S, CID) {
         }
         //A.attr("type", S.type);
     }
-    T.focus = function() {
+    T.focus = function () {
         A.focus();
     };
-    T.enabled = function(flag) {
+    T.enabled = function (flag) {
         A.attr({ "disabled": !flag });
         if (menuButton) menuButton.attr({ "disabled": !flag });
     };
     var objID = "Button_" + $.Index + "_";
     A.attr("id", objID);
-    A.click(function() {
+    A.click(function () {
         var f = true;
         if (S.onClick) { S.onClick(T, null); f = false; }
         return f;
     });
     if (T.menu) {
-        menuButton.on("click", function() {
+        menuButton.on("click", function () {
             if (T.menu) {
                 group.addClass("open");
                 var xy = group.offset();
                 T.menu.open(null, null, group);
             }
-            T.menu.attr("onClose", function() {
+            T.menu.attr("onClose", function () {
                 group.removeClass("open");
                 if (S.onMenuClose) S.onMenuClose(T, null);
             });
@@ -2895,7 +2900,7 @@ $M.Control["TreeView"] = function (BoxID, S) {
     if (S.style) A.css(S.style);
 };
 
-$M.Control["GridView"] = function(BoxID, S, CID) {
+$M.Control["GridView"] = function (BoxID, S, CID) {
     var T = this;
     var A = null;
     if (CID == null) {
@@ -2927,7 +2932,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
     T.rows = [];
     S.allowSorting = S.allowSorting ? true : false;
     if (typeof (S.columns) == "string") eval("S.columns=" + S.columns);
-    var columnClick = function() {
+    var columnClick = function () {
         var index = $(this).attr("index");
         if (S.allowSorting) {
             if (S.columns[index].name == null) return;
@@ -2945,7 +2950,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
         }
         columnFocusIndex = index;
     };
-    T.addColumn = function(columns) {
+    T.addColumn = function (columns) {
         for (var i = 0; i < columns.length; i++) {
             tableWidth += columns[i].width;
             var display = (columns[i].visible != false ? "" : "display:none;");
@@ -2962,13 +2967,13 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
         }
         $("<th />").appendTo(theadTr);
     };
-    T.tableRow = function(S2) {
+    T.tableRow = function (S2) {
         var T2 = this;
         T2.cells = [];
         T.selectedRow = null;
         var rowIndex = T.rows.length;
         T.rows[T.rows.length] = T2;
-        var tableCell = function(S3) {
+        var tableCell = function (S3) {
             var T3 = this;
             var td = S3.dom;
             var value = null;
@@ -2976,7 +2981,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
             if (S.columns[S3.cellIndex].xtype == "CheckBox") { S3.dom = $("<input type=checkbox >").appendTo(td); }
 
             T2.cells[T2.cells.length] = T3;
-            T3.val = function(text) {
+            T3.val = function (text) {
                 if (text != null) value = text;
                 if (S.columns[S3.cellIndex].xtype == "CheckBox") {
                     S3.dom.prop("checked", text);
@@ -2995,10 +3000,10 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
                     return (value);
                 }
             };
-            T3.html = function(html) {
+            T3.html = function (html) {
                 S3.dom.html(html);
             };
-            T3.attr = function(name, value) {
+            T3.attr = function (name, value) {
                 if (value != null) {
                     S3[name] = value;
                     if (name == "foreColor") S3.dom.css("color", value);
@@ -3006,7 +3011,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
                 return (S3[name]);
             };
             T3.val(S3.value);
-            T3.focus = function() {
+            T3.focus = function () {
                 if (S.columns[S3.cellIndex].xtype && S.columns[S3.cellIndex].xtype != "CheckBox") {
                     var xy = td.offset();
                     S.columns[S3.cellIndex].style = { position: "fixed", zIndex: $M.zIndex++, left: xy.left + "px", top: xy.top + "px", width: td.outerWidth() + "px", height: td.outerHeight() + "px" };
@@ -3034,14 +3039,14 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
 
             };
             S3.dom.click(T3.focus);
-            td.dblclick(function() {
+            td.dblclick(function () {
                 if (S.onCellMouseDoubleClick) S.onCellMouseDoubleClick(T, { x: td.attr("_x"), y: td.parent().attr("_y") });
             });
-            td.click(function() {
+            td.click(function () {
                 if (S.onCellMouseClick) S.onCellMouseClick(T, { x: td.attr("_x"), y: td.parent().attr("_y"), target: event.target });
             });
         };
-        T2.find = function(name) {
+        T2.find = function (name) {
             for (var i1 = 0; i1 < S.columns.length; i1++) {
                 if (S.columns[i1].name == name) return T2.cells[i1];
             }
@@ -3049,7 +3054,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
         };
         var tr = $("<tr _y=" + rowIndex + " ></tr>").appendTo(tbody);
 
-        T2.addClass = function(className) {
+        T2.addClass = function (className) {
             tr.addClass(className);
         };
         if (S.allowMultiple) var th = $("<td  style='width:30px;'><input type=checkbox  class='rowCheck' index=" + T.rows.length + "></td>").appendTo(tr);
@@ -3068,13 +3073,13 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
         $("<td />").appendTo(tr);
         var rowCheck = tr.find(".rowCheck");
 
-        T2.remove = function() {
+        T2.remove = function () {
             tr.remove();
             T.selectedRows = T.selectedRows.del(T2);
             T.rows = T.rows.del(T2);
             T2 = null;
         };
-        T2.focus = function(obj) {
+        T2.focus = function (obj) {
             //if (T.selectedRow == T2) return;
             //if (T.selectedRow) T.selectedRow.blur();
             T.selectedRows[T.selectedRows.length] = T2;
@@ -3082,14 +3087,14 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
             rowCheck.prop("checked", true);
             if (obj == null && S.onSelectionChanged) S.onSelectionChanged(T, { y: tr.attr("_y") });
         };
-        T2.blur = function(obj) {
+        T2.blur = function (obj) {
             tr.removeClass("active");
             rowCheck.prop("checked", false);
             T.selectedRows = T.selectedRows.del(T2);
             if (obj == null && S.onSelectionChanged) S.onSelectionChanged(T, { y: tr.attr("_y") });
         };
 
-        tr.click(function(e) {
+        tr.click(function (e) {
             var obj = $(e.target);
             if (obj.attr("class") == "rowCheck") {
                 if (rowCheck.prop("checked")) {
@@ -3120,7 +3125,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
             }
         }
         if (S.dragLine) {
-            var move = function(box, x, y) {
+            var move = function (box, x, y) {
                 var obj = null;
                 var x1 = x + box.width(), y1 = y + box.height();
                 var tr = tbody.find("tr");
@@ -3141,23 +3146,23 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
                 if (obj) exchangePos(blankBox, obj);
             };
             tr.moveBox({
-                onStart: function(sender, e) {
+                onStart: function (sender, e) {
                     //blankBox = $("<tr></tr>").insertAfter(sender);
                     blankBox = sender.clone(true);
                     blankBox.insertAfter(sender);
                     blankBox.css({ width: sender.outerWidth() + "px", height: sender.outerHeight() + "px", 'opacity': '0.2' });
                 },
-                onMove: function(sender, e) {
+                onMove: function (sender, e) {
                     move(sender, e.x, e.y);
                 },
-                onEnd: function(sender, e) {
+                onEnd: function (sender, e) {
                     blankBox.before(sender);
                     blankBox.remove();
                     sender.css({ position: "" });
                 }
             });
         }
-        T2.attr = function(a, b) {
+        T2.attr = function (a, b) {
             if (a == "visible") {
                 if (b != null) {
                     if (b) { tr.show(); } else { tr.hide(); }
@@ -3168,7 +3173,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
             return (S2[a]);
         };
     };
-    T.addRow = function(data) {
+    T.addRow = function (data) {
         if (data) {
 
             if (data.length == 0) return;
@@ -3182,7 +3187,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
             }
         }
     };
-    T.getSelection = function() {
+    T.getSelection = function () {
         var sels = [];
         var line = bodyTable.find('.rowCheck'); //.prop("checked", $(this).prop("checked"));
         for (var i = 0; i < line.length; i++) {
@@ -3193,7 +3198,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
         return sels;
     };
     var foucsObj = { control: null, cell: null, td: null };
-    var focusBlur = function() {
+    var focusBlur = function () {
         headDiv.scrollLeft($(this).scrollLeft());
         if (foucsObj.control != null) {
             foucsObj.cell.val(foucsObj.control.val());
@@ -3220,7 +3225,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
     //            foucsObj.control.focus();
     //        }
     //    });
-    T.val = function(data) {
+    T.val = function (data) {
         if (data != null) {
             T.addRow(data);
         }
@@ -3240,19 +3245,19 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
     };
     T.container = A;
     $M.BaseClass.apply(T, [S]);
-    T.css = function(style) {
+    T.css = function (style) {
         A.css(style);
         if (style && style.height) {
             bodyTable.outerHeight(A.outerHeight() - headTable.outerHeight());
         }
     };
-    var selectAll = function(checked) {
+    var selectAll = function (checked) {
         for (var i = 0; i < T.rows.length; i++) {
             if (checked) T.rows[i].focus();
             else { T.rows[i].blur(); }
         }
     };
-    T.attr = function(a, b) {
+    T.attr = function (a, b) {
         if (b != null) {
             S[a] = b;
             if (a == "columns") {
@@ -3263,7 +3268,7 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
                     tableWidth += 30;
                     var th = $("<th style='width:30px;'></th>").appendTo(theadTr);
                     mainCheck = $("<input type=checkbox >").appendTo(th);
-                    mainCheck.change(function() {
+                    mainCheck.change(function () {
                         selectAll($(this).prop("checked"));
                         //                        bodyTable.find('.rowCheck').prop("checked", $(this).prop("checked"));
 
@@ -3278,21 +3283,21 @@ $M.Control["GridView"] = function(BoxID, S, CID) {
         return S[a];
     };
     T.attr("columns", S.columns);
-    T.clear = function() {
+    T.clear = function () {
         T.rows.length = 0;
         T.selectedRows.length = 0;
         tbody.html("");
         if (mainCheck != null) mainCheck[0].checked = false;
     };
 
-    var keydown = function(e) {
+    var keydown = function (e) {
         if (A[0] == $M.focusElement || A.has($M.focusElement).length) {
             if (S.onKeyDown) S.onKeyDown(T, e);
         }
     };
     $(document).on("keydown", keydown);
 
-    A.mouseup(function(e) {
+    A.mouseup(function (e) {
         if (e.which == 3 && S.contextMenuStrip) S.contextMenuStrip.open(e.pageX, e.pageY);
     });
     if (S.data) T.addRow(S.data);

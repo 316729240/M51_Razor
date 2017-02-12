@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datatype\Field.cs" />
+    <Compile Include="Datatype\TableHandle.cs" />
+    <Compile Include="Datatype\TableStructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DBHelper\SqlServer.cs" />
     <Compile Include="TableHandle.cs" />

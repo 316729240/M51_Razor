@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataManageHandle.cs" />
     <Compile Include="ManageHandle.cs" />
     <Compile Include="ReturnValue.cs" />
     <Compile Include="User.cs" />
@@ -49,6 +50,10 @@
     <ProjectReference Include="..\..\Common\Helper\Helper.csproj">
       <Project>{FCCFB5A1-A771-49CC-AC13-3500C4CDE9F1}</Project>
       <Name>Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\M4Class\M4Class.csproj">
+      <Project>{13FAF33A-4791-4196-973C-EF40AABA478F}</Project>
+      <Name>M4Class</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MWMS.DAL\MWMS.DAL.csproj">
       <Project>{CAC3687F-17FA-4082-B216-449C3335361B}</Project>

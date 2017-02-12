@@ -20,3 +20,9 @@ F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\UserFramework.pdb
 F:\web\my\M51_Razor\BLL\ManagerFramework\obj\Debug\ManagerFramework.csprojResolveAssemblyReference.cache
 F:\web\my\M51_Razor\BLL\ManagerFramework\obj\Debug\ManagerFramework.dll
 F:\web\my\M51_Razor\BLL\ManagerFramework\obj\Debug\ManagerFramework.pdb
+F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.dll
+F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\RazorEngine.Core.dll
+F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\System.Web.Razor.Net4.0.dll
+F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.pdb
+F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\RazorEngine.Core.pdb
+F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\System.Web.Razor.Net4.0.pdb

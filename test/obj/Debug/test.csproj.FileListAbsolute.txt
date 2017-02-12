@@ -32,3 +32,5 @@ F:\web\my\M51_Razor\test\bin\Debug\MWMS.DAL.pdb
 F:\web\my\M51_Razor\test\obj\Debug\test.csprojResolveAssemblyReference.cache
 F:\web\my\M51_Razor\test\obj\Debug\test.exe
 F:\web\my\M51_Razor\test\obj\Debug\test.pdb
+F:\web\my\M51_Razor\test\bin\Debug\MWMS.dll
+F:\web\my\M51_Razor\test\bin\Debug\MWMS.pdb

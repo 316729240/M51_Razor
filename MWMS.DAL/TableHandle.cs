@@ -49,6 +49,10 @@ namespace MWMS.DAL
             }
             return _p;
         }
+        public Dictionary<string, object> GetModel(double id)
+        {
+            return GetModel(id,"*");
+        }
         public Dictionary<string, object> GetModel(string fields, string where, Dictionary<string, object> p, string desc)
         {
             if (TableName == "") throw new Exception("表名不能为空");
@@ -59,9 +63,9 @@ namespace MWMS.DAL
             bool flag = false;
             if (rs.Read())
             {
-                for (int i = 0; i < _fields.Length; i++)
+                for (int i = 0; i < rs.FieldCount; i++)
                 {
-                    model[_fields[i]] = rs[_fields[i]];
+                    model[rs.GetName(i)] = rs[rs.GetName(i)];
                 }
                 flag = true;
             }
@@ -89,11 +93,11 @@ namespace MWMS.DAL
                 return Append(model);
             }
         }
-        double Append(Dictionary<string, object> model)
+        public double Append(Dictionary<string, object> model)
         {
             StringBuilder fieldstr = new StringBuilder();
             StringBuilder fieldstr2 = new StringBuilder();
-            model[PrimaryKey] =double.Parse( Helper.Tools.GetId());
+            if(!model.ContainsKey(PrimaryKey))model[PrimaryKey] =double.Parse( Helper.Tools.GetId());
             foreach (var field in model)
             {
                 if (fieldstr.Length > 0)
@@ -107,7 +111,7 @@ namespace MWMS.DAL
             SqlServer.ExecuteNonQuery("insert into  [" + TableName + "] (" + fieldstr.ToString() + ")values(" + fieldstr2.ToString()+ ")", model);
             return (double)model[PrimaryKey];
         }
-        double Update(Dictionary<string, object> model)
+        public double Update(Dictionary<string, object> model)
         {
             StringBuilder fieldstr = new StringBuilder();
             foreach (var field in model)
