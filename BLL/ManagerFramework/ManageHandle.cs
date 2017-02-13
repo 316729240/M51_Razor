@@ -24,12 +24,19 @@ namespace ManagerFramework
                 context.Response.End();
             }
             Type t = this.GetType();
-            object value=t.InvokeMember(s_request.getString("_m"), BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod, null, this, null);
-            if (value != null)
-            {
-                context.Response.Write(value.ToJson());
-                context.Response.End();
-            }
+            //try { 
+                object value=t.InvokeMember(s_request.getString("_m"), BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod, null, this, null);
+                if (value != null)
+                {
+                    context.Response.Write(value.ToJson());
+                    context.Response.End();
+                }
+            //}catch(Exception e)
+            //{
+            //    ReturnValue returnValue = new ReturnValue(-1, e.Message);
+            //    context.Response.Write(returnValue.ToJson());
+            //    context.Response.End();
+            //}
         }
         public bool IsReusable
         {

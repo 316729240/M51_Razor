@@ -1,0 +1,75 @@
+﻿<input name="id" type='hidden'/>
+<input name=classId type='hidden'/>
+<input name="title"  type='hidden'/>
+	<div class="row form-group">
+		<div class="col-xs-12 col-md-6">
+
+				<label for="first-name-clinical-case">姓:</label>
+				<input class="form-control" id="first-name-clinical-case" type="text" name="u_firstName" value="" vtype="{required: true}">
+		
+		</div>
+		<div class="col-xs-12 col-md-6">
+
+				<label for="last-name-clinical-case">名:</label>
+				<input class="form-control" id="last-name-clinical-case" type="text" name="u_lastName" value="" vtype="{required: true}">
+	
+		</div>
+		<div class="col-xs-12 col-md-6">
+
+				<label for="city-clinical-case">城市:</label>
+				<input class="form-control" id="city-clinical-case" type="text" name="u_city" value="" vtype="{required: true}">
+
+		</div>
+		<div class="col-xs-12 col-md-6">
+
+				<label for="country-clinical-case">国家:</label>
+				<input class="form-control" id="country" type="country" name="u_country" value="" vtype="{required: true}">
+
+		</div>
+		<div class="col-xs-12 col-md-6">
+
+				<label for="email-clinical-case">邮箱:</label>
+				<input class="form-control" id="email-clinical-case" type="email" name="u_email" value="" required="required" data-parsley-id="4777">
+
+		</div>
+	</div>
+	
+	<div class="row form-group">
+		<div class="col-xs-12">
+		    <h4>上传一张自己的照片:</h4>
+		    <p>
+			    <span class="small">(图片大小. 4MB)</span>
+		    </p>
+	    </div>
+		    <div class="col-md-4">
+		    <input  xtype="UploadFileBox" accept="image/*" type="text" name="u_picture" />
+		    </div>
+	</div>
+	
+	<div class="row form-group">
+		<div class="col-xs-12">
+		    <h4>上传一段激动人心的视频:</h4>
+	    </div>
+		    <div class="col-md-4">
+		    <input  xtype="UploadFileBox" accept="video/mp4" type="text" name="u_video" />
+		    </div>
+	</div>
+	<div class="row form-group">	
+		    <div class="col-md-12">
+	        <label for="videolink-clinicalcase">视频链接</label>
+				<input class="form-control" id="u_link" type="text" name="u_link" value=""  >
+		    </div>
+	</div>
+<div class="row form-group">
+    <div class="col-xs-12">
+        <h4>你的出版资料:</h4>
+    </div>
+    <div class="col-md-12">
+        <label for="videolink-clinicalcase">出版物标题</label>
+        <input class="form-control" name="u_publicationTitle" value="" required="required">
+    </div>
+    <div class="col-md-12">
+        <label for="videolink-clinicalcase">出版物链接</label>
+        <input class="form-control" name="u_publicationLink" value="" required="required">
+    </div>
+</div>

@@ -752,8 +752,6 @@ $M.Control["UploadFileBox"] = function (BoxID, S, CID) {
             accept: S.accept,
             isMultiple: false,
             back: function (json) {
-                A.find(".openfile").html("预览文件");
-                A.find(".openfile").attr("href", json[0])
                 T.val(json[0]);
                 if (S.onChange) S.onChange(T, null);
             }
@@ -763,6 +761,10 @@ $M.Control["UploadFileBox"] = function (BoxID, S, CID) {
     T.val = function (value) {
         if (value != null) {
             inputbox.val(value);
+            if (value!=""){
+                A.find(".openfile").html("预览文件");
+                A.find(".openfile").attr("href", value);
+            }
         }
         return (inputbox.val());
     };

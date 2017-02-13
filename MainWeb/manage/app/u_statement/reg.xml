@@ -1,0 +1,4 @@
+  <app title="声明" name="u_statement" dataTypeId="22592312442" datetime="2015-9-5">
+    <include>edit.js</include>
+    <include>list.js</include>
+  </app>

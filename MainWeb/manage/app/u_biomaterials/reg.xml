@@ -1,0 +1,4 @@
+  <app title="出版资料" name="u_biomaterials" dataTypeId="22592328542" datetime="2015-9-5">
+    <include>edit.js</include>
+    <include>list.js</include>
+  </app>
