@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Helper
 {
@@ -67,6 +69,22 @@ namespace Helper
                 stream2.Close();
             }
             return data;
+        }
+        public static string SaveImage(HttpPostedFile file, string filePath)
+        {
+
+                string path = filePath + System.DateTime.Now.ToString("yyyy-MM/");
+                if (!System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(path))) System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~"+path));
+                string kzm = "";
+                if (file.FileName.LastIndexOf(".") > -1) kzm = file.FileName.Substring(file.FileName.LastIndexOf(".") + 1).ToLower();
+                if (!Regex.IsMatch(kzm, "(jpg|gif|png)"))
+                {
+                    throw new Exception("文件类型不合法，只能上传jpg,gif,png");
+                }
+                string fileName = GetId() + "." + kzm;
+                file.SaveAs(HttpContext.Current.Server.MapPath(path + fileName));
+                return path + fileName;
+            
         }
     }
 }

@@ -110,6 +110,96 @@ $M.Control["Popover"] = function (BoxID, S) {
     $(document).on("mousedown", mousedown);
     if (S.style) A.css(S.style);
 };
+
+$M.Control["ToolTip"] = function (BoxID, S) {
+    var T = this;
+    var jiantou = "";
+    var A = $("<div class=\"tooltip\" tabindex=\"-1\" style=\"display:none;z-index:" + ($M.zIndex + 1) + "\"  ></div>").appendTo($(document.body));
+    var B = $("<div class=\"tooltip-arrow\" ></div>").appendTo(A);
+    var title = null;
+    //if (S.title) title = $("<h3 class=\"popover-title\" ></h3>").appendTo(A);
+    var content = $("<div class=\"tooltip-inner\"></div>").appendTo(A);
+    A.css({ "max-width": "1000px" });
+    T.container = content;
+    $M.BaseClass.apply(T, [S]);
+    T.show = function (obj) {
+        obj = $(obj);
+        var x1 = obj.offset().left, y1 = obj.offset().top, w1 = obj.width(), h1 = obj.height();
+        var x2 = A.offset().left, y2 = A.offset().top, w2 = A.width(), h2 = A.height();
+
+        var pageWidth = $(window).width(), pageHeight = $(window).height();
+        if (jiantou != "") A.removeClass(jiantou);
+        var x = 0, y = 0;
+        if (S.location == null) {
+            if (y1 > h2) { jiantou = "top"; }
+            else if ((pageWidth - x1 - w1) > w2) { jiantou = "right"; }
+            else if ((pageHeight - y1 - h1) > h2) { jiantou = "bottom"; }
+            else if (x1 > w2) { jiantou = "left"; }
+        } else {
+            jiantou = S.location;
+        }
+
+        switch (jiantou) {
+            case "top":
+                x = (x1 + w2) > pageWidth ? (x1 + w1 - w2) : x1;
+                y = y1 - h2;
+                //B.css({ left: x1 - x + w1 / 2 + "px", top: "" });
+                break;
+            case "right":
+                x = x1 + w1; y = y1; B.css({ top: h1 / 2 + "px", left: "" });
+                break;
+            case "bottom":
+                x = (x1 + w2) > pageWidth ? (x1 + w1 - w2) : x1;
+                y = y1 + h1;
+                //B.css({ left: x1 - x + w1 / 2 + "px", top: "" });
+                break;
+            case "left":
+                //alert([x1,w1,x1-w1]);
+                x = x1 - w2; y = (y1 - (h2 - h1) / 2 > 1) ? y1 - (h2 - h1) / 2 : 1; B.css({ top: y1 + h1 / 2 + "px", left: "" });
+                break;
+        }
+        if (jiantou != "") A.addClass(jiantou);
+        //$M.lock(A, true, T, false);
+        A.css({ left: x + "px", top: y + "px", opacity: 1, transition: '0.3s ease-out' });
+        A.show();
+        $M.focusElement = A[0];
+    };
+    T.close = function () {
+        A.hide();
+        A.css({ opacity: 0, transition: '0.3s ease-out' });
+        if (S.onClose) S.onClose(T, null);
+    };
+    T.dispose = function () {
+        if (T.controls) {
+            var count = T.controls.length;
+            for (var i = count - 1; i > -1; i--) {
+                T.controls[i].dispose();
+            }
+        }
+        $(document).unbind("keydown", keydown);
+        $(document).unbind("mousedown", mousedown);
+        A.remove();
+        if (A[0] == $M.focusElement || A.has($M.focusElement).length) $M.focusElement = null;
+        A = null;
+    };
+    T.loseFocus = function () {
+        T.remove();
+    };
+    var keydown = function (e) {
+        if (A[0] == $M.focusElement || A.has($M.focusElement).length) {
+            if (e.which == 27) {
+                T.remove();
+            }
+            if (S.onKeyDown) S.onKeyDown(T, e);
+        }
+    };
+    var mousedown = function (e) {
+        if (A.has(e.target).length == 0) T.close();
+    };
+    $(document).on("keydown", keydown);
+    $(document).on("mousedown", mousedown);
+    if (S.style) A.css(S.style);
+};
 $M.Control["ToolBar"] = function (BoxID, S) {
     var T = this;
     T.controls = [];

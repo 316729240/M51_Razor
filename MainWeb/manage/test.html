@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Web管理系统</title>
     <script src="../static/js/jquery.min.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="../static/js/ZeroClipboard.js"></script>
@@ -21,6 +20,7 @@
     <script src="../static/js/jquery.slimscroll.js"></script>
     <script src="../static/js/chart.min.js"></script>
     <script src="../static/js/jquery.maskedinput.js"></script>
+    <script src="../static/js/json2.js"></script>
     <script src="../static/js/niuniuCapture.js"></script>
     <link rel="stylesheet" href="../static/css/codemirror.css">
     <script src="../static/js/codemirror.js"></script>
@@ -37,32 +37,20 @@
     <script src="../static/js/less-1.5.0.min.js"></script>
 </head>
 
-<body><form class="form-horizontal" id="edit" xtype="Form" method="post" action="/manage/app/account/frontEnd.ashx">
-   
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">城市</label>
-        <div class="col-sm-10">
-            <select xtype="SelectBox" name="city"></select>
-            <select xtype="SelectBox" name="area"></select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">婚姻状况</label>
-        <div class="col-sm-10">
-            <select xtype="SelectBox" name="marriage" items="[{text:'未婚',value:0},{text:'已婚',value:1}]" value="$public.userInfo2.marriage"></select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">教育程度</label>
-        <div class="col-sm-10">
-            <select xtype="SelectBox" name="education" items="[{text:'小学'},{text:'初中'},{text:'高中'},{text:'大学'},{text:'其它'}]" value="$public.userInfo2.education"></select>
-        </div>
-    </div>
-   
+<body><form class="form-horizontal" id="edit" name="edit" xtype="Form" method="post" action="/manage/app/account/frontEnd.ashx">
+          <textarea xtype="UploadFileBox2" name="aaa" id="aaa">
+              [{"title":"file1","size":10,"path":"1.doc","isDel":0},{"title":"file1","size":10,"path":"1.jpg","isDel":0}]
+          </textarea>
+    <input type="button" id="a1"/>
 </form>
-</body>
+    </body>
 <script>
     var form = $("#edit").render();
+    var fileinput = form.find("aaa");
+
+    $("#a1").click(function () { alert(fileinput.val()); });
+    
+//    $(".uploadButton").uploadFile("");
 </script>
 
 </html>

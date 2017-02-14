@@ -335,7 +335,7 @@ $M.BaseClass = function (S) {
     }
     this.render = function () {
         T.controls = [];
-        var item = this.container.find("input,select,div,button");
+        var item = this.container.find("input,select,div,button,textarea");
         for (var i = 0; i < item.length; i++) {
             var jqobj = $(item[i]);
             xtype = jqobj.attr("xtype");
@@ -354,6 +354,61 @@ $M.Method.Array.apply(Array.prototype);
 $M.Method.Date.apply(Date.prototype);
 $M.Method.String.apply(String.prototype);
 $.fn.extend({
+    //上传文件
+    //accept:文件类型
+    //isMultiple:是否可上传多个文件
+    uploadFile: function (url, back, S) {
+        if (url == null) throw ("提交地址不能为空");
+        var button = $(this);
+        if (button.length == 0) return;
+        if (button[0].tagName != "LABEL") {
+            alert("只支持label对象");
+        }
+        $M.Index++;
+        var frameId = "frame_" + $M.Index;
+        var fileId = "file_" + $M.Index;
+        var multiple =(S!=null && S.isMultiple) ? " multiple='multiple'" : "";
+        var inputFile = $("<input type='file' id='" + fileId + "' name=fileData accept='image/*' " + multiple + " style='display:none' >");
+        if (S && S.accept) inputFile.attr("accept", S.accept);
+        button.attr("for", fileId);
+        var uploadCallback = function (html) {
+            if (back) back(html);
+        };
+        var form = null;
+        if ($.browser.msie) {
+            form = jQuery('<form  method="POST" target="' + frameId + '" enctype="multipart/form-data"></form>');
+            form.attr("action", url);
+            form.append(inputFile);
+            var ifr = $('<iframe  id="' + frameId + '" name="' + frameId + '" style="display:none" ></iframe>');
+            $(document.body).append(form);
+            $(document.body).append(ifr);
+            ifr.load(function () {
+                if (ifr[0].contentWindow.location.href == "about:blank") return;
+                uploadCallback(ifr[0].contentWindow.document.body.innerHTML);
+            });
+        } else {
+            $(document.body).append(inputFile);
+        }
+        inputFile.on("change", function (e) {
+            if ($.browser.msie) {
+                form.submit();
+            } else {
+                var fd = new FormData();
+                for (var i = 0; i < inputFile[0].files.length; i++) {
+                    fd.append("fileData", inputFile[0].files[i]);
+                }
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        uploadCallback(xhr.responseText);
+                    }
+                };
+                xhr.open("POST", url);
+                xhr.send(fd);
+            }
+        });
+        //inputFile[0].click();
+    },
     render: function () {
         var xtype = this.attr("xtype");
         var attrs = this.get(0).attributes;
@@ -364,7 +419,7 @@ $.fn.extend({
         }
         var F = {};
         if (xtype) F = new $M.Control[xtype](null, S, this);
-        var item = this.find("input,select,form,div");
+        var item = this.find("input,select,form,div,textarea");
         F.controls = [];
         for (var i = 0; i < item.length; i++) {
             var jqobj = $(item[i]);
@@ -778,6 +833,84 @@ $M.Control["UploadFileBox"] = function (BoxID, S, CID) {
     T.container = A;
     $M.BaseClass.apply(T, [S]);
     if (S.style) T.css(S.style);
+};
+$M.Control["UploadFileBox2"] = function (BoxID, S, CID) {
+    var T = this;
+    if (S.ico == null) S.ico = "fa-ellipsis-h";
+    var A = null;
+    var Button = null;
+    var Textarea = null;
+    if (CID) {
+        A = $("<div class=\"M5_UploadFileBox\"></div>");
+        Button = $("<label class=\"label label-primary uploadButton\"><i class=\"fa fa-paperclip\"></i> 上传文件</label>");
+        A.insertBefore(CID);
+        A.append(Button);
+        CID.hide();
+        Textarea = CID;
+        //A.append('<div class="input-group-btn"><button type="button" class="btn btn-default">选择文件</button></div>');
+    } else {
+    }
+    var uiSet = $(document.body).addControl({ xtype: "ToolTip", location: "bottom" });    var img = uiSet.append("<img width=100%>");
+    var remove = function () {
+        $(this).parent().hide();
+    };
+    T.addFile = function (json) {
+        var ex = json.path.substring(json.path.length - 3);
+        var ico = "fa-file-o";
+        if ("jpg,png,gif".indexOf(ex) > -1) ico = "fa-picture-o";
+        else if ("txt".indexOf(ex) > -1) ico = "fa-file-text-o";
+        else if ("doc,docx".indexOf(ex) > -1) ico = "fa-file-word-o";
+        else if ("rar,zip".indexOf(ex) > -1) ico = "fa-file-zip-o";
+        else if ("pdf".indexOf(ex) > -1) ico = "fa-file-pdf-o";
+        var file = $("<span class=\"_file label label-default\" ><i class=\"fa " + ico + "\"></i> " + json.title + " <i class=\"fa fa-times remove\" style=\"cursor:pointer\" title=\"删除\"></i></span>");
+        file.insertBefore(Button);
+        file.attr(json);
+        file.find(".remove").click(remove);
+        file.on("mouseover", function () {
+            var filename = $(this).attr("path");
+            var ex = filename.substring(filename.length - 3);
+            if ("jpg,png,gif".indexOf(ex) == -1) return;
+            img.attr("src",  filename);
+            uiSet.show(file);
+        });
+        file.on("mouseout", function () {
+            uiSet.close();
+        });
+    };
+    T.container = A;
+    $M.BaseClass.apply(T, [S]);
+    Button.uploadFile($M.config.appPath + "system/upload.ashx", function (json) {
+        if (!S.isMultiple) {
+            A.find("._file").hide();
+        }
+        json = JSON.parse(json);
+        if (json.errNo < 0) {
+            $M.alert(json.errMsg);
+            return;
+        }
+        for (var i = 0; i < json.length; i++) {
+            T.addFile(json[i]);
+        }
+    },{
+        accept:S.accept,
+        isMultiple:S.isMultiple
+    });
+    if (S.style) T.css(S.style);
+    T.val = function (value) {
+        if (value) {
+            var json = JSON.parse(value);
+            for (var i = 0; i < json.length; i++) {
+                T.addFile(json[i]);
+            }
+        }
+        var list = [];
+        A.find("._file").each(function () {
+            var item = { "title": $(this).attr("title"), "size": $(this).attr("size"), "path": $(this).attr("path"), isDel: $(this).is(":visible")?0:1 };
+            list[list.length] = item;
+        });
+        return JSON.stringify(list);
+    };
+    T.val(Textarea.val());
 };
 $M.Control["PathBar"] = function (BoxID, S) {
     var T = this;

@@ -11,24 +11,36 @@ using System.Data;
 using System.Xml;
 using System.Text.RegularExpressions;
 using System.IO;
+using ManagerFramework;
 public class upload : IHttpHandler
 {
-    LoginInfo login = new LoginInfo();
+    //LoginInfo login = new LoginInfo();
     SafeReqeust s_request = new SafeReqeust(0, 0);
+    public class File
+    {
+        public string title = "";
+        public int size = 0;
+        public string path = "";
+    }
     public void ProcessRequest(HttpContext context)
     {
-        login.checkLogin();
+        //login.checkLogin();
 
-        ErrInfo info = new ErrInfo();
+        ReturnValue returnValue = new ReturnValue();
         context.Response.ContentType = "text/plain";
-
         string[] fp = new string[context.Request.Files.Count];
+        List<File> list = new List<File>();
         for(int i=0;i<context.Request.Files.Count;i++){
-            ErrInfo e = API.saveImage(context.Request.Files[0], Config.tempPath);
-            if (e.errNo >-1)fp[i] = e.userData.ToString();
+            try {
+                string newfile = Helper.Tools.SaveImage(context.Request.Files[i], Config.tempPath);
+                list.Add(new File { title=context.Request.Files[0].FileName,size=context.Request.Files[0].ContentLength,path=newfile});
+            }catch
+            {
+
+            }
         }
-        info.userData = fp;
-        context.Response.Write(info.ToJson());
+        returnValue.userData = list;
+        context.Response.Write(list.ToJson());
         context.Response.End();
     }
 

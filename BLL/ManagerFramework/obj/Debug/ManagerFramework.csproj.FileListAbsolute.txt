@@ -26,3 +26,9 @@ F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\System.Web.Razor.Net4.0.dll
 F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.pdb
 F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\RazorEngine.Core.pdb
 F:\web\my\M51_Razor\BLL\ManagerFramework\bin\Debug\System.Web.Razor.Net4.0.pdb
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.dll
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\RazorEngine.Core.dll
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\System.Web.Razor.Net4.0.dll
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\MWMS.pdb
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\RazorEngine.Core.pdb
+D:\myproject\M51_Razor\BLL\ManagerFramework\bin\Debug\System.Web.Razor.Net4.0.pdb
