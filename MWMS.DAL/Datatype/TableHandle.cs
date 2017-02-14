@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using Helper;
+using System.Web;
 
 namespace MWMS.DAL.Datatype
 {
-    public class TableHandle:TableStructure
+    public class TableHandle : TableStructure
     {
-        public TableHandle(string tableName):base(tableName)
+        public TableHandle(string tableName) : base(tableName)
         {
 
         }
@@ -25,7 +27,7 @@ namespace MWMS.DAL.Datatype
         {
             Dictionary<string, object> p = new Dictionary<string, object>();
             p.Add("id", id);
-            return GetModel(fields, "A.id=@id" , p, "");
+            return GetModel(fields, "A.id=@id", p, "");
         }
         public Dictionary<string, object> GetModel(string fields, string where, Dictionary<string, object> p, string desc)
         {
@@ -33,10 +35,10 @@ namespace MWMS.DAL.Datatype
             Dictionary<string, object> model = new Dictionary<string, object>();
             string[] _fields = fields.Split(',');
             string fieldList = "";
-            for(int i = 0; i < _fields.Length; i++)
+            for (int i = 0; i < _fields.Length; i++)
             {
-                int count=Fields.Where(p1=>p1.isPublicField && p1.name==_fields[i]).Count();
-                fieldList += ((count>0)?"A.":"B.")+_fields[i];
+                int count = Fields.Where(p1 => p1.isPublicField && p1.name == _fields[i]).Count();
+                fieldList += ((count > 0) ? "A." : "B.") + _fields[i];
             }
             SqlParameter[] _p = GetParameter(p);
             SqlDataReader rs = SqlServer.ExecuteReader("select " + fields + " from [mainTable] A inner join [" + TableName + "] B on A.id=B.id where " + where + " " + desc, _p);
@@ -77,9 +79,9 @@ namespace MWMS.DAL.Datatype
             foreach (var field in model)
             {
                 Field f = Fields.Where(p1 => p1.name == field.Key).First<Field>();
-                if(f==null)
+                if (f == null)
                     throw new Exception(f.name + "字段不存在");
-                object value = GetValue(f,field.Value.ToString());
+                object value = GetValue(f, field.Value.ToString());
                 if (value != null)
                 {
                     if (f.isPublicField)
@@ -92,25 +94,25 @@ namespace MWMS.DAL.Datatype
                     }
                 }
             }
-            if(mainFields.ContainsKey("id")) dataFields["id"] = mainFields["id"];
+            if (mainFields.ContainsKey("id")) dataFields["id"] = mainFields["id"];
             StringBuilder fieldstr = new StringBuilder();
             MWMS.DAL.TableHandle t = new MWMS.DAL.TableHandle("maintable");
             MWMS.DAL.TableHandle t1 = new MWMS.DAL.TableHandle(TableName);
             double id = 0;
-            if (mainFields.ContainsKey("id")){
+            if (mainFields.ContainsKey("id")) {
                 t.Update(mainFields);
-                id=t1.Update(dataFields);
-            }else
+                id = t1.Update(dataFields);
+            } else
             {
                 id = double.Parse(Helper.Tools.GetId());
                 mainFields["id"] = id;
                 dataFields["id"] = id;
                 t.Append(mainFields);
-                id=t1.Append(dataFields);
+                id = t1.Append(dataFields);
             }
             return id;
         }
-        object GetValue(Field f,string data)
+        object GetValue(Field f, string data)
         {
             object value = data;
             switch (f.type)
@@ -145,8 +147,35 @@ namespace MWMS.DAL.Datatype
                         return null;
                     }
                     break;
+                case "Files":
+                    value = ToFiles(data);
+                    break;
             }
             return value;
+        }
+        string ToFiles(string data)
+        {
+            List<File> _list = new List<File>();
+            List<File> list=data.ParseJson<List<File>>();
+            foreach(File file in list)
+            {
+                if (file.isDel ==0)
+                {
+                    _list.Add(file);
+                }
+                else {
+                    #region 删除无效文件 
+                    try { 
+                        string path = HttpContext.Current.Server.MapPath("~" + file.path);
+                        if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
+                    }catch
+                    {
+
+                    }
+                    #endregion
+                }
+            }
+            return _list.ToJson();
         }
     }
 }

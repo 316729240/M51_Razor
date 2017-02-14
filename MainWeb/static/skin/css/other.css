@@ -25,6 +25,9 @@
 .M5_GridView .scrollBody{overflow:auto;}
 .M5_GridView th,td{word-break:break-all;}
 
+.M5_UploadFileBox .label{
+    margin-right:5px;
+}
 .M5_Editor {
     position: relative;
     border: 1px solid #a9a9a9;

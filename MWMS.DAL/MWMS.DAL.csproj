@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datatype\Field.cs" />
+    <Compile Include="Datatype\FieldType.cs" />
     <Compile Include="Datatype\TableHandle.cs" />
     <Compile Include="Datatype\TableStructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
