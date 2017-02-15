@@ -32,7 +32,9 @@ namespace ManagerFramework
                 }
             }catch(Exception e)
             {
-                ReturnValue returnValue = new ReturnValue(-1, e.Message);
+                string message = e.Message;
+                if (e.InnerException != null) message = e.InnerException.Message;
+                ReturnValue returnValue = new ReturnValue(-1, message.Replace("\n","<br>"));
                 context.Response.Write(returnValue.ToJson());
             }
         }

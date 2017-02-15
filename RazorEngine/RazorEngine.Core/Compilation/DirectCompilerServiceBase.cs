@@ -131,7 +131,15 @@
             var compileResult = result.Item1;
 
             if (compileResult.Errors != null && compileResult.Errors.Count > 0)
-                throw new TemplateCompilationException(compileResult.Errors, result.Item2, context.TemplateContent);
+            {
+                string msg = "";
+                for(int i=0;i< compileResult.Errors.Count; i++)
+                {
+                    msg+=compileResult.Errors[i].ErrorText + "\r\n";
+                }
+                throw new Exception("模板编译错误：\r\n"+msg);
+                //throw new TemplateCompilationException(compileResult.Errors, result.Item2, context.TemplateContent);
+            }
 
             return Tuple.Create(
                 compileResult.CompiledAssembly.GetType("CompiledRazorTemplates.Dynamic." + context.ClassName),
