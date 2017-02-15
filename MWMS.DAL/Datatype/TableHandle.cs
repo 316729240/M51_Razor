@@ -148,34 +148,12 @@ namespace MWMS.DAL.Datatype
                     }
                     break;
                 case "Files":
-                    value = ToFiles(data);
+                    FieldType.Files file = FieldType.Files.Parse(data);
+                    if (file != null) value = file.ToJson();
+                    else { value = ""; }
                     break;
             }
             return value;
-        }
-        string ToFiles(string data)
-        {
-            List<File> _list = new List<File>();
-            List<File> list=data.ParseJson<List<File>>();
-            foreach(File file in list)
-            {
-                if (file.isDel ==0)
-                {
-                    _list.Add(file);
-                }
-                else {
-                    #region 删除无效文件 
-                    try { 
-                        string path = HttpContext.Current.Server.MapPath("~" + file.path);
-                        if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
-                    }catch
-                    {
-
-                    }
-                    #endregion
-                }
-            }
-            return _list.ToJson();
         }
     }
 }
