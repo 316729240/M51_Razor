@@ -53,7 +53,8 @@ namespace ManagerFramework
                 return returnValue;
             }
             Dictionary<string, object> model = new Dictionary<string, object>();
-            foreach(var field in table.Fields)
+            model[""] = "";
+            foreach (var field in table.Fields)
             {
                 if (context.Request.Form[field.name] != null)
                 {

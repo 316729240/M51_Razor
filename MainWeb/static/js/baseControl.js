@@ -879,7 +879,7 @@ $M.Control["UploadFileBox2"] = function (BoxID, S, CID) {
     };
     T.container = A;
     $M.BaseClass.apply(T, [S]);
-    Button.uploadFile($M.config.appPath + "system/upload.ashx", function (json) {
+    Button.uploadFile("/manage/app/system/upload.ashx", function (json) {
         if (!S.isMultiple) {
             A.find("._file").hide();
         }

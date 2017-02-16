@@ -78,20 +78,23 @@ namespace MWMS.DAL.Datatype
             Dictionary<string, object> dataFields = new Dictionary<string, object>();
             foreach (var field in model)
             {
-                Field f = Fields.Where(p1 => p1.name == field.Key).First<Field>();
-                if (f == null)
-                    throw new Exception(f.name + "字段不存在");
-                object value = GetValue(f, field.Value.ToString());
-                if (value != null)
+                try { 
+                    Field f = Fields.Where(p1 => p1.name == field.Key).First<Field>();
+                    object value = GetValue(f, field.Value.ToString());
+                    if (value != null)
+                    {
+                        if (f.isPublicField)
+                        {
+                            mainFields[field.Key] = value;
+                        }
+                        else
+                        {
+                            dataFields[field.Key] = value;
+                        }
+                    }
+                }catch
                 {
-                    if (f.isPublicField)
-                    {
-                        mainFields[field.Key] = value;
-                    }
-                    else
-                    {
-                        dataFields[field.Key] = value;
-                    }
+
                 }
             }
             if (mainFields.ContainsKey("id")) dataFields["id"] = mainFields["id"];

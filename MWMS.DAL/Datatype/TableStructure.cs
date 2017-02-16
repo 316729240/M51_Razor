@@ -45,9 +45,11 @@ namespace MWMS.DAL.Datatype
             string[] list = model["tableStructure"].ToString().Split('|');
             for (int i = 0; i < list.Length; i++)
             {
+                if (list[i] != "") { 
                 Field f = new Field(list[i]);
                 f.isPublicField = false;
                 Fields.Add(f);
+                }
             }
         }
         /// <summary>
