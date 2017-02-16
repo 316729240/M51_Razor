@@ -650,7 +650,7 @@ public class ajax : ManageHandle//IHttpHandler
             int index = 0;
             while (rs.Read())
             {
-                bool defaultFlag = rs.GetBoolean(3);
+                bool defaultFlag = rs.GetInt32(3)==1;
                 if (rs.GetDouble(2) == 0 ) index = 0;
                 else if (rs.GetDouble(2) == moduleId) index = 1;
                 else if (rs.GetDouble(2) == faId ) index = 2;

@@ -240,7 +240,7 @@ namespace MWMS.Template
             p.Add("isMobile", isMobile ? 1 : 0);
             Dictionary<string, object> model = null;
             model = this.GetModel("id,title,u_content,u_datatypeId,u_type,u_editboxStatus,u_defaultFlag,u_webFAid,classId,u_parameterValue", 
-                "classId in (0,@moduleId,@rootId) and B.u_defaultFlag=1 and B.u_datatypeid=@datatypeId and B.u_type=@typeId and B.u_webFAid=@isMobile", p, "u_layer desc");
+                "classId in (0,@moduleId,@rootId) and u_defaultFlag=1 and u_datatypeid=@datatypeId and u_type=@typeId and u_webFAid=@isMobile", p, "u_layer desc");
             
             if (model == null) throw new Exception("指定模板不存在");
             SetAttr(model);
@@ -298,7 +298,6 @@ namespace MWMS.Template
             fields["updateDate"] = System.DateTime.Now;
 
             int u_layer = 0;
-            if (TemplateType == TemplateType.自定义页) { 
                 ModuleInfo moduleInfo = ModuleClass.get(ColumnId);
                 if (moduleInfo == null)
                 {
@@ -316,7 +315,6 @@ namespace MWMS.Template
                     u_layer = 1;
                     if (moduleInfo.type) fields["url"] = @"/" + moduleInfo.dirName + "/" + TemplateName;
                 }
-            }
             fields["u_layer"] = u_layer;
             this.TemplateId = Save(fields);
             Build(true);

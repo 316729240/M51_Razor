@@ -34,3 +34,5 @@ F:\web\my\M51_Razor\test\obj\Debug\test.exe
 F:\web\my\M51_Razor\test\obj\Debug\test.pdb
 F:\web\my\M51_Razor\test\bin\Debug\MWMS.dll
 F:\web\my\M51_Razor\test\bin\Debug\MWMS.pdb
+D:\myproject\M51_Razor\test\bin\Debug\MWMS.dll
+D:\myproject\M51_Razor\test\bin\Debug\MWMS.pdb

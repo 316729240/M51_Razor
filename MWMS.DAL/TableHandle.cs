@@ -53,12 +53,13 @@ namespace MWMS.DAL
         {
             return GetModel(id,"*");
         }
-        public Dictionary<string, object> GetModel(string fields, string where, Dictionary<string, object> p, string desc)
+        public Dictionary<string, object> GetModel(string fields, string where, Dictionary<string, object> p, string desc="")
         {
             if (TableName == "") throw new Exception("表名不能为空");
             Dictionary<string, object> model = new Dictionary<string, object>();
             string[] _fields = fields.Split(',');
             SqlParameter[] _p = GetParameter(p);
+            if (desc != "") desc = "order by "+desc;
             SqlDataReader rs = SqlServer.ExecuteReader("select " + fields + " from [" + TableName + "] where "+ where+" "+desc, _p);
             bool flag = false;
             if (rs.Read())
@@ -97,7 +98,7 @@ namespace MWMS.DAL
         {
             StringBuilder fieldstr = new StringBuilder();
             StringBuilder fieldstr2 = new StringBuilder();
-            if(!model.ContainsKey(PrimaryKey))model[PrimaryKey] =double.Parse( Helper.Tools.GetId());
+            if(!model.ContainsKey(PrimaryKey) || (double)(model[PrimaryKey])==0) model[PrimaryKey] =double.Parse( Helper.Tools.GetId());
             foreach (var field in model)
             {
                 if (fieldstr.Length > 0)

@@ -181,8 +181,8 @@ namespace MWMS
             pageTemplate.Build();
 
 
-            TemplateInfo info = TemplateClass.get(newUrl, isMobile);
-            if (info == null)
+            //TemplateInfo info = TemplateClass.get(newUrl, isMobile);
+            if (pageTemplate == null)
             {
                 API.ERR404("模板不存在");
             }
@@ -211,7 +211,7 @@ namespace MWMS
                 RazorEngine.Razor.Compile(info.u_content, typeof(object[]), info.id.ToString(),false);
                 */
 
-                string html = RazorEngine.Razor.Run(pageTemplate.TemplateId.ToString(),new object[] { Config.systemVariables,info.variable ,null });
+                string html = RazorEngine.Razor.Run(pageTemplate.TemplateId.ToString(),new object[] { Config.systemVariables, pageTemplate.Variable ,null });
                 
                 return html;
             }
