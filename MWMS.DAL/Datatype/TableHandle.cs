@@ -102,13 +102,17 @@ namespace MWMS.DAL.Datatype
             MWMS.DAL.TableHandle t = new MWMS.DAL.TableHandle("maintable");
             MWMS.DAL.TableHandle t1 = new MWMS.DAL.TableHandle(TableName);
             double id = 0;
-            if (mainFields.ContainsKey("id")) {
+            if (mainFields.ContainsKey("id"))
+            {
+                mainFields["createDate"] = DateTime.Now;
+                mainFields["updateDate"] = DateTime.Now;
                 t.Update(mainFields);
                 id = t1.Update(dataFields);
             } else
             {
                 id = double.Parse(Helper.Tools.GetId());
                 mainFields["id"] = id;
+                mainFields["updateDate"] = DateTime.Now;
                 dataFields["id"] = id;
                 t.Append(mainFields);
                 id = t1.Append(dataFields);

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+
+<title>Geistlich Key2Success - Key to success</title>
+<meta name="generator" content="TYPO3 CMS">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link type="text/css" href="/static/skin/css/metrostyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/skin/css/ace.css" />
+    <link href="/static/skin/css/font-awesome.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/stylesheet_ed0619df95.css" media="all">
+<link rel="stylesheet" type="text/css" href="/css/main.css" media="all">
+<link rel="stylesheet" type="text/css" href="/css/main_1.css" media="all">
+<link rel="stylesheet" type="text/css" href="/css/pagebrowse.css" media="all">
+
+<script type="text/javascript" src="/static/m5_public.js"></script>
+<script src="/js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/baseControl.js"></script>
+    <script type="text/javascript" src="/static/js/frame.js"></script>
+    <script src="/static/js/dialog.js"></script>
+    <script src="/static/js/jquery.validate.min.js"></script>
+    <script src="/static/js/messages_zh.js"></script>
+    <script src="/static/js/validate-methods.js"></script>
+    <script src="/static/js/userEX.js"></script>
+    <link href="/static/skin/css/other.css" rel="stylesheet">
+
+
+</head>
+<body >
+<div class="page-overlay fade in"><img class="spinner" src="/picture/puff.svg" alt="spinner" /></div>
+<header class="main-header no-print">
+
+		<nav class="navbar navbar-light bg-faded navbar-fixed-top">
+			<nav class="navbar-brand nav nav-inline"><h1 class="sr-hint">Geistlich Key to Success</h1><a href="en/"><img src="/picture/logo_k2s.png" width="189" height="65"  class="logo"  alt="Geistlich Key to Success" title="Geistlich Key to Success" ></a></nav>
+			<div class="pull-xs-right main-navigation">
+				<div data-collapsecontent="#filter-nav" class="hamburger hamburger--collapse">
+					<div class="hamburger-box">
+						<div class="hamburger-inner"></div>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+
+		<div id="filter-nav" class="collapse-section"><!--TYPO3SEARCH_begin--><div id="c44498" class="csc-default csc-space-before- csc-space-after-">
+<div class="tx-cs2-k2s">
+	
+
+	<div class="filter-nav light-background">
+		<div class="container-fluid">
+			<div class="row">
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="#">个人信息</a></li>
+  <li role="presentation"><a href="/member/publication.html">出版资料</a></li>
+  <li role="presentation"><a href="/member/biomaterials.html">临时病例</a></li>
+  <li role="presentation"><a href="/member/statement.html">声明</a></li>
+</ul>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+		jQuery( document ).ready(function($) {
+			if($('#presetCategory').val()) {
+				$('#category').val($('#presetCategory').val());
+			}
+		});
+
+	</script>
+
+
+</div></div><!--TYPO3SEARCH_end--></div>
+
+	</header>
+<section class="container-fluid">
+	<div class="content-wrapper">
+		<div id="c44509" class="csc-default csc-space-before- csc-space-after-">
+			<div class="tx-cs2-k2s">
+				<input type="hidden" name="presetCategory" id="presetCategory" value>
+				<h1><strong>个人发布 </strong></h1>
+				<div class="col-space">
+					<div class="row">
+
+						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 print-fullwidth item-list" data-url="en/list/detail/k2sitem/eduard-anchakov/">
+							<div class="collapse-teaser &amp;nbsp;" data-collapsecontent="#collapse-1">
+								<div class="background-img-wrapper">
+									<img class="background-img fit-image" alt="Eduard  Anchakov" src="picture/csm_рыбин-1_1a0be0dad6.jpg" width="441" height="296" />
+								</div>
+								<div class="profil-caption">
+									<strong>Eduard Anchakov</strong><br>
+									<span>Moscow , Russia </span>
+									<div class="icons">
+										<div class="item-wrapper small-space">
+											<div class="item">
+												<i class="icon-clinical_case_social">
+												</i></div>
+											<div class="item">
+												<span class="k2slike" data-uid="2183">
+												<div class="round-icon list">
+													<i class="fa fa-heart"></i>
+												</div>
+												<span class="counter-list" data-uid="2183">
+												0</span> </span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="page-navigation pagination pagination-centered">
+						<ul class="f3-widget-paginator">
+							<li class="current active"><a>1</a></li>
+							<li>
+							<a href="en/list/k2scontroller/KeytosuccessItem/k2spage/2/">
+							2</a></li>
+							<li>
+							<a href="en/list/k2scontroller/KeytosuccessItem/k2spage/3/">
+							3</a></li>
+							<li>
+							<a href="en/list/k2scontroller/KeytosuccessItem/k2spage/4/">
+							4</a></li>
+							<li>
+							<a id="skippedHighDots" data-placement="top" title role="button">
+							...</a></li>
+							<li>
+							<a href="en/list/k2scontroller/KeytosuccessItem/k2spage/137/">
+							137</a></li>
+							<li>
+							<a href="en/list/k2scontroller/KeytosuccessItem/k2spage/2/">
+							Next</a></li>
+						</ul>
+					</div>
+					<div style="display:none;" id="highContent">
+						<select class="fullwidth submitLinkSelect" onchange="triggerChange(this);">
+						<option value>Page</option>
+						<option value="https://www.geistlich-key2success.com/en/list/k2scontroller/KeytosuccessItem/k2spage/5/">
+						5</option>
+						</select> </div>
+				</div>
+			</div>
+		</div>
+</section></div>
+
+
+
+	<div class="c"></div>
+	<div id="footer" style="position: fixed;">
+	<p>军委机关服务保障信息平台 |系统维管：780055/780052</p>
+		<p> Powered by 军委机关事务管理总局综合局 2016</p>
+		
+	</div>
+</body>
+</html>
+
+    <script>
+        var uploadform = $("#uploadform").render();
+        uploadform.attr("onBeginSubmit",function(sender){
+            var u_firstname = sender.find("u_firstName").val();
+            var u_lastname = sender.find("u_lastName").val();
+            sender.find("title").val(u_firstname +" "+ u_lastname);
+        });
+        uploadform.attr("onSubmit",function(sender){
+             $M.alert("提交成功！");
+
+        });
+</script>
