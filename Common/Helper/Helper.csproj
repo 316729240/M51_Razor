@@ -47,6 +47,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ErrInfo.cs" />
+    <Compile Include="Extensions\ConvertType.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="Microshaoft.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />

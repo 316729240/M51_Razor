@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseColumn.cs" />
+    <Compile Include="Column.cs" />
     <Compile Include="DataManageHandle.cs" />
     <Compile Include="ManageHandle.cs" />
     <Compile Include="ReturnValue.cs" />
