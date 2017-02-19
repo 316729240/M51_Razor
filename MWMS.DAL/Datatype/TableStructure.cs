@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MWMS.DAL;
+using System.Collections;
+
 namespace MWMS.DAL.Datatype
 {
     public class TableStructure
@@ -19,7 +21,7 @@ namespace MWMS.DAL.Datatype
         /// <summary>
         /// 字段列表
         /// </summary>
-        public List<Field> Fields = null;
+        public Dictionary<string, Field> Fields = new Dictionary<string, Field>(StringComparer.OrdinalIgnoreCase);
         public TableStructure(double datatypeId)
         {
             this.DatatypeId = datatypeId;
@@ -37,18 +39,24 @@ namespace MWMS.DAL.Datatype
         }
         void Init(Dictionary<string, object> model)
         {
-            TableName = model["tableName"].ToString();
-            Fields = new List<Field>();
-            List<Field> Structure = new List<Field>();
             if (model == null) throw new Exception("表类型不存在");
+            TableName = model["tableName"].ToString();
+            List<Field> Structure = new List<Field>();
             LoadPublicField();
             string[] list = model["tableStructure"].ToString().Split('|');
             for (int i = 0; i < list.Length; i++)
             {
-                if (list[i] != "") { 
-                Field f = new Field(list[i]);
-                f.isPublicField = false;
-                Fields.Add(f);
+                if (list[i] != "") {
+                    Field f = new Field(list[i]);
+                    if (Fields.ContainsKey(f.name))
+                    {
+                        f.isPublicField = Fields[f.name].isPublicField;
+                        Fields[f.name] = f;
+                    }
+                    else { 
+                        f.isPublicField = false;
+                        Fields[f.name] = f;
+                    }
                 }
             }
         }
@@ -62,7 +70,7 @@ namespace MWMS.DAL.Datatype
             {
                 Field f = new Field(list[i]);
                 f.isPublicField = true;
-                Fields.Add(f);
+                Fields[f.name] = f;
             }
         }
     }

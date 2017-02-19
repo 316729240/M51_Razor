@@ -11,14 +11,15 @@ using RazorEngine.Templating;
 using RazorEngine;
 using System.Collections;
 using MWMS.Configuration;
-
+using MWMS.DAL.Datatype;
+using Helper.Extensions;
 namespace MWMS.Template
 {
 
 
     public class BuildCode
     {
-        struct pageBar
+        public struct pageBar
         {
             public int pageNo;
             public int recordCount;
@@ -47,9 +48,9 @@ namespace MWMS.Template
         }
         public void compile(bool flag)
         {
-            _html = compile(_html,flag);
+            _html = compile(_html, flag);
         }
-         string compile(string code,bool flag)
+        string compile(string code, bool flag)
         {
 
             Regex r = new Regex(@"(\b(page|sys|config))\.((\w|\.|\[|\]){1,30})(\(|)", RegexOptions.IgnoreCase);
@@ -78,7 +79,7 @@ namespace MWMS.Template
             return code;
 
         }
-        public static string readView(string viewPath, object sys, object page, object[] p)
+        public static string ReadView(string viewPath, object sys, object page, object[] p)
         {
             string[] item = viewPath.Split('.');
             Dictionary<string, object> list = (Dictionary<string, object>)Config.viewVariables[item[0]];
@@ -112,9 +113,9 @@ namespace MWMS.Template
                     string html = getLabel(m.Value);
                     return html;
                 }
-                catch
+                catch(Exception e)
                 {
-                    return "<font color=\"#FF0000\">标签错误:</font>" + HttpContext.Current.Server.HtmlEncode(m.Value);
+                    return "<font color=\"#FF0000\">标签错误:"+e.Message+"</font>" + HttpContext.Current.Server.HtmlEncode(m.Value.Replace("@", "&#64;"));
                 }
 
             }
@@ -136,7 +137,8 @@ namespace MWMS.Template
                 string pageBarId = getFieldString(m.Value, "pageBarId");
                 string FG = m.Value.SubString("FG=", "(\r\n)|(\n)");
                 string html = m.Value.SubString("<HtmlTemplate>", "</HtmlTemplate>");
-                if (variables.ContainsKey("pageBar_" + pageBarId))
+                return "@Raw(MWMS.Template.BuildCode.ShowPage((MWMS.Template.BuildCode.pageBar)page[\"pagebar_" + pageBarId + "\"],page))";
+                if (variables.ContainsKey("pagebar_" + pageBarId))
                 {
                     return "";
                     //pageBar p = (pageBar)variables["pageBar_" + pageBarId];
@@ -360,20 +362,22 @@ namespace MWMS.Template
         string _variable3(Match m)
         {
             string item = m.Value.SubString(@"view\.", @"\(");
-            string p = m.Value.SubString(@"\(",@"\)");
+            string p = m.Value.SubString(@"\(", @"\)");
             //Dictionary<string, object> list =  (Dictionary<string, object>)Config.viewVariables[item[0]];
             //string viewId = list[item[1]].ToString();
             //return "MWMS.Template.BuildCode.readView(\"" + item + "\"";
             if (p == "")
             {
-                return "MWMS.Template.BuildCode.readView(\"" + item + "\",Model[0],Model[1],null)";
+                return "MWMS.Template.BuildCode.ReadView(\"" + item + "\",Model[0],Model[1],null)";
             }
-            else { 
-                return "MWMS.Template.BuildCode.readView(\"" + item + "\",Model[0],Model[1],new object []{" + p + "})";
+            else {
+                return "MWMS.Template.BuildCode.ReadView(\"" + item + "\",Model[0],Model[1],new object []{" + p + "})";
             }
         }
-        public static ArrayList getLabel(string labelId, string html, double moduleId, double classId, int pageSize, int recordCount, double datatypeId, int orderBy, string _fields, string attribute, string addWhere, bool debug, Hashtable p1)
+        public static List<Dictionary<string, object>> getLabel(string labelId, string html, object _moduleId, object _classId, int pageSize, int recordCount, object _datatypeId, int orderBy, string _fields, string attribute, object _addWhere, bool debug, Hashtable p1,ref Dictionary<string,object> page)
         {
+            double moduleId= _moduleId.ToDouble(),  classId=_classId.ToDouble(), datatypeId= _datatypeId.ToDouble();
+            string addWhere = _addWhere.ToStr();
             StringBuilder Sql = new StringBuilder("");
             object temp_sql = addWhere;
             if (temp_sql != null) addWhere = temp_sql.ToString();
@@ -396,7 +400,7 @@ namespace MWMS.Template
                 p[i] = new SqlParameter("p_" + (i + 1).ToString(), sql_p[i]);
             }*/
             //renderSql(ref addWhere, ref sql_p);
-            TableInfo tableInfo = new TableInfo(datatypeId);
+            DAL.Datatype.TableStructure tableInfo = new DAL.Datatype.TableStructure(datatypeId);
 
             string orderByStr = "order by A.orderid desc,A.createdate desc";
             if (orderBy == 1) orderByStr = "order by A.orderid desc,A.createdate desc";
@@ -458,8 +462,8 @@ namespace MWMS.Template
 
             if (infoFlag || (pageSize > 0 && addWhere.IndexOf("u_") > -1))
             {
-                sql += " inner join [" + tableInfo.tableName + "] B WITH(NOLOCK) on A.id=B.id ";
-                countSql += " inner join [" + tableInfo.tableName + "] B WITH(NOLOCK) on A.id=B.id ";
+                sql += " inner join [" + tableInfo.TableName + "] B WITH(NOLOCK) on A.id=B.id ";
+                countSql += " inner join [" + tableInfo.TableName + "] B WITH(NOLOCK) on A.id=B.id ";
             }
             if (classFlag)
             {
@@ -550,7 +554,7 @@ namespace MWMS.Template
                 pageBar p = new pageBar();
                 p.recordCount = (int)Helper.Sql.ExecuteScalar(countSql + where, sql_p);
                 SafeReqeust request = new SafeReqeust(0, 0);
-                pageNo = (pageNo == 0 ? 1 : pageNo);
+                pageNo = page["_pageNo"] ==null?1:(int)page["_pageNo"];
                 p.pageSize = pageSize;
                 p.pageNo = pageNo;
                 int pageCount = (p.recordCount - 1) / p.pageSize + 1;
@@ -558,7 +562,7 @@ namespace MWMS.Template
                 {
                     Page.ERR404("页码不正确");
                 }
-
+                page["pagebar_" + labelId] = p;
                 sql = "select top " + pageSize.ToString() + " * from (" + sql + where.ToString() + ")L where L.row_number>" + (pageSize * (pageNo - 1)).ToString();
                 //sql = sql + " where A.id in (" + tempsql + ")";
                 //sql = "select top " +pageSize.ToString() + " * from (" +
@@ -566,20 +570,50 @@ namespace MWMS.Template
                 //")L where L.row_number>"+(pageSize*(pageNo-1)).ToString();
 
                 //if (debug) return "调试：" + sql;
-                rs1 = Helper.Sql.ExecuteArray(sql, sql_p);
+                //rs1 = Helper.Sql.ExecuteArray(sql, sql_p);
+                //GetDataList(tableInfo, sql, sql_p);
 
             }
             else
             {
                 if (recordCount == 0) recordCount = 100000;
                 sql += " inner join  (select top " + recordCount.ToString() + " A.id from maintable A WITH(NOLOCK) ";
-                if (addWhere.IndexOf("u_") > -1) sql += " inner join [" + tableInfo.tableName + "] B WITH(NOLOCK) on A.id=B.id ";
+                if (addWhere.IndexOf("u_") > -1) sql += " inner join [" + tableInfo.TableName + "] B WITH(NOLOCK) on A.id=B.id ";
                 sql += where.ToString() + " " + orderByStr + ") H on A.id=H.id ";
                 //if (debug) return "调试：" + sql;
                 //rs1 = Helper.Sql.ExecuteReader(sql + where.ToString() + " " + orderByStr);
-                rs1 = Helper.Sql.ExecuteArray(sql, sql_p);
+                //rs1 = Helper.Sql.ExecuteArray(sql, sql_p);
             }
-            return rs1;
+            return GetDataList(tableInfo, sql, sql_p);
+        }
+        static List<Dictionary<string, object>> GetDataList(TableStructure table,string sql, SqlParameter[] p)
+        {
+            List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();
+            SqlDataReader rs= Helper.Sql.ExecuteReader(sql, p);
+            while (rs.Read())
+            {
+                Dictionary<string, object> attr = new Dictionary<string, object>();
+                for (int i = 0; i < rs.FieldCount; i++)
+                {
+                    string name = rs.GetName(i);
+                    Field field = null;
+                    try
+                    {
+                        field = table.Fields[name];
+                    }
+                    catch { }
+                    if (field == null)
+                    {
+                        attr[name] = rs[i];
+                    }else
+                    {
+                        attr[name] = field.Convert(rs[i],Field.ConvertType.UserData);
+                    }
+                }
+                list.Add(attr);
+            }
+            rs.Close();
+            return list;
         }
 
         /// <summary>
@@ -635,15 +669,15 @@ namespace MWMS.Template
             outhtml.Append("@{\r\n");
             outhtml.Append("if(true){\r\n");
             outhtml.Append(buildSql(ref sql) + "\r\n");
-            outhtml.Append("ArrayList list=MWMS.Template.BuildCode.getSqlLabel(\"");
+            outhtml.Append("List<Dictionary<string, object>> list=MWMS.Template.BuildCode.getSqlLabel(\"");
             outhtml.Append(labelId + "\",");
             outhtml.Append(sql + ",");
             outhtml.Append(pageSize + ",");
             outhtml.Append(recordCount + ",");
             outhtml.Append(debug + ",");
-            outhtml.Append("p);\r\n");
+            outhtml.Append("p,ref page);\r\n");
             outhtml.Append("for(int index=0;index<list.Count;index++){\r\n");
-            outhtml.Append("var item = (System.Collections.Generic.Dictionary<string, object>)list[index];\r\n");
+            outhtml.Append("var item = list[index];\r\n");
             for (int i = 0; i < fields.Length; i++)
             {
                 if (fields[i] == "url")
@@ -674,7 +708,7 @@ namespace MWMS.Template
                 p[i] = new SqlParameter("p_" + (i + 1).ToString(), sql_p[i]);
             }
         }*/
-        public static ArrayList getSqlLabel(string labelId, string sql, int pageSize, int recordCount, bool debug, Hashtable p1)
+        public static List<Dictionary<string, object>> getSqlLabel(string labelId, string sql, int pageSize, int recordCount, bool debug, Hashtable p1, ref Dictionary<string, object> page)
         {
 
             SqlParameter[] sql_p = null;
@@ -707,9 +741,10 @@ namespace MWMS.Template
                 //sql = sql.Replace(fieldList, fieldList + ",row_number() OVER(order by " + (orderBy == "" ? "(select 0)" : orderBy) + ") row_number ");
                 pageBar p = new pageBar();
                 p.recordCount = (int)Helper.Sql.ExecuteScalar(countSql, sql_p);
+                page["pagebar_" + labelId] = p;
                 SafeReqeust request = new SafeReqeust(0, 0);
                 // pageNo = (int)getVariable("public._pageNo");
-                pageNo = (pageNo == 0 ? 1 : pageNo);
+                pageNo = page["_pageNo"] == null ? 1 : (int)page["_pageNo"];
                 p.pageSize = pageSize;
                 p.pageNo = pageNo;
 
@@ -727,7 +762,8 @@ namespace MWMS.Template
 
 
             //if (debug == "true") return "调试：" + sql;
-            return Helper.Sql.ExecuteArray(sql, sql_p);
+            return Helper.Sql.ExecuteList(sql, sql_p);
+             
         }
         string buildSql(ref string str)
         {
@@ -763,7 +799,7 @@ namespace MWMS.Template
             outhtml.Append("@{\r\n");
             outhtml.Append("if(true){\r\n");
             outhtml.Append(buildSql(ref addWhere) + "\r\n");
-            outhtml.Append("ArrayList list =MWMS.Template.BuildCode.getLabel(");
+            outhtml.Append("List<Dictionary<string, object>> list =MWMS.Template.BuildCode.getLabel(");
             outhtml.Append(labelId + ",");
             outhtml.Append("\"\"" + ",");
             outhtml.Append(moduleId + ",");
@@ -776,9 +812,10 @@ namespace MWMS.Template
             outhtml.Append(attribute + ",");
             outhtml.Append(addWhere + ",");
             outhtml.Append(debug + ",");
-            outhtml.Append("p);\r\n");
+            outhtml.Append("p,ref page);\r\n");
             outhtml.Append("for(int index=0;index<list.Count;index++){\r\n");
-            outhtml.Append("var item = (System.Collections.Generic.Dictionary<string, object>)list[index];\r\n");
+            outhtml.Append("var item = list[index];\r\n");
+            TableStructure table = new TableStructure(datatypeId);
             for (int i = 0; i < fields.Length; i++)
             {
                 if (fields[i] == "url")
@@ -787,7 +824,18 @@ namespace MWMS.Template
                 }
                 else
                 {
-                    outhtml.Append("var " + fields[i] + "=item[\"" + fields[i] + "\"];\r\n");
+                    Field field = null;
+                    try
+                    {
+                        field = table.Fields[fields[i]];
+                    }
+                    catch { }
+                    if (field == null) { 
+                        outhtml.Append("var " + fields[i] + "=item[\"" + fields[i] + "\"];\r\n");
+                    }else
+                    {
+                        outhtml.Append("var " + fields[i] + "=("+ field.GetTypeName() + ")item[\"" + fields[i] + "\"];\r\n");
+                    }
                 }
             }
             outhtml.Append(template);
@@ -1007,8 +1055,11 @@ namespace MWMS.Template
             }
             catch { return 0; }
         }
-
-        public string showPage(string H, int RecordCount, int PageSize, int ShowCount, int PageNo, string FG)
+        public static string ShowPage(pageBar page,Dictionary<string,object> pagev)
+        {
+            return showPage("{LabelName=FirstPage Value=首页}&nbsp; {LabelName=Prev Value=上一页} &nbsp;{LabelName=PageNumber}&nbsp; {LabelName=Next Value=下一页} {LabelName=EndPage Value=尾页} 共[RecordCount]条记录 [PageNo]/[PageCount]", page.recordCount,page.pageSize,10,page.pageNo,"",pagev);
+        }
+        public static string showPage(string H, int RecordCount, int PageSize, int ShowCount, int PageNo, string FG, Dictionary<string, object> pagev)
         {
             if (PageNo < 1) PageNo = 1;
             #region 查找当前域名是否在子域列表中
@@ -1052,8 +1103,7 @@ namespace MWMS.Template
             StringBuilder FirstPage = new StringBuilder();
             StringBuilder EndPage = new StringBuilder();
             string KZM = "." + BaseConfig.extension;
-            string FileName = "";// (string)getVariable("public._fileName");
-            if (FileName == null) FileName = "default";
+            string FileName = pagev["_fileName"]==null? "default" : pagev["_fileName"]+"";
             Regex r = new Regex(@"({(Label)[^{]*?})");
             MatchCollection mc = r.Matches(Html.ToString());
             string LabelName = "", Value = "", Css = "", Color1 = "";

@@ -15,6 +15,7 @@ namespace ManagerFramework
         protected LoginUser loginUser = null;
         public void ProcessRequest(HttpContext context)
         {
+            
             context.Response.ContentType = "text/plain";
             this.context = context;
             loginUser = LoginUser.GetLoginUser();

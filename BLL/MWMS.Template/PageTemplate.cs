@@ -24,7 +24,7 @@ namespace MWMS.Template
         /// 模板所属数据类型
         /// </summary>
         public double DatatypeId { get; set; }
-        public Dictionary<string, object> Variable { get; set; }
+        public Dictionary<string, object> Variable = new Dictionary<string, object>();
         public PageTemplate()
         {
             this.TableName = "htmlTemplate";
@@ -184,15 +184,20 @@ namespace MWMS.Template
             string url2 = "";
             Regex r = new Regex(@"/" + ".*(?=" + @"/" + ")", RegexOptions.Singleline | RegexOptions.IgnoreCase); //定义一个Regex对象实例
             MatchCollection mc = r.Matches(url);
-            if (mc.Count > 0) url2 = mc[0].Value;
-            Dictionary<string, object> variable = new Dictionary<string, object>();
-            if (url2 != "")
+            Dictionary<string, object> p = new Dictionary<string, object>();
+            p.Add("url", url);
+            int count=this.GetCount("url=@url",p);
+            if (count > 0)
             {
-                string[] parameter = Regex.Replace(url, "^" + url2 + @"/", "", RegexOptions.IgnoreCase).Split('-');
-                for (int i = 0; i < parameter.Length; i++)
+                url2 = url;
+                this.Parameter = new object[] { "", "", "" };
+            }
+            else { 
+                if (mc.Count > 0) url2 = mc[0].Value;
+                Dictionary<string, object> variable = new Dictionary<string, object>();
+                if (url2 != "")
                 {
-                    variable["parameter" + (i + 1).ToString()] = HttpContext.Current.Server.UrlDecode(parameter[i]);
-                    //                    variable.Set("parameter" + (i + 1).ToString(), HttpContext.Current.Server.UrlDecode(parameter[i]));
+                    this.Parameter = Regex.Replace(url, "^" + url2 + @"/", "", RegexOptions.IgnoreCase).Split('-'); 
                 }
             }
             Get(url, url2, IsMobile);

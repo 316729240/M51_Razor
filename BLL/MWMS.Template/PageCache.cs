@@ -193,7 +193,7 @@ namespace MWMS
                     Helper.Sql.ExecuteNonQuery("update mainTable set clickCount=clickCount+1 where id=@id", new SqlParameter[]{
                     new SqlParameter("id",info.variable["id"])
                 });
-                }
+                }*/
                 if (newUrl.IndexOf(".") > -1)
                 {
                     string[] u = newUrl.Split('/');
@@ -203,6 +203,11 @@ namespace MWMS
                 {
                     _fileName = "default";
                 }
+
+                pageTemplate.Variable.Add("_pageNo", _pageNo);
+                pageTemplate.Variable.Add("_url", HttpContext.Current.Request.Url.ToString());
+                pageTemplate.Variable.Add("_fileName", _fileName);
+                /*
                 TemplateServiceConfiguration templateConfig = new TemplateServiceConfiguration
                 {
                     CatchPath = HttpContext.Current.Server.MapPath("~" + Config.cachePath + "assembly/")
@@ -211,7 +216,7 @@ namespace MWMS
                 RazorEngine.Razor.Compile(info.u_content, typeof(object[]), info.id.ToString(),false);
                 */
 
-                string html = RazorEngine.Razor.Run(pageTemplate.TemplateId.ToString(),new object[] { Config.systemVariables, pageTemplate.Variable ,null });
+                string html = RazorEngine.Razor.Run(pageTemplate.TemplateId.ToString(),new object[] { Config.systemVariables, pageTemplate.Variable , pageTemplate.Parameter });
                 
                 return html;
             }

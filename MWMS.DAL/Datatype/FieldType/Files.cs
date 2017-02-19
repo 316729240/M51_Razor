@@ -64,11 +64,8 @@ namespace MWMS.DAL.Datatype.FieldType
             }
             catch
             {
-                 return null;
             }
-            if (files.Count == 0) return null;
-            else
-            {
+            if (files.Count > 0) {
                 #region 设置默认值
                 files.title = files[0].title;
                 files.path = files[0].path;
@@ -86,6 +83,10 @@ namespace MWMS.DAL.Datatype.FieldType
         public void Add(File file)
         {
             _list.Add(file);
+        }
+        public override string ToString()
+        {
+            return path;
         }
         public int Count {get{return _list.Count;} }
         public string ToJson()

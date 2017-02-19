@@ -2,12 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Helper.Extensions;
 namespace MWMS.DAL.Datatype
 {
     [Serializable]
     public class Field
     {
+        /// <summary>
+        /// 转换方式
+        /// </summary>
+        public enum ConvertType
+        {
+            /// <summary>
+            /// 用户数据类型
+            /// </summary>
+            UserData=0,
+            /// <summary>
+            /// Sql数据类弄型
+            /// </summary>
+            SqlData=1
+        }
         public string name = "";
         public string text = "";
         public string type = "";
@@ -46,6 +60,67 @@ namespace MWMS.DAL.Datatype
         {
             get { return _maxLenth; }
             set { width = value * 8; _maxLenth = value; if (width > 300) width = 300; }
+        }
+        public string GetTypeName()
+        {
+            string typeName = "";
+            switch (type)
+            {
+                case "String":
+                    typeName = "string";
+                    break;
+                case "Number":
+                    typeName = "int";
+                    break;
+                case "Double":
+                    typeName = "double";
+                    break;
+                case "DateTime":
+                    typeName = "DateTime";
+                    break;
+                case "Files":
+                    typeName = "MWMS.DAL.Datatype.FieldType.Files";
+                    break;
+            }
+            return typeName;
+        }
+        public object Convert(object data, ConvertType convertType)
+        {
+            object value = null;
+            switch (type)
+            {
+                case "String":
+                    value = data.ToStr();
+                    break;
+                case "Number":
+                    value = data.ToInt();
+                    break;
+                case "Double":
+                    value = data.ToDouble();
+                    break;
+                case "DateTime":
+                    try
+                    {
+                        value =  DateTime.Parse(data.ToString());
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                    break;
+                case "Files":
+                    FieldType.Files file = FieldType.Files.Parse(data.ToString());
+                    if (convertType == ConvertType.UserData)
+                    {
+                        value = file;
+                    }else
+                    {
+                        if (file != null) value = file.ToJson();
+                        else { value = ""; }
+                    }
+                    break;
+            }
+            return value;
         }
     }
 }

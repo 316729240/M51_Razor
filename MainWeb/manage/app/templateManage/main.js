@@ -266,9 +266,9 @@ $M.templateManage.edit = function (S) {
         });
         tree.root.addItem([{ ico: "fa-folder-o", text: "页面参数", type: 1 }, { ico: "fa-folder-o", text: "网站变量", type: 1 }, { ico: "fa-folder-o", text: "页面变量", type: 2 }, { ico: "fa-folder-o", text: "自定义标签", type: 3 }, { ico: "fa-folder-o", text: "自定义视图", type: 4}]);
         if (S.typeId == 3) {
-            tree.root.items[0].addItem({ text: "参数1", name: "parameter1", type: 21 });
-            tree.root.items[0].addItem({ text: "参数2", name: "parameter2", type: 21 });
-            tree.root.items[0].addItem({ text: "参数3", name: "parameter3", type: 21 });
+            tree.root.items[0].addItem({ text: "参数1", name: "parameter[0]", type: 21 });
+            tree.root.items[0].addItem({ text: "参数2", name: "parameter[1]", type: 21 });
+            tree.root.items[0].addItem({ text: "参数3", name: "parameter[2]", type: 21 });
         }
         $M.comm([
                 ["templateManage.ajax.readTemplateLable", { dataTypeId: S.datatypeId}],

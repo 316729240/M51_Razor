@@ -55,6 +55,7 @@ namespace MWMS.Template
         /// 栏目id
         /// </summary>
         public double ColumnId { get; set; }
+        public object[] Parameter = null;
         /// <summary>
         /// 模板备份
         /// </summary>

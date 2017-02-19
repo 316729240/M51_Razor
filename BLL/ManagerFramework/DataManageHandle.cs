@@ -56,9 +56,9 @@ namespace ManagerFramework
             model[""] = "";
             foreach (var field in table.Fields)
             {
-                if (context.Request.Form[field.name] != null)
+                if (context.Request.Form[field.Key] != null)
                 {
-                    model[field.name]=s_request.getString(field.name);
+                    model[field.Key]=s_request.getString(field.Key);
                 }
             }
             model["userId"] = loginUser.UserId;
