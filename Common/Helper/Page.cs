@@ -4,9 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
-
-namespace Helper
-{
+    namespace Helper
+{ 
     public class Page
     {
         public static void ERR301(string url)

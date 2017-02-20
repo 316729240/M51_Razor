@@ -70,7 +70,7 @@ namespace MWMS.Template
                     "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n" +
                     "Dictionary<string, object> page=( Dictionary<string, object>)Model[1];\r\n" +
                     "object [] parameter= Model[2]==null?null:(object [])Model[2];\r\n" +
-                    "var loginUser=(new LoginInfo()).value;}";
+                    "var loginUser=ManagerFramework.LoginUser.GetLoginUser();}";
             code = headCode + code;
 
             r = new Regex(@"(<|&lt;)!-- #(.*?)#[\s\S]*?--(>|&gt;)", RegexOptions.IgnoreCase);
@@ -93,7 +93,7 @@ namespace MWMS.Template
         "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n" +
         "Dictionary<string, object> page=( Dictionary<string, object>)Model[1];\r\n" +
         "object [] parameter= Model[2]==null?null:(object [])Model[2];\r\n" +
-        "var loginUser=(new LoginInfo()).value;}";
+        "var loginUser=ManagerFramework.LoginUser.GetLoginUser();}";
             string code = headCode + obj[1];
             RazorEngine.Razor.Compile(code, typeof(object[]), obj[0].ToString(), false);
             string html = "";
@@ -695,13 +695,15 @@ namespace MWMS.Template
             outhtml.Append("var item = list[index];\r\n");
             for (int i = 0; i < fields.Length; i++)
             {
-                if (fields[i] == "url")
-                {
-                    outhtml.Append("var " + fields[i] + "=Config.webPath + item[\"" + fields[i] + "\"] + \".\" + BaseConfig.extension;\r\n");
-                }
-                else
-                {
-                    outhtml.Append("var " + fields[i] + "=item[\"" + fields[i] + "\"];\r\n");
+                if (fields[i] != "") { 
+                    if (fields[i] == "url")
+                    {
+                        outhtml.Append("var " + fields[i] + "=Config.webPath + item[\"" + fields[i] + "\"] + \".\" + BaseConfig.extension;\r\n");
+                    }
+                    else
+                    {
+                        outhtml.Append("var " + fields[i] + "=item[\"" + fields[i] + "\"];\r\n");
+                    }
                 }
             }
             outhtml.Append(template);

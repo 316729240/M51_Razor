@@ -29,6 +29,7 @@
                              {
                                  "System",
                                  "MWMS",
+                                 "Helper",
                                  "System.Collections.Generic", 
                                  "System.Linq"
                              };

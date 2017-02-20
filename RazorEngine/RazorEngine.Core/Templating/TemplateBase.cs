@@ -4,7 +4,7 @@
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Text;
-
+    using System.Web;
     using Text;
 
     /// <summary>
@@ -106,6 +106,43 @@
             return new RawString(rawString);
         }
 
+        public static void ERR301(string url)
+        {
+
+            HttpContext.Current.Response.Status = "301 Moved Permanently";
+            HttpContext.Current.Response.AddHeader("Location", url);
+            HttpContext.Current.Response.End();
+        }
+        public static void ERR404()
+        {
+            HttpContext.Current.Response.Status = "404 Not Found";
+            HttpContext.Current.Response.End();
+        }
+        public static void ERR404(string msg)
+        {
+            HttpContext.Current.Response.Status = "404 Not Found";
+            if (HttpContext.Current.Request.Cookies["AdminClassID"] != null && HttpContext.Current.Request.Cookies["AdminClassID"].Value == "6") //管理员浏览网页时不使用缓存
+            {
+                HttpContext.Current.Response.Write(msg);
+            }
+            else
+            {
+                string file = HttpContext.Current.Server.MapPath("~/404.html");
+                if (File.Exists(file))
+                {
+                    HttpContext.Current.Response.Write(File.ReadAllText(file));
+                }
+                else
+                {
+                    HttpContext.Current.Response.Write(msg);
+                }
+            }
+            HttpContext.Current.Response.End();
+        }
+        public void Redirect(string url)
+        {
+            HttpContext.Current.Response.Redirect(url);
+        }
         /// <summary>
         /// Runs the template and returns the result.
         /// </summary>
