@@ -89,8 +89,23 @@ namespace MWMS.Template
                 CatchPath = HttpContext.Current.Server.MapPath("~" + Config.cachePath + "assembly/")
             };
             Razor.SetTemplateService(new TemplateService(templateConfig));
-            RazorEngine.Razor.Compile((string)obj[1], typeof(object[]), obj[0].ToString(), false);
-            return RazorEngine.Razor.Run(obj[0].ToString(), new object[] { sys, page, p });
+            string headCode = "@using System.Collections\r\n" +
+        "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n" +
+        "Dictionary<string, object> page=( Dictionary<string, object>)Model[1];\r\n" +
+        "object [] parameter= Model[2]==null?null:(object [])Model[2];\r\n" +
+        "var loginUser=(new LoginInfo()).value;}";
+            string code = headCode + obj[1];
+            RazorEngine.Razor.Compile(code, typeof(object[]), obj[0].ToString(), false);
+            string html = "";
+            try
+            {
+                html = RazorEngine.Razor.Run(obj[0].ToString(), new object[] { sys, page, p });
+            }
+            catch(Exception e)
+            {
+                html = "\""+viewPath+"\"视图错误：" +e.Message;
+            }
+            return html;
             //return RazorEngine.Razor.Run(obj[0].ToString(), new object[] { Config.systemVariables, null });
         }
         string _variable2(Match m)
@@ -787,7 +802,7 @@ namespace MWMS.Template
             string classId = getFP(html, "classId", 1);
             if (moduleId == "0" && classId == "0") return "调用错误：必须指定模块或栏目id";
             string template = html.SubString("<HtmlTemplate>", "</HtmlTemplate>");
-            string datatypeId = getFP(html, "datatypeId", 1);
+            double datatypeId = double.Parse( getFP(html, "datatypeId", 1));
             string orderBy = getFP(html, "orderBy", 1);
             string[] fields = getFieldString(html, "fields").Split(',');
             string _fields = getFP(html, "fields");
