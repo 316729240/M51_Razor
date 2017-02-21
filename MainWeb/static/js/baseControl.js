@@ -357,6 +357,7 @@ $.fn.extend({
     //上传文件
     //accept:文件类型
     //isMultiple:是否可上传多个文件
+    //onUploadProgress:当前进度 value:百分比
     uploadFile: function (url, back, S) {
         if (url == null) throw ("提交地址不能为空");
         var button = $(this);
@@ -390,6 +391,9 @@ $.fn.extend({
             $(document.body).append(inputFile);
         }
         inputFile.on("change", function (e) {
+            if (S.onStartUpload){
+                if (S.onStartUpload()==false) return;
+            }
             if ($.browser.msie) {
                 form.submit();
             } else {
@@ -398,6 +402,17 @@ $.fn.extend({
                     fd.append("fileData", inputFile[0].files[i]);
                 }
                 var xhr = new XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var fileIndex=0;
+                        //var fen = 100 / inputFile[0].files.length;
+                        //var percentComplete = Math.round(evt.loaded / evt.total * fen + fen * fileIndex);
+                        var percentComplete = Math.round(evt.loaded / evt.total * 100);
+                        if (S.onUploadProgress) {
+                            S.onUploadProgress({ value: percentComplete });
+                        }
+                    }
+                }, false);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4) {
                         uploadCallback(xhr.responseText);
@@ -842,7 +857,7 @@ $M.Control["UploadFileBox2"] = function (BoxID, S, CID) {
     var Textarea = null;
     if (CID) {
         A = $("<div class=\"M5_UploadFileBox\"></div>");
-        Button = $("<label class=\"label label-primary uploadButton\"><i class=\"fa fa-paperclip\"></i> 上传文件</label>");
+        Button = $("<label class=\"label label-primary uploadButton btn btn-primary\"><i class=\"fa fa-paperclip\"></i> <span>上传文件</span></label>");
         A.insertBefore(CID);
         A.append(Button);
         CID.hide();
@@ -879,7 +894,10 @@ $M.Control["UploadFileBox2"] = function (BoxID, S, CID) {
     };
     T.container = A;
     $M.BaseClass.apply(T, [S]);
+    S.isMultiple = S.isMultiple || S.ismultiple;
     Button.uploadFile("/manage/app/system/upload.ashx", function (json) {
+        Button.find("span").html("上传文件");
+        Button.removeClass("disabled");
         if (!S.isMultiple) {
             A.find("._file").hide();
         }
@@ -893,7 +911,17 @@ $M.Control["UploadFileBox2"] = function (BoxID, S, CID) {
         }
     },{
         accept:S.accept,
-        isMultiple:S.isMultiple
+        isMultiple: S.isMultiple,
+        onUploadProgress: function (json) {
+            Button.find("span").html("上传中..." + json.value+"%");
+            if (S.onUploadProgress) {
+                S.onUploadProgress(T, json);
+            }
+        },
+        onStartUpload: function () {
+            Button.addClass("disabled");
+            Button.find("span").html("上传中...");
+        }
     });
     if (S.style) T.css(S.style);
     T.val = function (value) {

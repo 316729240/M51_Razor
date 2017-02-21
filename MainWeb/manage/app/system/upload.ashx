@@ -32,7 +32,7 @@ public class upload : IHttpHandler
         List<File> list = new List<File>();
         for(int i=0;i<context.Request.Files.Count;i++){
             try {
-                string newfile = Helper.Tools.SaveImage(context.Request.Files[i], Config.tempPath);
+                string newfile = SaveFile(context.Request.Files[i], Config.tempPath);
                 list.Add(new File { title=context.Request.Files[0].FileName,size=context.Request.Files[0].ContentLength,path=newfile});
             }catch
             {
@@ -42,6 +42,31 @@ public class upload : IHttpHandler
         returnValue.userData = list;
         context.Response.Write(list.ToJson());
         context.Response.End();
+    }
+    public static string SaveFile(HttpPostedFile file, string filePath)
+    {
+
+        string path = filePath + System.DateTime.Now.ToString("yyyy-MM")+"/";
+        if (!System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(path))) System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~"+path));
+        string kzm = "";
+        if (file.FileName.LastIndexOf(".") > -1) kzm = file.FileName.Substring(file.FileName.LastIndexOf(".") + 1).ToLower();
+        string fkzm = "jpg,png,gif,doc,rar,zip,mp4,wmv";
+            /*
+        for (int i = 0; i < Config.userConfig["uploadSet"].Count; i++)
+        {
+            XmlNode node = Config.userConfig["uploadSet"][i];
+            if (i>0) fkzm += "|";
+            fkzm += node.InnerText;
+        }*/
+
+        if (!Regex.IsMatch(kzm, "("+fkzm.Replace(",","|")+")"))
+        {
+            throw new Exception("文件类型不合法，只能上传"+fkzm);
+        }
+        string fileName = Helper.Tools.GetId() + "." + kzm;
+        file.SaveAs(HttpContext.Current.Server.MapPath(path + fileName));
+        return path + fileName;
+
     }
 
     public bool IsReusable {
