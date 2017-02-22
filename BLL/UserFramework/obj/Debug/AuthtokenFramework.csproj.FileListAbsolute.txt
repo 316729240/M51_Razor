@@ -16,3 +16,9 @@ F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\MWMS.DAL.pdb
 F:\web\my\M51_Razor\BLL\UserFramework\obj\Debug\AuthtokenFramework.csprojResolveAssemblyReference.cache
 F:\web\my\M51_Razor\BLL\UserFramework\obj\Debug\UserFramework.dll
 F:\web\my\M51_Razor\BLL\UserFramework\obj\Debug\UserFramework.pdb
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\MWMS.dll
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\RazorEngine.Core.dll
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\System.Web.Razor.Net4.0.dll
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\MWMS.pdb
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\RazorEngine.Core.pdb
+F:\web\my\M51_Razor\BLL\UserFramework\bin\Debug\System.Web.Razor.Net4.0.pdb

@@ -54,6 +54,10 @@
       <Project>{FCCFB5A1-A771-49CC-AC13-3500C4CDE9F1}</Project>
       <Name>Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\M4Class\M4Class.csproj">
+      <Project>{13faf33a-4791-4196-973c-ef40aaba478f}</Project>
+      <Name>M4Class</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
