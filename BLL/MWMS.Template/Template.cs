@@ -10,10 +10,11 @@ namespace MWMS.Template
 {
     public enum TemplateType
     {
-        主页=0,
-        频道页=1,
-        栏目页=2,
-        自定义页=3,
+        //主页=0,
+        频道页=0,
+        栏目页=1,
+        内容页 = 2,
+        自定义页 =3,
         视图=10
     }
     public enum EditMode
@@ -23,6 +24,10 @@ namespace MWMS.Template
     }
     public class Template:TableHandle
     {
+        /// <summary>
+        /// 模板所属数据类型
+        /// </summary>
+        public double DatatypeId { get; set; }
         /// <summary>
         /// 参数表
         /// </summary>
@@ -126,7 +131,24 @@ namespace MWMS.Template
         /// </summary>
         public void Build(bool flag)
         {
-            BuildCode build = new BuildCode(this.TemplateId.ToString(), this.TemplateContent);
+            string code = this.TemplateContent;
+            StringBuilder fieldCode = new StringBuilder();
+            if (this.TemplateType==TemplateType.栏目页 || this.TemplateType == TemplateType.内容页)
+            {
+                DAL.Datatype.TableStructure table = new DAL.Datatype.TableStructure(this.DatatypeId);
+                foreach (var item in table.Fields)
+                {
+
+                    if (item.Key == "url")
+                    {
+                        fieldCode.Append("var " + item.Key + "=Config.webPath + _page[\"" + item.Key + "\"] + \".\" + BaseConfig.extension;\r\n");
+                    }else { 
+                        fieldCode.Append("var " + item.Key + "=(" + item.Value.GetTypeName() + ")_page[\"" + item.Key+"\"];\r\n");
+                    }
+                }
+            }
+            //BuildCode build = new BuildCode(this.TemplateId.ToString(), "@{\r\n" + fieldCode.ToString() + "\r\n}" + code);
+            BuildCode build = new BuildCode(this.TemplateId.ToString(), "" + code);
             build.compile(flag);
         }
         public void Build()

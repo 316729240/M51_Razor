@@ -56,7 +56,7 @@ namespace MWMS.DAL
         public Dictionary<string, object> GetModel(string fields, string where, Dictionary<string, object> p, string desc="")
         {
             if (TableName == "") throw new Exception("表名不能为空");
-            Dictionary<string, object> model = new Dictionary<string, object>();
+            Dictionary<string, object> model = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             string[] _fields = fields.Split(',');
             SqlParameter[] _p = GetParameter(p);
             if (desc != "") desc = "order by "+desc;

@@ -77,8 +77,6 @@ namespace MWMS.DAL.Datatype
             Dictionary<string, object> columnModel = column.GetModel(columnId, "dirPath,dirName,rootId");
             Dictionary<string, object> channelModel = column.GetModel(columnModel["rootId"].ToDouble(), "dirName");
             StringBuilder url = new StringBuilder(BaseConfig.contentUrlTemplate);
-            string text = BaseConfig.contentUrlTemplate.ToString().Trim();
-            url.Append(BaseConfig.contentUrlTemplate.ToString().Trim());
             url.Replace("$id", "'+convert(varchar(20),convert(decimal(18,0),id))+'");
             url.Replace("$create.year", "'+convert(varchar(4),year(createdate))+'");
             url.Replace("$create.month", "'+right('00'+cast(month(createdate) as varchar),2)+'");
@@ -127,9 +125,15 @@ namespace MWMS.DAL.Datatype
             MWMS.DAL.TableHandle t = new MWMS.DAL.TableHandle("maintable");
             MWMS.DAL.TableHandle t1 = new MWMS.DAL.TableHandle(TableName);
             double id = 0;
+            MWMS.DAL.TableHandle column = new MWMS.DAL.TableHandle("class");
+            if (mainFields.ContainsKey("classId")) { 
+                Dictionary<string,object> columnModel=column.GetModel((double)mainFields["classId"],"rootId,moduleId");
+                mainFields["rootId"] = columnModel["rootId"];
+                mainFields["moduleId"] = columnModel["moduleId"];
+            }
+            mainFields["datatypeId"] = DatatypeId;
             if (mainFields.ContainsKey("id") && mainFields["id"].ToDouble()>0)
             {
-                mainFields["createDate"] = DateTime.Now;
                 mainFields["updateDate"] = DateTime.Now;
                 t.Update(mainFields);
                 id = t1.Update(dataFields);
@@ -137,7 +141,9 @@ namespace MWMS.DAL.Datatype
             {
                 id = double.Parse(Helper.Tools.GetId());
                 mainFields["id"] = id;
+                mainFields["auditorid"] = 0;
                 mainFields["updateDate"] = DateTime.Now;
+                mainFields["createDate"] = DateTime.Now;
                 dataFields["id"] = id;
                 t.Append(mainFields);
                 id = t1.Append(dataFields);

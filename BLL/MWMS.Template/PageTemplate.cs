@@ -20,10 +20,6 @@ namespace MWMS.Template
         /// </summary>
         public bool IsDefault { get; set; }
         
-        /// <summary>
-        /// 模板所属数据类型
-        /// </summary>
-        public double DatatypeId { get; set; }
         public Dictionary<string, object> Variable = new Dictionary<string, object>();
         public PageTemplate()
         {
@@ -115,7 +111,7 @@ namespace MWMS.Template
             TableHandle table = new TableHandle("maintable");
             Dictionary<string, object> p = new Dictionary<string, object>();
             p.Add("url", url);
-            Dictionary<string, object> variable = table.GetModel("dataTypeId,rootId,moduleId,skinId,id,title,createDate,updateDate,classId,clickCount,url,pic,userId", "url=@url and orderId>-1", p);
+            Dictionary<string, object> variable = table.GetModel("*", "url=@url and orderId>-1", p);
             if(variable==null) throw new Exception("访问数据不存在");
             dataTypeId = (double)variable["dataTypeId"];
             rootId = (double)variable["rootId"];
@@ -123,6 +119,7 @@ namespace MWMS.Template
             skinId = (double)variable["skinId"];
             id = (double)variable["id"];
             classId = (double)variable["classId"];
+            variable["attribute"] = "";
             SqlDataReader rs = null;
             if (skinId == 0)
             {
@@ -163,6 +160,7 @@ namespace MWMS.Template
                 }
             }
             rs.Close();
+            this.Variable = variable;
             if (skinId > 0)
             {
                 try { 
@@ -171,6 +169,9 @@ namespace MWMS.Template
                 {
                     Get(moduleId, rootId, 2, dataTypeId, isMobile);
                 }
+            }else
+            {
+                Get(moduleId, rootId, 2, dataTypeId, isMobile);
             }
         }
         /// <summary>

@@ -26,7 +26,7 @@ namespace MWMS.DAL.Datatype
         {
             this.DatatypeId = datatypeId;
             MWMS.DAL.TableHandle table = new MWMS.DAL.TableHandle("Datatype");
-            Dictionary<string, object> model = table.GetModel(datatypeId, "tableName,tableStructure,displayField");
+            Dictionary<string, object> model = table.GetModel(datatypeId, "tableName,tableStructure,displayField,id");
             Init(model);
         }
         public TableStructure(string tableName)
@@ -34,12 +34,14 @@ namespace MWMS.DAL.Datatype
             MWMS.DAL.TableHandle table = new MWMS.DAL.TableHandle("Datatype");
             Dictionary<string, object> p = new Dictionary<string, object>();
             p.Add("tableName", tableName);
-            Dictionary<string, object> model = table.GetModel( "tableName,tableStructure,displayField", "tableName=@tableName",p);
+            Dictionary<string, object> model = table.GetModel( "tableName,tableStructure,displayField,id", "tableName=@tableName",p);
             Init(model);
         }
         void Init(Dictionary<string, object> model)
         {
             if (model == null) throw new Exception("表类型不存在");
+
+            DatatypeId = (double)model["id"];
             TableName = model["tableName"].ToString();
             List<Field> Structure = new List<Field>();
             LoadPublicField();

@@ -29,7 +29,6 @@ namespace MWMS.Template
         public int layerCount = 0;//深度
         public bool isEdit = false;//是否为编辑状态
         List<string> _viewList = new List<string>();
-
         Dictionary<string, string> variables = new Dictionary<string, string>();
         static Dictionary<string, object> temp = new Dictionary<string, object>(); //存储临时变量
         string _html, _fileName;
@@ -53,7 +52,7 @@ namespace MWMS.Template
         string compile(string code, bool flag)
         {
 
-            Regex r = new Regex(@"(\b(page|sys|config))\.((\w|\.|\[|\]){1,30})(\(|)", RegexOptions.IgnoreCase);
+            Regex r = new Regex(@"(\b(sys|config))\.((\w|\.|\[|\]){1,30})(\(|)", RegexOptions.IgnoreCase);
             code = r.Replace(code, new MatchEvaluator(_variable2));
 
             r = new Regex(@"view\.(.*?)\)", RegexOptions.IgnoreCase);
@@ -68,7 +67,7 @@ namespace MWMS.Template
 
             string headCode = "@using System.Collections\r\n" +
                     "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n" +
-                    "Dictionary<string, object> page=( Dictionary<string, object>)Model[1];\r\n" +
+                    "Dictionary<string, object> _page=( Dictionary<string, object>)Model[1];\r\n" +
                     "object [] parameter= Model[2]==null?null:(object [])Model[2];\r\n" +
                     "var loginUser=ManagerFramework.LoginUser.GetLoginUser();}";
             code = headCode + code;
@@ -91,7 +90,7 @@ namespace MWMS.Template
             Razor.SetTemplateService(new TemplateService(templateConfig));
             string headCode = "@using System.Collections\r\n" +
         "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n" +
-        "Dictionary<string, object> page=( Dictionary<string, object>)Model[1];\r\n" +
+        "Dictionary<string, object> _page=( Dictionary<string, object>)Model[1];\r\n" +
         "object [] parameter= Model[2]==null?null:(object [])Model[2];\r\n" +
         "var loginUser=ManagerFramework.LoginUser.GetLoginUser();}";
             string code = headCode + obj[1];
@@ -187,6 +186,7 @@ namespace MWMS.Template
                 }
                 else if (value[0] == "page")
                 {
+
                     /*for (int i = 1; i < value.Length; i++)
                     {
                         newstr = Config.systemVariables[value[i]].ToString();

@@ -81,6 +81,9 @@ namespace MWMS.DAL.Datatype
                 case "Files":
                     typeName = "MWMS.DAL.Datatype.FieldType.Files";
                     break;
+                default:
+                    typeName = "object";
+                    break;
             }
             return typeName;
         }
