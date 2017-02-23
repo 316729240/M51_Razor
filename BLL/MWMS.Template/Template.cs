@@ -141,14 +141,14 @@ namespace MWMS.Template
 
                     if (item.Key == "url")
                     {
-                        fieldCode.Append("var " + item.Key + "=Config.webPath + _page[\"" + item.Key + "\"] + \".\" + BaseConfig.extension;\r\n");
+                        fieldCode.Append("" + item.Key + "=Config.webPath + _page[\"" + item.Key + "\"] + \".\" + BaseConfig.extension,\r\n");
                     }else { 
-                        fieldCode.Append("var " + item.Key + "=(" + item.Value.GetTypeName() + ")_page[\"" + item.Key+"\"];\r\n");
+                        fieldCode.Append("" + item.Key + "=_page[\"" + item.Key + "\"],\r\n");
                     }
                 }
             }
-            //BuildCode build = new BuildCode(this.TemplateId.ToString(), "@{\r\n" + fieldCode.ToString() + "\r\n}" + code);
-            BuildCode build = new BuildCode(this.TemplateId.ToString(), "" + code);
+            BuildCode build = new BuildCode(this.TemplateId.ToString(), "@{\r\nvar page=new {" + fieldCode.ToString() + "};\r\n}" + code);
+            //BuildCode build = new BuildCode(this.TemplateId.ToString(),  code);
             build.compile(flag);
         }
         public void Build()

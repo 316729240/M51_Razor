@@ -32,7 +32,7 @@ namespace MWMS.DAL.Datatype
         public Dictionary<string, object> GetModel(string fields, string where, Dictionary<string, object> p, string desc)
         {
             if (TableName == "") throw new Exception("表名不能为空");
-            Dictionary<string, object> model = new Dictionary<string, object>();
+            Dictionary<string, object> model = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             string[] _fields = fields.Split(',');
             string fieldList = "";
             for (int i = 0; i < _fields.Length; i++)
@@ -47,7 +47,20 @@ namespace MWMS.DAL.Datatype
             {
                 for (int i = 0; i < rs.FieldCount; i++)
                 {
-                    model[rs.GetName(i)] = rs[rs.GetName(i)];
+                    string name = rs.GetName(i);
+                    Field field = null;
+                    try
+                    {
+                        field = Fields[name];
+                    }
+                    catch { }
+                    if (field == null)
+                    {
+                        model[name] = rs[i];
+                    }
+                    else { 
+                        model[name] = field.Convert( rs[i],Field.ConvertType.UserData);
+                    }
                 }
                 flag = true;
             }
@@ -98,11 +111,32 @@ namespace MWMS.DAL.Datatype
             if (TableName == "") throw new Exception("表名不能为空");
             Dictionary<string, object> mainFields = new Dictionary<string, object>();
             Dictionary<string, object> dataFields = new Dictionary<string, object>();
+            ColumnConfig config = null;
+            if (model.ContainsKey("classId"))
+            {
+                config=GetConfig(model["classId"].ToDouble());
+            }
             foreach (var field in model)
             {
                 try { 
                     Field f = Fields[field.Key];
-                    object value = f.Convert(field.Value,Field.ConvertType.SqlData);
+                    object value = null;
+                    if (f.type== "Pictures")
+                    {
+                        DAL.Datatype.FieldType.Pictures files =DAL.Datatype.FieldType.Pictures.Parse(field.Value.ToStr());
+                        for(int i = 0; i < files.Count; i++)
+                        {
+                            string kzm= "";
+                            if (files[i].path.LastIndexOf(".") > -1) kzm = files[i].path.Substring(files[i].path.LastIndexOf(".") + 1);
+                            string newfile=API.PictureSize(files[i].path, files[i].path.Replace("."+ kzm, "_min."+ kzm), config.picWidth, config.picHeight, 100, config.picForce);
+                            files[i].MinPath = newfile;
+                        }
+                        value = files;
+                    }
+                    else
+                    {
+                        value = f.Convert(field.Value, Field.ConvertType.SqlData);
+                    }
                     if (value != null)
                     {
                         if (f.isPublicField)
@@ -151,5 +185,120 @@ namespace MWMS.DAL.Datatype
             if (mainFields.ContainsKey("classId")) ReplaceUrl(mainFields["classId"].ToDouble(), mainFields["id"].ToDouble());
             return id;
         }
+
+
+        ColumnConfig GetConfig(double id)
+        {
+            bool inherit = false;
+            double classId = 0, moduleId = 0;
+            string parentId = "";
+            ColumnConfig config = new ColumnConfig();
+            SqlDataReader rs = Helper.Sql.ExecuteReader("select thumbnailWidth,thumbnailHeight,thumbnailForce,saveRemoteImages,inherit,classId,parentId,moduleId,titleRepeat,watermark from class where id=@id", new SqlParameter[]{
+                new SqlParameter("id",id)
+            });
+            if (rs.Read())
+            {
+                inherit = rs.GetInt32(4) == 1;
+                config.picForce = rs.GetInt32(2) == 1;
+                config.picSave = rs.GetInt32(3) == 1;
+                config.picWidth = rs.GetInt32(0);
+                config.picHeight = rs.GetInt32(1);
+                classId = rs.GetDouble(5);
+                parentId = rs.GetString(6);
+                moduleId = rs.GetDouble(7);
+                config.titleRepeat = (rs.IsDBNull(8) || rs.GetInt32(8) == 1);
+                config.isRoot = rs.GetDouble(5) == 7;
+                config.isColumn = rs.GetDouble(5) != 7;
+                config.isModule = false;
+                config.pId = id;
+                config.watermarkFlag = rs.IsDBNull(9) || rs.GetInt32(9) == 1;
+            }
+            rs.Close();
+            if (inherit)
+            {
+                string sql = "";
+                if (classId == 7)
+                {
+
+                    rs = Helper.Sql.ExecuteReader("select thumbnailWidth,thumbnailHeight,thumbnailForce,saveRemoteImages,titleRepeat,watermark from module where id=@moduleId", new SqlParameter[] { new SqlParameter("moduleId", moduleId) });
+                    if (rs.Read())
+                    {
+                        config.picForce = rs.GetInt32(2) == 1;
+                        config.picSave = rs.GetInt32(3) == 1;
+                        config.picWidth = rs.GetInt32(0);
+                        config.picHeight = rs.GetInt32(1);
+                        config.titleRepeat = (rs.IsDBNull(4) || rs.GetInt32(4) == 1);
+                        config.isModule = true;
+                        config.isRoot = false;
+                        config.isColumn = false;
+                        config.pId = moduleId;
+                        config.watermarkFlag = rs.IsDBNull(5) || rs.GetInt32(5) == 1;
+
+                    }
+                    rs.Close();
+                }
+                else
+                {
+                    sql = "select thumbnailWidth,thumbnailHeight,thumbnailForce,saveRemoteImages,titleRepeat,classId,childId,id,watermark from class where id in (" + parentId + ")  and inherit=0  order by layer desc ";
+                    bool flag = false;
+                    rs = Helper.Sql.ExecuteReader(sql);
+                    if (rs.Read())
+                    {
+                        flag = true;
+                        config.picForce = rs.GetInt32(2) == 1;
+                        config.picSave = rs.GetInt32(3) == 1;
+                        config.picWidth = rs.GetInt32(0);
+                        config.picHeight = rs.GetInt32(1);
+                        config.titleRepeat = (rs.IsDBNull(4) || rs.GetInt32(4) == 1);
+                        config.isRoot = rs.GetDouble(5) == 7;
+                        config.isColumn = rs.GetDouble(5) != 7;
+                        config.isModule = false;
+                        config.childId = rs.GetString(6);
+                        config.pId = rs.GetDouble(7);
+                        config.watermarkFlag = rs.IsDBNull(8) || rs.GetInt32(8) == 1;
+
+                    }
+                    rs.Close();
+                    if (!flag)//从模块中查找配制
+                    {
+
+                        rs = Helper.Sql.ExecuteReader("select thumbnailWidth,thumbnailHeight,thumbnailForce,saveRemoteImages,titleRepeat,watermark from module where id=@moduleId", new SqlParameter[] { new SqlParameter("moduleId", moduleId) });
+                        if (rs.Read())
+                        {
+                            config.picForce = rs.GetInt32(2) == 1;
+                            config.picSave = rs.GetInt32(3) == 1;
+                            config.picWidth = rs.GetInt32(0);
+                            config.picHeight = rs.GetInt32(1);
+                            config.titleRepeat = (rs.IsDBNull(4) || rs.GetInt32(4) == 1);
+                            config.isModule = true;
+                            config.isRoot = false;
+                            config.isColumn = false;
+                            config.pId = moduleId;
+                            config.watermarkFlag = rs.IsDBNull(5) || rs.GetInt32(5) == 1;
+                        }
+                        rs.Close();
+                    }
+                }
+                return config;
+            }
+            else
+            {
+                return config;
+            }
+        }
+    }
+    public class ColumnConfig
+    {
+        public int picWidth = 0;
+        public int picHeight = 0;
+        public bool picForce = false;//图片剪裁
+        public bool picSave = true;//是否保存远程图片
+        public bool watermarkFlag = true;//是否加水印
+        public bool titleRepeat = true;//标题是否可以重复
+        public bool isModule = false;
+        public bool isRoot = false;
+        public bool isColumn = false;
+        public double pId = -1;
+        public string childId = "";
     }
 }

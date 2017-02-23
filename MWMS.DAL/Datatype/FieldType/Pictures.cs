@@ -7,28 +7,40 @@ using System.Web;
 
 namespace MWMS.DAL.Datatype.FieldType
 {
-    public class Picture:File
+    public class File
     {
         /// <summary>
-        /// 缩略图路径
+        /// 路径
         /// </summary>
-        public string MinPath { get; set; }
+        public string path = "";
+        /// <summary>
+        /// 文件大小
+        /// </summary>
+        public int size = 0;
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string title = "";
+        /// <summary>
+        /// 是否已删除
+        /// </summary>
+        public int isDel = 0;
     }
-    public class Pictures : Picture
+    public class Files : File
     {
-        List<Picture> _list = new List<Picture>();
+        List<File> _list = new List<File>();
         /// <summary>
         /// 将字符串转换为Files字段数据类型
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static Pictures Parse(string data)
+        public static Files Parse(string data)
         {
-            Pictures files = new Pictures();
+            Files files = new Files();
             try
             {
-                List<Picture> list = data.ParseJson<List<Picture>>();
-                foreach (Picture file in list)
+                List<File> list = data.ParseJson<List<File>>();
+                foreach (File file in list)
                 {
                     if (file.isDel == 0)
                     {
@@ -41,8 +53,6 @@ namespace MWMS.DAL.Datatype.FieldType
                         {
                             string path = HttpContext.Current.Server.MapPath("~" + file.path);
                             if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
-                            string minpath = HttpContext.Current.Server.MapPath("~" + file.MinPath);
-                            if (System.IO.File.Exists(minpath)) System.IO.File.Delete(minpath);
                         }
                         catch
                         {
@@ -61,17 +71,16 @@ namespace MWMS.DAL.Datatype.FieldType
                 files.path = files[0].path;
                 files.title = files[0].title;
                 files.isDel = files[0].isDel;
-                files.MinPath = files[0].MinPath;
                 #endregion
             }
             return files;
         }
-        public Picture this[int index]
+        public File this[int index]
         {
             get { return _list[index]; }
             set { _list[index] = value; }
         }
-        public void Add(Picture file)
+        public void Add(File file)
         {
             _list.Add(file);
         }

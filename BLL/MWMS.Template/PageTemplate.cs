@@ -111,15 +111,14 @@ namespace MWMS.Template
             TableHandle table = new TableHandle("maintable");
             Dictionary<string, object> p = new Dictionary<string, object>();
             p.Add("url", url);
-            Dictionary<string, object> variable = table.GetModel("*", "url=@url and orderId>-1", p);
+            Dictionary<string, object> variable = table.GetModel("dataTypeId,classId,id,skinId,moduleId, rootId", "url=@url and orderId>-1", p);
             if(variable==null) throw new Exception("访问数据不存在");
-            dataTypeId = (double)variable["dataTypeId"];
-            rootId = (double)variable["rootId"];
             moduleId = (double)variable["moduleId"];
+            rootId = (double)variable["rootId"];
+            dataTypeId = (double)variable["dataTypeId"];
             skinId = (double)variable["skinId"];
             id = (double)variable["id"];
             classId = (double)variable["classId"];
-            variable["attribute"] = "";
             SqlDataReader rs = null;
             if (skinId == 0)
             {
@@ -130,6 +129,10 @@ namespace MWMS.Template
                 }
                 rs.Close();
             }
+            DAL.Datatype.TableHandle T = new DAL.Datatype.TableHandle(dataTypeId);
+            variable = T.GetModel(id);
+            variable["attribute"] = "";
+            /*
             string tableName = (string)Helper.Sql.ExecuteScalar("select tableName from datatype where id=" + dataTypeId.ToString());
             rs = Helper.Sql.ExecuteReader("select * from " + tableName + " where id=@id", new SqlParameter[] {
                     new SqlParameter("id",id)});
@@ -159,7 +162,7 @@ namespace MWMS.Template
                     }
                 }
             }
-            rs.Close();
+            rs.Close();*/
             this.Variable = variable;
             if (skinId > 0)
             {

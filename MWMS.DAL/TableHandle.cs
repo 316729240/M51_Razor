@@ -66,7 +66,13 @@ namespace MWMS.DAL
             {
                 for (int i = 0; i < rs.FieldCount; i++)
                 {
+                    if (rs.IsDBNull(i))
+                    {
+                        model[rs.GetName(i)] = "";
+                    }
+                    else { 
                     model[rs.GetName(i)] = rs[rs.GetName(i)];
+                    }
                 }
                 flag = true;
             }

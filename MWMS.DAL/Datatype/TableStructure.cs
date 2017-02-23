@@ -9,7 +9,7 @@ namespace MWMS.DAL.Datatype
 {
     public class TableStructure
     {
-        string publicFieldStr = "id-数据ID-Double--15----否---------|classId-数据所属栏目-Double------否---------|createDate-创建时间-Date--20----否---------|updateDate-修改时间-Date--20----否---------|userId-用户ID-Double------否---------|orderId-排序至顶-Long------否---------|title-标题-String-0-30-TextBox---是---------|attribute-属性-String-0-10-TextBox---是---------|auditorId-审核者-Double------否---------|auditDate-审核时间-Date--20----否---------|auditMsg-审核信息-string--20----否---------|moduleId-模块id-Double------否---------|rootId-根id-Double------否---------|datatypeId-类型-Double------否---------|pic-图片-String-0-30-TextBox---是---------|skinId-皮肤-Double------否---------";
+        string publicFieldStr = "id-数据ID-Double--15----否---------|classId-数据所属栏目-Double------否---------|createDate-创建时间-Date--20----否---------|updateDate-修改时间-Date--20----否---------|userId-用户ID-Double------否---------|orderId-排序至顶-Long------否---------|clickCount-点击量-Long------否---------|title-标题-String-0-30-TextBox---是---------|attribute-属性-String-0-10-TextBox---是---------|auditorId-审核者-Double------否---------|auditDate-审核时间-Date--20----否---------|auditMsg-审核信息-string--20----否---------|moduleId-模块id-Double------否---------|rootId-根id-Double------否---------|datatypeId-类型-Double------否---------|pic-图片-String-0-30-TextBox---是---------|skinId-皮肤-Double------否---------";
         /// <summary>
         /// 数据类型id
         /// </summary>

@@ -122,6 +122,9 @@ namespace MWMS.DAL.Datatype
                         else { value = ""; }
                     }
                     break;
+                default:
+                    value = data;
+                    break;
             }
             return value;
         }
