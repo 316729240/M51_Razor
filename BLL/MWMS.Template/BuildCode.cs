@@ -690,7 +690,7 @@ namespace MWMS.Template
             outhtml.Append(pageSize + ",");
             outhtml.Append(recordCount + ",");
             outhtml.Append(debug + ",");
-            outhtml.Append("p,ref page);\r\n");
+            outhtml.Append("p,ref _page);\r\n");
             outhtml.Append("for(int index=0;index<list.Count;index++){\r\n");
             outhtml.Append("var item = list[index];\r\n");
             for (int i = 0; i < fields.Length; i++)
@@ -829,7 +829,7 @@ namespace MWMS.Template
             outhtml.Append(attribute + ",");
             outhtml.Append(addWhere + ",");
             outhtml.Append(debug + ",");
-            outhtml.Append("p,ref page);\r\n");
+            outhtml.Append("p,ref _page);\r\n");
             outhtml.Append("for(int index=0;index<list.Count;index++){\r\n");
             outhtml.Append("var item = list[index];\r\n");
             TableStructure table = new TableStructure(datatypeId);
