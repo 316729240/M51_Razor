@@ -65,7 +65,10 @@ $M.Control["Editor"] = function (BoxID, S, CID) {
     var Labels = new Array();
     var T = this;
     var A = null;
-    if (CID != null) A = CID;
+    if (CID != null) {
+        A = $("<div class=\"M5_Editor\"></div>");
+        A.insertBefore(CID);
+    }
     else { A = $("<div class=\"M5_Editor\"></div>").appendTo(BoxID); }
 
     var content, content_body, codeBox;
@@ -171,7 +174,8 @@ $M.Control["Editor"] = function (BoxID, S, CID) {
         if (flag) {
             ifr.hide();
             codeBox.show();
-            textarea.setValue(HeadHtml + T.val() + EndHtml);
+            //textarea.setValue(HeadHtml + T.val() + EndHtml);
+            T.val(HeadHtml + T.val() + EndHtml);
             
         } else {
             ifr.show();
@@ -372,10 +376,11 @@ $M.Control["Editor"] = function (BoxID, S, CID) {
         }
     });*/
     var codeBox = $("<div/>").appendTo(A);
-    var prebox = $("<pre style='width:100%;height:100%;'/>").appendTo(codeBox);
     var textarea = null;
-    ace.shortKeyword =S.shortKeyword;
-    //if (S.codemirror) {
+    var prebox =null;
+    if (S.codemirror) {
+        prebox = $("<pre style='width:100%;height:100%;'/>").appendTo(codeBox);
+        ace.shortKeyword =S.shortKeyword;
         textarea = ace.edit(prebox[0]);
         textarea.setOptions({
             enableBasicAutocompletion: true,
@@ -386,20 +391,24 @@ $M.Control["Editor"] = function (BoxID, S, CID) {
         textarea.session.setMode("ace/mode/razor");
         var langTools = ace.require("ace/ext/language_tools");
 
-    //}
+    } else {
+        if (CID==null){
+            textarea = $("<textarea style='width:100%;height:100%'></textarea>");
+        } else {
+            textarea = CID;
+        }
+        codeBox.append(textarea);
+    }
     codeBox.hide();
     T.val = function (html) {
-        if (html!=null) {
-            if (isCodeMode) {
+        if (html != null) {
                 if (textarea.getValue) {
                     textarea.setValue(html);
-                }else{
+                } else {
                     textarea.val(html);
                 }
-            } else {
                 html = T.replaceLabel(html);
                 content_body.html(html);
-            }
         }
         var html = "";
         if (isCodeMode) {
@@ -553,7 +562,10 @@ $M.Control["Editor"] = function (BoxID, S, CID) {
             }else{
                 prebox.css({ "width": A.width() + "px", "height": (A.height() - toolbar.container.outerHeight()) + "px" });
             }*/
-            prebox.css({ "width": A.width() + "px", "height": (A.height() - toolbar.container.outerHeight()) + "px" });
+            if(prebox!=null)prebox.css({ "width": A.width() + "px", "height": (A.height() - toolbar.container.outerHeight()) + "px" });
+            else {
+                textarea.css({ "width": A.width() + "px", "height": (A.height() - toolbar.container.outerHeight()) + "px" });
+            }
             //codeBox.setSize(A.width(), content.height());
 
             //if (style && style.height) {
@@ -569,5 +581,5 @@ $M.Control["Editor"] = function (BoxID, S, CID) {
         return (S[name]);
     };
     if (S.sourceMode != null) setCodeMode(S.sourceMode);
- 
+
 }

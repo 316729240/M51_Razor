@@ -131,7 +131,7 @@ namespace MWMS.DAL.Datatype
                             string newfile=API.PictureSize(files[i].path, files[i].path.Replace("."+ kzm, "_min."+ kzm), config.picWidth, config.picHeight, 100, config.picForce);
                             files[i].MinPath = newfile;
                         }
-                        value = files;
+                        value = files.ToJson();
                     }
                     else
                     {

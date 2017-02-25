@@ -116,9 +116,22 @@ namespace MWMS.DAL.Datatype
                     if (convertType == ConvertType.UserData)
                     {
                         value = file;
-                    }else
+                    }
+                    else
                     {
                         if (file != null) value = file.ToJson();
+                        else { value = ""; }
+                    }
+                    break;
+                case "Pictures":
+                    FieldType.Pictures file2 = FieldType.Pictures.Parse(data.ToString());
+                    if (convertType == ConvertType.UserData)
+                    {
+                        value = file2;
+                    }
+                    else
+                    {
+                        if (file2 != null) value = file2.ToJson();
                         else { value = ""; }
                     }
                     break;
