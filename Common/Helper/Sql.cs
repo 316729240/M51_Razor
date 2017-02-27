@@ -936,6 +936,22 @@ namespace Helper
             rs.Close();
             return arrayList;
         }
+        public static List<Dictionary<string, dynamic>> ExecuteList2(string commandText, SqlParameter[] p)
+        {
+            List<Dictionary<string, object>> arrayList = new List<Dictionary<string, object>>();
+            SqlDataReader rs = ExecuteReader(commandText, p);
+            while (rs.Read())
+            {
+                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                for (int i = 0; i < rs.FieldCount; i++)
+                {
+                    dictionary.Add(rs.GetName(i), rs[i]);
+                }
+                arrayList.Add(dictionary);
+            }
+            rs.Close();
+            return arrayList;
+        }
         public static ArrayList ExecuteArrayObj(string commandText)
         {
 

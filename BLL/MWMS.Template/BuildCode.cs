@@ -64,11 +64,11 @@ namespace MWMS.Template
                 CatchPath = HttpContext.Current.Server.MapPath("~" + Config.cachePath + "assembly/")
             };
             Razor.SetTemplateService(new TemplateService(templateConfig));
-
+            
             string headCode = "@using System.Collections\r\n" +
                     "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n" +
                     "Dictionary<string, object> _page=( Dictionary<string, object>)Model[1];\r\n" +
-                    "object [] parameter= Model[2]==null?null:(object [])Model[2];\r\n" +
+                    "dynamic [] parameter= Model[2]==null?null:(dynamic [])Model[2];\r\n" +
                     "var loginUser=ManagerFramework.LoginUser.GetLoginUser();}";
             code = headCode + code;
 
@@ -78,7 +78,7 @@ namespace MWMS.Template
             return code;
 
         }
-        public static string ReadView(string viewPath, object sys, object page, object[] p)
+        public static string ReadView(string viewPath, object sys, object page, dynamic[] p)
         {
             string[] item = viewPath.Split('.');
             Dictionary<string, object> list = (Dictionary<string, object>)Config.viewVariables[item[0]];
@@ -91,7 +91,7 @@ namespace MWMS.Template
             string headCode = "@using System.Collections\r\n" +
         "@{ Dictionary<string, string> sys=( Dictionary<string, string>)Model[0];\r\n" +
         "Dictionary<string, object> _page=( Dictionary<string, object>)Model[1];\r\n" +
-        "object [] parameter= Model[2]==null?null:(object [])Model[2];\r\n" +
+        "dynamic [] parameter= Model[2]==null?null:(dynamic [])Model[2];\r\n" +
         "var loginUser=ManagerFramework.LoginUser.GetLoginUser();}";
             string code = headCode + obj[1];
             RazorEngine.Razor.Compile(code, typeof(object[]), obj[0].ToString(), false);
@@ -386,10 +386,10 @@ namespace MWMS.Template
                 return "MWMS.Template.BuildCode.ReadView(\"" + item + "\",Model[0],Model[1],null)";
             }
             else {
-                return "MWMS.Template.BuildCode.ReadView(\"" + item + "\",Model[0],Model[1],new object []{" + p + "})";
+                return "MWMS.Template.BuildCode.ReadView(\"" + item + "\",Model[0],Model[1],new dynamic []{" + p + "})";
             }
         }
-        public static List<Dictionary<string, object>> getLabel(string labelId, string html, object _moduleId, object _classId, int pageSize, int recordCount, object _datatypeId, int orderBy, string _fields, string attribute, object _addWhere, bool debug, Hashtable p1,ref Dictionary<string,object> page)
+        public static List<Dictionary<string, dynamic>> getLabel(string labelId, string html, object _moduleId, object _classId, int pageSize, int recordCount, object _datatypeId, int orderBy, string _fields, string attribute, object _addWhere, bool debug, Hashtable p1,ref Dictionary<string,object> page)
         {
             double moduleId= _moduleId.ToDouble(),  classId=_classId.ToDouble(), datatypeId= _datatypeId.ToDouble();
             string addWhere = _addWhere.ToStr();
@@ -601,9 +601,9 @@ namespace MWMS.Template
             }
             return GetDataList(tableInfo, sql, sql_p);
         }
-        static List<Dictionary<string, object>> GetDataList(TableStructure table,string sql, SqlParameter[] p)
+        static List<Dictionary<string, dynamic>> GetDataList(TableStructure table,string sql, SqlParameter[] p)
         {
-            List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();
+            List<Dictionary<string, dynamic>> list = new List<Dictionary<string, object>>();
             SqlDataReader rs= Helper.Sql.ExecuteReader(sql, p);
             while (rs.Read())
             {
@@ -684,7 +684,7 @@ namespace MWMS.Template
             outhtml.Append("@{\r\n");
             outhtml.Append("if(true){\r\n");
             outhtml.Append(buildSql(ref sql) + "\r\n");
-            outhtml.Append("List<Dictionary<string, object>> list=MWMS.Template.BuildCode.getSqlLabel(\"");
+            outhtml.Append("List<Dictionary<string, dynamic>> list=MWMS.Template.BuildCode.getSqlLabel(\"");
             outhtml.Append(labelId + "\",");
             outhtml.Append(sql + ",");
             outhtml.Append(pageSize + ",");
@@ -693,19 +693,22 @@ namespace MWMS.Template
             outhtml.Append("p,ref _page);\r\n");
             outhtml.Append("for(int index=0;index<list.Count;index++){\r\n");
             outhtml.Append("var item = list[index];\r\n");
+            /*
+            outhtml.Append("var item = new{\r\n");
             for (int i = 0; i < fields.Length; i++)
             {
                 if (fields[i] != "") { 
                     if (fields[i] == "url")
                     {
-                        outhtml.Append("var " + fields[i] + "=Config.webPath + item[\"" + fields[i] + "\"] + \".\" + BaseConfig.extension;\r\n");
+                        outhtml.Append(" " + fields[i] + "=Config.webPath + list[index][\"" + fields[i] + "\"] + \".\" + BaseConfig.extension,\r\n");
                     }
                     else
                     {
-                        outhtml.Append("var " + fields[i] + "=item[\"" + fields[i] + "\"];\r\n");
+                        outhtml.Append(" " + fields[i] + "=list[index][\"" + fields[i] + "\"],\r\n");
                     }
                 }
             }
+            outhtml.Append("\r\n};\r\n");*/
             outhtml.Append(template);
             outhtml.Append("\r\n}\r\n");
             outhtml.Append("}\r\n");
@@ -725,7 +728,7 @@ namespace MWMS.Template
                 p[i] = new SqlParameter("p_" + (i + 1).ToString(), sql_p[i]);
             }
         }*/
-        public static List<Dictionary<string, object>> getSqlLabel(string labelId, string sql, int pageSize, int recordCount, bool debug, Hashtable p1, ref Dictionary<string, object> page)
+        public static List<Dictionary<string, dynamic>> getSqlLabel(string labelId, string sql, int pageSize, int recordCount, bool debug, Hashtable p1, ref Dictionary<string, object> page)
         {
 
             SqlParameter[] sql_p = null;
@@ -816,7 +819,7 @@ namespace MWMS.Template
             outhtml.Append("@{\r\n");
             outhtml.Append("if(true){\r\n");
             outhtml.Append(buildSql(ref addWhere) + "\r\n");
-            outhtml.Append("List<Dictionary<string, object>> list =MWMS.Template.BuildCode.getLabel(");
+            outhtml.Append("List<Dictionary<string, dynamic>> list =MWMS.Template.BuildCode.getLabel(");
             outhtml.Append(labelId + ",");
             outhtml.Append("\"\"" + ",");
             outhtml.Append(moduleId + ",");
@@ -832,12 +835,14 @@ namespace MWMS.Template
             outhtml.Append("p,ref _page);\r\n");
             outhtml.Append("for(int index=0;index<list.Count;index++){\r\n");
             outhtml.Append("var item = list[index];\r\n");
+            /*
+            outhtml.Append("var item = new {\r\n");
             TableStructure table = new TableStructure(datatypeId);
             for (int i = 0; i < fields.Length; i++)
             {
                 if (fields[i] == "url")
                 {
-                    outhtml.Append("var " + fields[i] + "=Config.webPath + item[\"" + fields[i] + "\"] + \".\" + BaseConfig.extension;\r\n");
+                    outhtml.Append(" " + fields[i] + "=Config.webPath + list[index][\"" + fields[i] + "\"] + \".\" + BaseConfig.extension,\r\n");
                 }
                 else
                 {
@@ -848,13 +853,15 @@ namespace MWMS.Template
                     }
                     catch { }
                     if (field == null) { 
-                        outhtml.Append("var " + fields[i] + "=item[\"" + fields[i] + "\"];\r\n");
+                        outhtml.Append(" " + fields[i] + "=list[index][\"" + fields[i] + "\"],\r\n");
                     }else
                     {
-                        outhtml.Append("var " + fields[i] + "=("+ field.GetTypeName() + ")item[\"" + fields[i] + "\"];\r\n");
+                        outhtml.Append(" " + fields[i] + "=("+ field.GetTypeName() + ")list[index][\"" + fields[i] + "\"],\r\n");
                     }
                 }
             }
+            outhtml.Append("\r\n};\r\n");
+            */
             outhtml.Append(template);
             outhtml.Append("\r\n}\r\n");
             outhtml.Append("}\r\n");

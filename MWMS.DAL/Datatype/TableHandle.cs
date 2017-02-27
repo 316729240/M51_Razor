@@ -129,7 +129,13 @@ namespace MWMS.DAL.Datatype
                             string kzm= "";
                             if (files[i].path.LastIndexOf(".") > -1) kzm = files[i].path.Substring(files[i].path.LastIndexOf(".") + 1);
                             string newfile=API.PictureSize(files[i].path, files[i].path.Replace("."+ kzm, "_min."+ kzm), config.picWidth, config.picHeight, 100, config.picForce);
-                            files[i].MinPath = newfile;
+                            if (newfile == "")
+                            {
+                                files[i].minPath = files[i].path;
+                            }
+                            else { 
+                                files[i].minPath = newfile;
+                            }
                         }
                         value = files.ToJson();
                     }

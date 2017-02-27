@@ -927,7 +927,12 @@ $M.Control["UploadFileBox2"] = function (BoxID, S, CID) {
     T.val = function (value) {
         if (value) {
             A.find("._file").remove();
-            var json = JSON.parse(value);
+            var json = null;
+            if ($.isArray(value)) {
+                json = value;
+            }else{
+                json=JSON.parse(value);
+            }
             for (var i = 0; i < json.length; i++) {
                 T.addFile(json[i]);
             }

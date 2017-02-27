@@ -65,7 +65,7 @@ $M.Control["Popover"] = function (BoxID, S) {
                 break;
             case "left":
                 //alert([x1,w1,x1-w1]);
-                x = x1 - w2; y = (y1 - (h2 -h1)/ 2>1)?y1 - (h2 -h1)/ 2:1 ; B.css({ top: y1+h1/ 2 + "px", left: "" });
+                x = x1 - w2; y = (y1 - (h2 - h1) / 2 > 1) ? y1 - (h2 - h1) / 2 : 1; B.css({ top: y1 + h1 / 2 + "px", left: "" });
                 break;
         }
         if (jiantou != "") A.addClass(jiantou);
@@ -231,7 +231,7 @@ $M.Control["ToolBar"] = function (BoxID, S) {
 //onLoad 模板加载完成
 //onSubmit 表单提交完成
 //-----------------------------------------------------------
-$M.Control["Form"] = function(BoxID, S, CID) {
+$M.Control["Form"] = function (BoxID, S, CID) {
     var T = this;
     T.items = new Array();
     var A = null; //
@@ -249,7 +249,7 @@ $M.Control["Form"] = function(BoxID, S, CID) {
     $M.BaseClass.apply(T, [S]);
     if (S["class"]) A.addClass(S["class"]);
     var data = {};
-    var getData = function(obj) {
+    var getData = function (obj) {
         if (obj.controls == null) return;
         for (var i = 0; i < obj.controls.length; i++) {
             if (obj.controls[i] != null) {
@@ -264,7 +264,7 @@ $M.Control["Form"] = function(BoxID, S, CID) {
             }
         }
     };
-    var submitForm = function() {
+    var submitForm = function () {
         if (S.onBeginSubmit) S.onBeginSubmit(T);
         data = {};
         var list = A.find("input");
@@ -293,9 +293,9 @@ $M.Control["Form"] = function(BoxID, S, CID) {
 
         getData(T);
         if (S.command) {
-            $M.comm(S.command, data, function(userData) { if (S.onSubmit) S.onSubmit(T, { "formData": data, "returnData": userData }); }, S.onSubmitErr);
+            $M.comm(S.command, data, function (userData) { if (S.onSubmit) S.onSubmit(T, { "formData": data, "returnData": userData }); }, S.onSubmitErr);
         } else if (S.url) {
-            $M.ajax(S.url, data, function(userData) {
+            $M.ajax(S.url, data, function (userData) {
                 if (S.onSubmit) S.onSubmit(T, { "formData": data, "returnData": userData });
             });
         } else {
@@ -307,11 +307,11 @@ $M.Control["Form"] = function(BoxID, S, CID) {
     var errorPlacement = null;
     var invalidHandler = null;
     if (S.errorshowtype == 1) {
-        errorPlacement = function() {
+        errorPlacement = function () {
             return false;
         };
-        invalidHandler = function(form, validator) {
-            $.each(validator.invalid, function(key, value) {
+        invalidHandler = function (form, validator) {
+            $.each(validator.invalid, function (key, value) {
                 tmpkey = key;
                 tmpval = value;
                 validator.invalid = {};
@@ -326,10 +326,10 @@ $M.Control["Form"] = function(BoxID, S, CID) {
         A.validate({
             errorClass: "help-block",
             errorElement: "span",
-            highlight: function(element) {
+            highlight: function (element) {
                 $(element).closest('div').addClass("has-error");
             },
-            unhighlight: function(element) {
+            unhighlight: function (element) {
                 $(element).closest('div').removeClass("has-error");
 
             },
@@ -338,10 +338,10 @@ $M.Control["Form"] = function(BoxID, S, CID) {
             submitHandler: submitForm
         });
     }
-    T.submit = function() {
+    T.submit = function () {
         A.submit();
     };
-    T.find = function(name) {
+    T.find = function (name) {
         if (T.controls) {
             for (var i = 0; i < T.controls.length; i++) {
                 if (T.controls[i].attr("name") == name) {
@@ -358,10 +358,10 @@ $M.Control["Form"] = function(BoxID, S, CID) {
         if (obj.length > 0) return obj;
         return null;
     };
-    T.append = function(str) {
+    T.append = function (str) {
         return ($(str).appendTo(A));
     };
-    T.val = function(value) {
+    T.val = function (value) {
         var list = A.find("input");
         for (var i = 0; i < list.length; i++) {
             var obj = $(list[i]);
@@ -397,16 +397,16 @@ $M.Control["Form"] = function(BoxID, S, CID) {
             }
         }
     };
-    T.read = function(comm, id, back) {
+    T.read = function (comm, id, back) {
         if (id != null) {
-            $M.comm(comm, { id: id }, function(json) {
+            $M.comm(comm, { id: id }, function (json) {
                 T.val(json);
                 if (back) back(json);
             });
         }
     };
     //重置表单
-    T.reset = function() {
+    T.reset = function () {
         var list = A.find("input");
         for (var i = 0; i < list.length; i++) {
             var obj = $(list[i]);
@@ -439,7 +439,7 @@ $M.Control["Form"] = function(BoxID, S, CID) {
         }
     };
     if (S.templateUrl) {
-        A.load(S.templateUrl + "?" + $M.getId(), function() {
+        A.load(S.templateUrl + "?" + $M.getId(), function () {
             T.render();
             if (S.onLoad) S.onLoad(T, null);
         });
@@ -479,7 +479,7 @@ $M.Control["Frame"] = function (BoxID, S) {
             title = box.find(".w-box-title");
             if (S2.buttons) {
                 var options = box.find(".w-box-options");
-                options =$("<div class=' btn-group'></div>").appendTo(options);
+                options = $("<div class=' btn-group'></div>").appendTo(options);
                 for (var i = 0; i < S2.buttons.length; i++) {
                     //var button=$("<a href='#' class='fa " + S2.buttons[i].ico + "'></a>").appendTo(options);
                     S2.buttons[i].xtype = "Button";
@@ -695,6 +695,7 @@ $M.Control["Tab"] = function (BoxID, S, CID) {
                     dockC[0].css({ width: w + "px", height: (h - countHeight - marginHeight) + "px" });
                 }
             }
+            content.height(h);
         };
         T2.container = content;
         $M.BaseClass.apply(T2, [S2]);
@@ -710,12 +711,12 @@ $M.Control["Tab"] = function (BoxID, S, CID) {
             if (a == "text") caption.html(b);
             return (S2[a]);
         };
-
+        if (S2.style) content.css(S2.style);
     };
     T.addItem = function (S2) {
         if ($.isArray(S2)) {
             for (var i = 0; i < S2.length; i++) T.addItem(S2[i]);
-        }else{
+        } else {
             return (new item(S2));
         }
     };
@@ -873,98 +874,90 @@ $M.Control["PanelGroup"] = function (BoxID, S) {
     T.container = A;
     $M.BaseClass.apply(T, [S]);
 };
-$M.Control["SlidingBar"]=function(BoxID,S)
-	{
-		var B=BoxID.addDom("div");B.className="M5_SlidingBar";
-		var T=this;
-		T.items=new Array();
-		T.openItem=null;
-		this.add=function(S2){
-			var T2=this;
-			T2.buttons=new Array();
-			T.items[T.items.length]=this;
-			var Bar=B.addDom("div");Bar.className="Bar";Bar.unselectable="on";
-			if(S.ico!=null){var Ico=Bar.addDom("div");Ico.className="Ico "+S.ico;}
-			var Title=Bar.addDom("span");//Title.className="Title";
-			Title.unselectable="on";
-			var ButtonBox=Bar.addDom("div");
-			ButtonBox.setFloat("right");
-			if(S2.buttons!=null){
-			    for(var i=0;i<S2.buttons.length;i++)
-			    {
-			        S2.buttons[i].xtype="Button"; S2.buttons[i].className="LabelButton";
-			        S2.buttons[i].disabled="true";
-			        T2.buttons[T2.buttons.length]=ButtonBox.addControl(S2.buttons[i]);
-			    }
-			}
-			if(S2.titleMenu!=null)
-		    {
-			    Bar.addEvent("onmouseup",function(){
-			        if($M.event.button()==2)S2.titleMenu.show($M.event.x()-2,$M.event.y()-2);
-			    });
-		    }
-			//var Button=ButtonBox.addControl({xtype:"Button",ico:"addClass",onclick:function(){},className:"LabelButton"});
-			var Box=B.addDom("div");Box.className="Box";Box.style.display="none";
-			var h=1;
-			if(S2.caption!=null)Title.innerHTML=S2.caption;
-			T2.setCaption=function(text)
-			{
-				Title.innerHTML=text;
-			};
-			T2.buttonsDisabled=function(tag){
-			    for(var i=0;i<T2.buttons.length;i++){
-			        T2.buttons[i].disabled(tag);
-			    }
-			};
-			T2.remove=function(){
-			    var n=-1;
-			    for(var i=0;i<T.items.length;i++){
-			        if(T.items[i]==T2)n=i;
-			    }
-			    T.items=T.items.del(n);
-			    Bar.remove();
-			    Box.remove();
-			    T.items[0].open();
-			};
-			T2.open=function()
-			{
-				if(T.openItem!=null){T.openItem.buttonsDisabled(true);T.openItem.close();}
-				Box.style.display="";
-				Box.style.height=B.offsetHeight-Bar.offsetHeight*T.items.length+"px";
-				T.openItem=T2;
-				T2.buttonsDisabled(false);
-				if(S.onopen)S.onopen(T2);
-			};
-			T2.resize=function()
-			{
-			    var height=Bar.offsetHeight*T.items.length;
-			    if(height>B.offsetHeight)height=0;
-			    else{height=B.offsetHeight-height;}
-				Box.style.height=height+"px";
-			};
-			T2.close=function()
-			{
-				Box.style.display="none";
-				T.openItem=null;
-			};
-			T2.addControl=function(Set){return(Box.addControl(Set));};
-			Bar.addEvent("onclick",T2.open);
-			return(this);
-		};
-		this.resize=function(){
-		    if(T.openItem!=null)T.openItem.resize();
-		};
-		this.setAttribute=function(a,b){S[a]=b;};
-		this.setSize=function(w,h)
-		{
-			B.style.height=h+"px";
-			if(T.openItem!=null)T.openItem.resize();
-		};
-		if(S.items!=null){
-		for(var n=0;n<S.items.length;n++){
-			var s=new this.add(S.items[n]);
-		}
-		}
+$M.Control["SlidingBar"] = function (BoxID, S) {
+    var B = BoxID.addDom("div"); B.className = "M5_SlidingBar";
+    var T = this;
+    T.items = new Array();
+    T.openItem = null;
+    this.add = function (S2) {
+        var T2 = this;
+        T2.buttons = new Array();
+        T.items[T.items.length] = this;
+        var Bar = B.addDom("div"); Bar.className = "Bar"; Bar.unselectable = "on";
+        if (S.ico != null) { var Ico = Bar.addDom("div"); Ico.className = "Ico " + S.ico; }
+        var Title = Bar.addDom("span");//Title.className="Title";
+        Title.unselectable = "on";
+        var ButtonBox = Bar.addDom("div");
+        ButtonBox.setFloat("right");
+        if (S2.buttons != null) {
+            for (var i = 0; i < S2.buttons.length; i++) {
+                S2.buttons[i].xtype = "Button"; S2.buttons[i].className = "LabelButton";
+                S2.buttons[i].disabled = "true";
+                T2.buttons[T2.buttons.length] = ButtonBox.addControl(S2.buttons[i]);
+            }
+        }
+        if (S2.titleMenu != null) {
+            Bar.addEvent("onmouseup", function () {
+                if ($M.event.button() == 2) S2.titleMenu.show($M.event.x() - 2, $M.event.y() - 2);
+            });
+        }
+        //var Button=ButtonBox.addControl({xtype:"Button",ico:"addClass",onclick:function(){},className:"LabelButton"});
+        var Box = B.addDom("div"); Box.className = "Box"; Box.style.display = "none";
+        var h = 1;
+        if (S2.caption != null) Title.innerHTML = S2.caption;
+        T2.setCaption = function (text) {
+            Title.innerHTML = text;
+        };
+        T2.buttonsDisabled = function (tag) {
+            for (var i = 0; i < T2.buttons.length; i++) {
+                T2.buttons[i].disabled(tag);
+            }
+        };
+        T2.remove = function () {
+            var n = -1;
+            for (var i = 0; i < T.items.length; i++) {
+                if (T.items[i] == T2) n = i;
+            }
+            T.items = T.items.del(n);
+            Bar.remove();
+            Box.remove();
+            T.items[0].open();
+        };
+        T2.open = function () {
+            if (T.openItem != null) { T.openItem.buttonsDisabled(true); T.openItem.close(); }
+            Box.style.display = "";
+            Box.style.height = B.offsetHeight - Bar.offsetHeight * T.items.length + "px";
+            T.openItem = T2;
+            T2.buttonsDisabled(false);
+            if (S.onopen) S.onopen(T2);
+        };
+        T2.resize = function () {
+            var height = Bar.offsetHeight * T.items.length;
+            if (height > B.offsetHeight) height = 0;
+            else { height = B.offsetHeight - height; }
+            Box.style.height = height + "px";
+        };
+        T2.close = function () {
+            Box.style.display = "none";
+            T.openItem = null;
+        };
+        T2.addControl = function (Set) { return (Box.addControl(Set)); };
+        Bar.addEvent("onclick", T2.open);
+        return (this);
+    };
+    this.resize = function () {
+        if (T.openItem != null) T.openItem.resize();
+    };
+    this.setAttribute = function (a, b) { S[a] = b; };
+    this.setSize = function (w, h) {
+        B.style.height = h + "px";
+        if (T.openItem != null) T.openItem.resize();
+    };
+    if (S.items != null) {
+        for (var n = 0; n < S.items.length; n++) {
+            var s = new this.add(S.items[n]);
+        }
+    }
 };
 $M.Control["Window"] = function (BoxID, S) {
     var objID = "Window_" + $.Index + "_";
@@ -1007,7 +1000,7 @@ $M.Control["Window"] = function (BoxID, S) {
     }
     T.remove = function () {
         var r = true;
-        if (S.onClose) r = S.onClose(T,null);
+        if (S.onClose) r = S.onClose(T, null);
         if (r == null || r) {
             if (S.isModal) {
                 $M.lock(A, false);
@@ -1032,13 +1025,13 @@ $M.Control["Window"] = function (BoxID, S) {
     T.container = modal_body;
     $M.BaseClass.apply(T, [S]);
     T.css = function (style) {
-        if(style){
+        if (style) {
             A.css(style);
-        if (style.height) {
-            var headHeight = header ? header.outerHeight():0;
-            var footHeight = modal_footer ? modal_footer.outerHeight() : 0;
-            modal_body.css({ height: style.height - headHeight - footHeight });
-        }
+            if (style.height) {
+                var headHeight = header ? header.outerHeight() : 0;
+                var footHeight = modal_footer ? modal_footer.outerHeight() : 0;
+                modal_body.css({ height: style.height - headHeight - footHeight });
+            }
         }
     };
     T.show = function () {
@@ -1089,7 +1082,7 @@ $M.Control["Window"] = function (BoxID, S) {
                     }
                 }
             }
-            
+
             if (dockC.length > 0) {
                 console.warn(dockC[0].name);
                 var marginHeight = dockC[0].attr("marginHeight") ? dockC[0].attr("marginHeight") : 0;

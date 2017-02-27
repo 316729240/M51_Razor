@@ -4,43 +4,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Collections;
 
 namespace MWMS.DAL.Datatype.FieldType
 {
-    public class File
+    public class Picture:File
     {
         /// <summary>
-        /// 路径
+        /// 缩略图路径
         /// </summary>
-        public string path = "";
-        /// <summary>
-        /// 文件大小
-        /// </summary>
-        public int size = 0;
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string title = "";
-        /// <summary>
-        /// 是否已删除
-        /// </summary>
-        public int isDel = 0;
+        public string minPath = "";
     }
-    public class Files : File
+    public class Pictures : Picture,IList<Picture>
     {
-        List<File> _list = new List<File>();
+        List<Picture> _list = new List<Picture>();
         /// <summary>
         /// 将字符串转换为Files字段数据类型
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static Files Parse(string data)
+        public static Pictures Parse(string data)
         {
-            Files files = new Files();
+            Pictures files = new Pictures();
             try
             {
-                List<File> list = data.ParseJson<List<File>>();
-                foreach (File file in list)
+                List<Picture> list = data.ParseJson<List<Picture>>();
+                foreach (Picture file in list)
                 {
                     if (file.isDel == 0)
                     {
@@ -53,6 +42,8 @@ namespace MWMS.DAL.Datatype.FieldType
                         {
                             string path = HttpContext.Current.Server.MapPath("~" + file.path);
                             if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
+                            string minpath = HttpContext.Current.Server.MapPath("~" + file.minPath);
+                            if (System.IO.File.Exists(minpath)) System.IO.File.Delete(minpath);
                         }
                         catch
                         {
@@ -71,16 +62,17 @@ namespace MWMS.DAL.Datatype.FieldType
                 files.path = files[0].path;
                 files.title = files[0].title;
                 files.isDel = files[0].isDel;
+                files.minPath = files[0].minPath;
                 #endregion
             }
             return files;
         }
-        public File this[int index]
+        public Picture this[int index]
         {
             get { return _list[index]; }
             set { _list[index] = value; }
         }
-        public void Add(File file)
+        public void Add(Picture file)
         {
             _list.Add(file);
         }
@@ -89,9 +81,63 @@ namespace MWMS.DAL.Datatype.FieldType
             return path;
         }
         public int Count {get{return _list.Count;} }
+
+        public bool IsReadOnly
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public string ToJson()
         {
             return _list.ToJson();
+        }
+
+        public int IndexOf(Picture item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(int index, Picture item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(Picture item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(Picture[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(Picture item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<Picture> GetEnumerator()
+        {
+            return _list.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _list.GetEnumerator();
         }
     }
 }
